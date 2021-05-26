@@ -482,6 +482,37 @@ if true then
 		elseif Visit == 1 or Visit == 2 or Visit == 3 then
 			Bitmask = 0x15FD79
 		end
+		if Place == 0x0104 then
+			Spawn('Short',0x04,0x078,45) --Sephiroth
+		elseif Place == 0x1504 then --Cavern of Remembrance: Depths
+			WriteByte(Btl0+0x308C2,15) --Stalactite
+			WriteByte(Btl0+0x3091E,15) --Valves
+			Spawn('Short',0x0B,0x018,15) --BTL 0x01
+			Spawn('Short',0x0B,0x038,15) --BTL 0x19
+			Spawn('Short',0x0B,0x054,15) --BTL 0x1A
+		elseif Place == 0x1704 then --Cavern of Remembrance: Engine Chamber
+			Spawn('Short',0x09,0x018,15) --BTL 0x01
+			Spawn('Short',0x09,0x040,15) --BTL 0x19
+			Spawn('Short',0x09,0x064,15) --BTL 0x1A
+		elseif Place == 0x1804 then --Cavern of Remembrance: Mineshaft
+			Spawn('Short',0x0F,0x038,15) --BTL 0x01
+			Spawn('Short',0x0F,0x07C,15) --BTL 0x02
+		elseif Place == 0x1904 then --Transport to Remembrance
+			Spawn('Short',0x05,0x038,30) --BTL 0x01
+			Spawn('Short',0x05,0x07C,30) --BTL 0x02
+			Spawn('Short',0x05,0x0C0,30) --BTL 0x03
+			Spawn('Short',0x05,0x0E4,30) --BTL 0x04
+		elseif Place == 0x2004 then
+			Spawn('Short',0x03,0x038,32) --Vexen
+		elseif Place == 0x2104 then
+			Spawn('Short',0x03,0x098,31) --Lexaeus
+			Spawn('Short',0x03,0x0E4,36) --Larxene
+			Spawn('Short',0x03,0x210,36) --Larxene
+		elseif Place == 0x2204 then
+			Spawn('Short',0x03,0x04C,27) --Zexion
+		elseif Place == 0x2604 then
+			Spawn('Short',0x03,0x0A4,18) --Marluxia
+		end
 	elseif World == 0x05 then --Beast's Castle
 		Visit = ReadByte(Save+0x4001)
 		if Visit == 2 then
