@@ -1,8 +1,8 @@
 --ROM Version
---Last Update: Prevent losing Keyblade after losing to Seifer or Vivi
+--Last Update: Fixed MCP Damage
 
 function _OnInit()
-local VersionNum = 'GoA Version 1.52.1'
+local VersionNum = 'GoA Version 1.52.2'
 if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" then --PCSX2
 	if ENGINE_VERSION < 3.0 then
 		print('LuaEngine is Outdated. Things might not work properly.')
@@ -298,6 +298,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteByte(Save+0x1D6F,8) --Olympus Coliseum
 	WriteByte(Save+0x1DDF,7) --Pride Lands
 	WriteByte(Save+0x1D0D,10)--Twilight Town
+	WriteByte(Save+0x1D2F,2) --Hollow Bastion
 	WriteByte(Save+0x1E9F,5) --Port Royal
 	WriteByte(Save+0x1EBF,4) --Space Paranoids
 	--Tutorial Flags & Form Weapons
@@ -333,6 +334,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	BitOr(Save+0x1D13,0x01) --HB_tr_117_END
 	BitOr(Save+0x1D15,0x10) --HB_START2
 	BitOr(Save+0x1D15,0x20) --HB_START_wi_dc
+	BitOr(Save+0x1D16,0x02) --HB_START_Pooh
 	BitOr(Save+0x1D19,0x20) --HB_TR_202_END
 	BitOr(Save+0x1D1A,0x02) --HB_TR_tr04_ms202
 	BitOr(Save+0x1D1A,0x08) --HB_TR_tr09_ms205
@@ -355,6 +357,10 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	BitOr(Save+0x1DD0,0x01) --LK_START
 	BitOr(Save+0x1DD3,0x01) --LK_START2
 	BitOr(Save+0x1DF0,0x01) --LM_START
+	BitOr(Save+0x1DF1,0x04) --LM_START_2
+	BitOr(Save+0x1DF2,0x01) --LM_START_3
+	BitOr(Save+0x1DF2,0x10) --LM_START_4
+	BitOr(Save+0x1DF3,0x80) --LM_START_5
 	BitOr(Save+0x1E10,0x02) --DC_START
 	BitOr(Save+0x1E50,0x01) --NM_START
 	BitOr(Save+0x1E50,0x02) --NM_START2
@@ -441,17 +447,11 @@ if true then
 	local Bitmask, Visit
 	if World == 0x02 then --Twilight Town & Simulated Twilight Town
 		Visit = ReadByte(Save+0x3FF5)
-		if Visit == 1 then --Day 1
+		if Visit == 1 or Visit == 2 or Visit == 3 then
 			Bitmask = 0x040001
-		elseif Visit == 2 then --Day 2
-			Bitmask = 0x040001
-		elseif Visit == 3 then --Day 3
-			Bitmask = 0x040001
-		elseif Visit == 4 then --Day 4
+		elseif Visit == 4 or Visit == 5 then
 			Bitmask = 0x140001
-		elseif Visit == 5 then --Day 5
-			Bitmask = 0x140001
-		elseif Visit == 6 then --Day 6
+		elseif Visit == 6 then
 			Bitmask = 0x140401
 		elseif Visit == 10 then
 			Bitmask = 0x140C01
@@ -1712,12 +1712,12 @@ elseif Place == 0x1C02 and Events(0x97,0x97,0x97) then --The Evil Fairy's Reviva
 	WriteByte(Save+0x1CFD,1) --Post-Story Save
 	WriteByte(Save+0x1CFF,0)
 	WriteShort(Save+0x01C4,0x04) --Station Heights MAP (Jobs Unavailable)
-	WriteShort(Save+0x03A8,0x04) --The Tower: Entryway BTL
-	WriteShort(Save+0x03C0,0x04) --Tower: Star Chamber BTL
-	WriteShort(Save+0x03C6,0x04) --Tower: Moon Chamber BTL
-	WriteShort(Save+0x03CC,0x04) --Tower: Wayward Stairs (Lower Level) BTL
-	WriteShort(Save+0x03F6,0x04) --Tower: Wayward Stairs (Middle Level) BTL
-	WriteShort(Save+0x03FC,0x04) --Tower: Wayward Stairs (Upper Level) BTL
+	WriteShort(Save+0x03A8,0x01) --The Tower: Entryway BTL
+	WriteShort(Save+0x03C0,0x01) --Tower: Star Chamber BTL
+	WriteShort(Save+0x03C6,0x01) --Tower: Moon Chamber BTL
+	WriteShort(Save+0x03CC,0x01) --Tower: Wayward Stairs (Lower Level) BTL
+	WriteShort(Save+0x03F6,0x01) --Tower: Wayward Stairs (Middle Level) BTL
+	WriteShort(Save+0x03FC,0x01) --Tower: Wayward Stairs (Upper Level) BTL
 	WriteShort(Save+0x0400,0x0D) --Betwixt & Between MAP (Data Door)
 elseif ReadByte(Save+0x1D0D) == 6 and ReadByte(Save+0x363F) > 0 then --2nd Visit
 	WriteByte(Save+0x1D0D,7)
@@ -1957,7 +1957,7 @@ if Place == 0x1A04 then
 			WarpRoom = 0x03
 			Visit = 4
 		elseif Progress == 10 then --Post 4th Visit
-			WarpRoom = 0x0D
+			WarpRoom = 0x06
 			Visit = 4
 		elseif Progress == 11 then --5th Visit
 			WarpRoom = 0x0A
@@ -1988,9 +1988,12 @@ if Place == 0x0004 and Events(Null,Null,0x01) then --Pete Enters the Castle
 elseif Place == 0x0D04 and Events(Null,Null,0x01) then --The Hollow Bastion Restoration Committee
 	WriteByte(Save+0x1D2F,1)
 elseif Place == 0x0012 and Events(0x74,0x74,0x74) then --The Keyblade's Hero
-	WriteByte(Save+0x1D2F,2)
+	BitOr(Save+0x1D26,0x20) --HB_FM_DEM_RE_CLEAR (Change Portal Color)
+	WriteShort(Save+0x1D2E,1) --Post-Story Save
+	WriteShort(Save+0x0640,0x0D) --Bailey (Intact) MAP (Data Door)
 elseif ReadByte(Save+0x1D2F) == 2 and ReadByte(Save+0x35C1) > 0 then --4th Visit
 	WriteByte(Save+0x1D2F,3)
+	WriteShort(Save+0x0640,0x01) --Bailey (Intact) MAP (Locked Door)
 	WriteShort(Save+0x064C,0x02) --Marketplace MAP (Barrier Beyond Cloud)
 	WriteShort(Save+0x0650,0x02) --Marketplace EVT
 elseif Place == 0x0D04 and Events(Null,Null,0x02) then --Cid's Report
@@ -2016,7 +2019,7 @@ elseif Place == 0x0104 and Events(Null,Null,0x01) then --Xemnas's Agenda
 	BitNot(Save+0x1D15,0x08) --HB_418_END (Change Spawn ID in Next Cutscene Properly)
 elseif Place == 0x0104 and Events(0x5C,0x5C,0x5C) then --A Box of Memories
 	WriteByte(Save+0x1D2F,10)
-elseif ReadByte(Save+0x1D2F) == 10 and true then --5th Visit
+elseif ReadByte(Save+0x1D2F) == 10 and false then --5th Visit
 	WriteByte(Save+0x1D2F,11)
 	WriteShort(Save+0x0650,0x0A) --Marketplace EVT
 elseif Place == 0x0904 and Events(Null,Null,0x0B) then --The Rogue Security System
@@ -2024,9 +2027,16 @@ elseif Place == 0x0904 and Events(Null,Null,0x0B) then --The Rogue Security Syst
 elseif Place == 0x0504 and Events(Null,Null,0x0D) then --Wait for Us, Tron
 	WriteShort(Save+0x0662,0x0C) --Merlin's House EVT
 elseif Place == 0x0604 and Events(0x5E,0x5E,0x5E) then --Radiant Garden
-	BitOr(Save+0x1D26,0x20) --HB_FM_DEM_RE_CLEAR (Change Portal Color)
-	WriteShort(Save+0x1D2E,2) --Post-Story Save
-	WriteShort(Save+0x067C,0x0D) --Restoration Site (Destroyed) MAP (Data Door)
+end
+--Block CoR & Go Back to GoA
+if ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9 then
+	if Place == 0x0604 then --Postern -> Cavern of Remembrance: Depths
+		Spawn('Short',0x05,0x024,0x0306)
+	end
+elseif Place == 0x0104 and Events(Null,Null,0x13) then --Sephiroth Cleared
+	Spawn('Short',0x03,0x024,0x1D1A)
+	WriteByte(Save+0x1D2F,0)
+	WriteShort(Save+0x0646,0x01) --Borough MAP (Transition to Bailey (Intact))
 end
 --Hollow Bastion Post-Story Save
 if Place == 0x1A04 and ReadByte(Save+0x1D2E) > 0 then
@@ -2062,8 +2072,6 @@ if ReadByte(Save+0x1D2F) == 8 then
 end
 --Skip Hollow Bastion 5th Visit
 if ReadShort(Save+0x0650) == 0x0A then
-	BitOr(Save+0x1D26,0x20) --HB_FM_DEM_RE_CLEAR (Change Portal Color)
-	WriteShort(Save+0x1D2E,2) --Post-Story Save
 	WriteShort(Save+0x0618,0x00) --The Dark Depths BTL
 	WriteShort(Save+0x061A,0x16) --The Dark Depths EVT
 	WriteShort(Save+0x061E,0x02) --The Great Maw BTL
@@ -2076,7 +2084,6 @@ if ReadShort(Save+0x0650) == 0x0A then
 	WriteShort(Save+0x065C,0x16) --Heartless Manufactory EVT
 	WriteShort(Save+0x0662,0x10) --Merlin's House EVT
 	WriteShort(Save+0x0672,0x0B) --Ravine Trail BTL
-	WriteShort(Save+0x067C,0x0D) --Restoration Site (Destroyed) MAP (Data Door)
 	WriteShort(Save+0x067E,0x0B) --Restoration Site (Destroyed) BTL
 	WriteShort(Save+0x0684,0x0B) --Bailey (Destroyed) BTL
 	WriteShort(Save+0x20D4,0x0000) --Heartless Manufactory Barrier Removal
@@ -2100,7 +2107,7 @@ if ReadShort(Save+0x0650) == 0x0A then
 	BitOr(Save+0x1D21,0x08) --HB_hb_event_507 (Hollow Bastion -> Radiant Garden)
 end
 --Mushroom XIII Unlocked
-if Place == 0x0204 and Events(Null,0x02,0x03) and ReadByte(Save+0x36B4) > 0 then
+if Place == 0x0204 and Events(Null,0x02,0x03) then
 	WriteShort(Save+0x3E94,0x03) --Mushroom I
 	WriteShort(Save+0x3E98,99)
 	WriteShort(Save+0x3E9C,0x03) --Mushroom II
@@ -2128,6 +2135,7 @@ if Place == 0x0204 and Events(Null,0x02,0x03) and ReadByte(Save+0x36B4) > 0 then
 end
 --Transport to Remembrance Nobodies III Cleared (Skip GoA Stuff After)
 if ReadShort(Save+0x06A8) == 0x05 then
+	WriteShort(Save+0x0650,0x0A) --Marketplace EVT
 	WriteShort(Save+0x06A8,0x04) --Transport to Remembrance BTL
 	WriteShort(Save+0x06AA,0x00) --Transport to Remembrance EVT
 	BitOr(Save+0x1D27,0x04) --HB_FM_13TSUURO_OUT
@@ -2190,7 +2198,7 @@ elseif Place == 0x0810 and Events(Null,Null,0x04) then --Parting Ways
 	WriteShort(Save+0x184C,0x0D) --Treasure Heap MAP (Data Door)
 elseif ReadByte(Save+0x1E9F) == 5 and ReadByte(Save+0x35B6) > 0 then --2nd Visit
 	WriteByte(Save+0x1E9F,6)
-	WriteShort(Save+0x1816,0x02) --Harbor MAP (Room Transition to The Black Pearl)
+	WriteShort(Save+0x1816,0x02) --Harbor MAP (Transition to The Black Pearl)
 	WriteShort(Save+0x1818,0x00) --Harbor BTL
 	WriteShort(Save+0x1850,0x0A) --Treasure Heap EVT
 	WriteShort(Save+0x1852,0x01) --The Interceptor's Hold MAP (Visibility)
@@ -2866,6 +2874,7 @@ end
 function AW()
 --World Progress
 if Place == 0x0009 and Events(0x00,Null,Null) then --0th Visit
+	BitNot(Save+0x1D16,0x02) --HB_START_Pooh
 	WriteArray(Save+0x066A,ReadArray(Save+0x0646,6)) --Save Borough Spawn ID
 	WriteArray(Save+0x0664,ReadArray(Save+0x065E,6)) --Save Merlin's House Spawn ID
 elseif Place == 0x0D04 and Events(0x65,0x65,0x65) and ReadByte(Save+0x1DBF) == 0 then --Lost Memories
@@ -2891,11 +2900,10 @@ if Place == 0x0009 and ReadByte(Save+0x1DBF) == 0 then
 	Spawn('Short',0x01,0x57E,0x01)
 end
 --Skip 0th Visit
-if ReadShort(Save+0x0D90) == 0x00 then
+if ReadShort(Save+0x0D90) == 0x00 and false then
 	WriteByte(Save+0x1DBF,1)
 	WriteShort(Save+0x0D90,0x02) --The Hundred Acre Wood MAP (Pooh's House Only)
 	WriteShort(Save+0x0DA0,0x16) --Pooh's House EVT
-	BitOr(Save+0x1D16,0x02) --HB_START_Pooh
 	BitOr(Save+0x1D16,0x04) --HB_901_END
 	BitOr(Save+0x1D16,0x08) --HB_902_END
 	BitOr(Save+0x1D16,0x20) --HB_903_END
@@ -2970,7 +2978,7 @@ if true then
 	elseif Place == 0x1302 and ReadByte(Save+0x1CFF) == 8 then --Mansion: Basement Hall
 		Path = 8
 		WriteByte(Save+0x3FF5,10) --Battle Level TT3
-	elseif Place == 0x1204 then --Restoration Site (Destroyed)
+	elseif Place == 0x0804 then --Restoration Site (Destroyed)
 		Path = 9
 	elseif Place == 0x0D10 then --Isla de Muerta: Moonlight Nook
 		Path = 10
