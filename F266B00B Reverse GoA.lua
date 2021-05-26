@@ -286,7 +286,10 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	--Place Scripts
 	WriteShort(Save+0x06AC,0x01) --Garden of Assemblage MAP (Before Computer)
 	WriteShort(Save+0x06B0,0x03) --Garden of Assemblage EVT
-	WriteShort(Save+0x10BE,0x01) --The Shore (Night) EVT
+	WriteShort(Save+0x0D90,0x0F) --The Hundred Acre Wood MAP (5th Page)
+	WriteShort(Save+0x0D94,0x0B) --The Hundred Acre Wood EVT
+	WriteShort(Save+0x10A0,0x13) --Undersea Courtyard EVT
+	WriteShort(Save+0x10AC,0x02) --The Palace: Performance Hall EVT
 	WriteShort(Save+0x1238,0x01) --Gummi Hangar EVT
 	WriteShort(Save+0x1B1A,0x01) --Alley to Between EVT
 	WriteShort(Save+0x1B5E,0x01) --Proof of Existence MAP (Lock Progress)
@@ -299,6 +302,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteByte(Save+0x1DDF,7) --Pride Lands
 	WriteByte(Save+0x1D0D,10)--Twilight Town
 	WriteByte(Save+0x1D2F,2) --Hollow Bastion
+	WriteByte(Save+0x1DFF,1) --Atlantica
 	WriteByte(Save+0x1E9F,5) --Port Royal
 	WriteByte(Save+0x1EBF,4) --Space Paranoids
 	--Tutorial Flags & Form Weapons
@@ -354,6 +358,11 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	BitOr(Save+0x1D72,0x20) --AL_START2
 	BitOr(Save+0x1D90,0x01) --MU_START
 	BitOr(Save+0x1D92,0x08) --MU_START2
+	BitOr(Save+0x1DB1,0x01) --PO_PAGE_1
+	BitOr(Save+0x1DB2,0x01) --PO_PAGE_2
+	BitOr(Save+0x1DB3,0x01) --PO_PAGE_3
+	BitOr(Save+0x1DB4,0x01) --PO_PAGE_4
+	BitOr(Save+0x1DB4,0x80) --PO_PAGE_5
 	BitOr(Save+0x1DD0,0x01) --LK_START
 	BitOr(Save+0x1DD3,0x01) --LK_START2
 	BitOr(Save+0x1DF0,0x01) --LM_START
@@ -2872,25 +2881,15 @@ end
 end
 
 function AW()
---World Progress
+--0th Visit Adjustments
 if Place == 0x0009 and Events(0x00,Null,Null) then --0th Visit
 	BitNot(Save+0x1D16,0x02) --HB_START_Pooh
 	WriteArray(Save+0x066A,ReadArray(Save+0x0646,6)) --Save Borough Spawn ID
 	WriteArray(Save+0x0664,ReadArray(Save+0x065E,6)) --Save Merlin's House Spawn ID
-elseif Place == 0x0D04 and Events(0x65,0x65,0x65) and ReadByte(Save+0x1DBF) == 0 then --Lost Memories
+elseif Place == 0x0D04 and Events(0x65,0x65,0x65) and PrevPlace == 0x0209 then --Lost Memories
 	WriteByte(Save+0x1DBF,1)
 	WriteArray(Save+0x0646,ReadArray(Save+0x066A,6)) --Load Borough Spawn ID
 	WriteArray(Save+0x065E,ReadArray(Save+0x0664,6)) --Load Merlin's House Spawn ID
-elseif Place == 0x0009 and Events(Null,Null,0x04) then --Piglet's House: Complete
-	WriteByte(Save+0x1DBF,2)
-elseif Place == 0x0009 and Events(Null,Null,0x06) then --Rabbit's House: Complete
-	WriteByte(Save+0x1DBF,3)
-elseif Place == 0x0009 and Events(Null,Null,0x08) then --Kanga and Roo's House: Complete
-	WriteByte(Save+0x1DBF,4)
-elseif Place == 0x0009 and Events(Null,Null,0x0A) then --The Spooky Cave: Complete
-	WriteByte(Save+0x1DBF,5)
-elseif Place == 0x0109 and Events(Null,Null,0x03) then --I'll Always Be With You
-	WriteByte(Save+0x1DBF,6)
 end
 --Prevent Leaving in 0th Visit
 if Place == 0x0009 and ReadByte(Save+0x1DBF) == 0 then
@@ -2922,6 +2921,55 @@ if ReadShort(Save+0x0D90) == 0x00 and false then
 	BitOr(Save+0x1D17,0x02) --HB_po_008_END
 	BitOr(Save+0x1D17,0x08) --HB_907_END
 end
+--Block Previous Visit Areas & Reverse Visit Order
+if Place == 0x0009 then
+	local CurMAP = ReadShort(Save+0x0D90)
+	if CurMAP > 0x0F then
+		Spawn('Short',0x07,0x024,0x0400) --The Spooky Cave
+		Spawn('Short',0x06,0x024,0x0300) --Kanga's House
+		Spawn('Short',0x04,0x024,0x0100) --Rabbit's House
+		Spawn('Short',0x05,0x024,0x0200) --Piglet's House
+		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+	elseif CurMAP > 0x0C then
+		Spawn('Short',0x06,0x024,0x0300) --Kanga's House
+		Spawn('Short',0x04,0x024,0x0100) --Rabbit's House
+		Spawn('Short',0x05,0x024,0x0200) --Piglet's House
+		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+	elseif CurMAP > 0x09 then
+		Spawn('Short',0x04,0x024,0x0100) --Rabbit's House
+		Spawn('Short',0x05,0x024,0x0200) --Piglet's House
+		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+	elseif CurMAP > 0x06 then
+		Spawn('Short',0x05,0x024,0x0200) --Piglet's House
+		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+	elseif CurMAP > 0x03 then
+		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+	end
+elseif ReadByte(Save+0x3598) > 0 and Place == 0x1A04 then
+	local PrevMAP, PrevEVT
+	local CurMAP = ReadShort(Save+0x0D90)
+	if CurMAP == 0x11 then --Post 5th Visit
+		PrevMAP = 0x0C
+		PrevEVT = 0x09
+	elseif CurMAP == 0x0E then --Post 4th Visit
+		PrevMAP = 0x09
+		PrevEVT = 0x07
+	elseif CurMAP == 0x0B then --Post 3rd Visit
+		PrevMAP = 0x06
+		PrevEVT = 0x05
+	elseif CurMAP == 0x08 then --Post 2nd Visit
+		PrevMAP = 0x03
+		PrevEVT = 0x03
+	elseif CurMAP == 0x05 then --Post 1st Visit
+		PrevMAP = 0x00
+		PrevEVT = 0x00
+	end
+	if PrevMAP and PrevEVT then
+		WriteShort(Save+0x0D90,PrevMAP) --The Hundred Acre Wood MAP
+		WriteShort(Save+0x0D94,PrevEVT) --The Hundred Acre Wood EVT
+		WriteByte(Save+0x3598,ReadByte(Save+0x3598)-1)
+	end
+end
 --Faster A Blustery Rescue
 if Place == 0x0609 then --In Minigame
 	if ReadByte(Cntrl) == 0x00 then --Minigame Started
@@ -2945,19 +2993,32 @@ function At()
 if Place == 0x1A04 and ReadByte(Save+0x1DFF) == 0 then --1st Visit
 	Spawn('Short',0x0A,0x23C,0x07)
 end
---World Progress
+--Atlantica Visited
 if Place == 0x020B and Events(Null,Null,0x01) then --The Kingdom Under the Sea
 	WriteByte(Save+0x1DFF,1)
-elseif Place == 0x020B and Events(Null,Null,0x03) then --Let's Cheer Her Up!
-	WriteByte(Save+0x1DFF,2)
-elseif Place == 0x000B and Events(Null,Null,0x01) then --Getting Rid of Worry
-	WriteByte(Save+0x1DFF,3)
-elseif Place == 0x060B and Events(Null,Null,0x02) then --What the Prince Lost
-	WriteByte(Save+0x1DFF,4)
-elseif Place == 0x070B and Events(Null,Null,0x04) then --Ariel's Confession
-	WriteByte(Save+0x1DFF,5)
-elseif Place == 0x040B and Events(0x37,0x37,0x37) and ReadInt(CutLen) == 0xA46 then	--Our Worlds Are All Connected
-	WriteByte(Save+0x1DFF,6)
+end
+--Block Leaving Finny Fun & Reverse Visit Order
+if Place == 0x020B and Events(Null,Null,0x02) then
+	Spawn('Short',0x04,0x034,0x23A)
+elseif Place == 0x1A04 then
+	local PrevEVT
+	local CurEVT = ReadShort(Save+0x10A0)
+	if CurEVT == 0x0D then
+		PrevEVT = 0x14
+		WriteShort(Save+0x109A,0x02) --Ariel's Grotto EVT
+	elseif CurEVT == 0x0C then
+		PrevEVT = 0x15
+		WriteShort(Save+0x10A6,0x01) --Undersea Courtyard (Dawn) EVT
+	elseif CurEVT == 0x07 then
+		PrevEVT = 0x16
+		WriteShort(Save+0x10B2,0x02) --Sunken Ship EVT
+	elseif CurEVT == 0x06 then
+		WriteByte(Save+0x1DFF,0)
+		WriteShort(Save+0x10BE,0x01) --The Shore (Night) EVT
+	end
+	if PrevEVT then
+		WriteShort(Save+0x10A0,PrevEVT) --Undersea Courtyard EVT
+	end
 end
 end
 
@@ -3076,10 +3137,10 @@ Save+0x1D7E Ag Post-Story Save
 Save+0x1D7F Ag Progress
 Save+0x1D9E LOD Post-Story Save
 Save+0x1D9F LOD Progress
-Save+0x1DBF AW Progress
+Save+0x1DBF AW 0th Visit Flag
 Save+0x1DDE PL Post-Story Save
 Save+0x1DDF PL Progress
-Save+0x1DFF At Progress
+Save+0x1DFF At 0th Visit Flag
 Save+0x1E1E DC Post-Story Save
 Save+0x1E1F DC Progress
 Save+0x1E5E HT Post-Story Save
