@@ -284,6 +284,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteByte(Slot1+0x1B1,5)   --Starting Drive Current
 	WriteByte(Slot1+0x1B2,5)   --Starting Drive Max
 	--Place Scripts
+	WriteShort(Save+0x023A,0x01) --Roxas' Room EVT
 	WriteShort(Save+0x06AC,0x01) --Garden of Assemblage MAP (Before Computer)
 	WriteShort(Save+0x06B0,0x03) --Garden of Assemblage EVT
 	WriteShort(Save+0x0D90,0x0F) --The Hundred Acre Wood MAP (5th Page)
@@ -2549,14 +2550,9 @@ if Place == 0x1A04 then
 	elseif PostSave == 5 then --Mansion: Computer Room
 		WarpRoom = 0x15
 	end
-	if WarpRoom == 0x01 then
-		Spawn('Short',0x0A,0x1F8,0x02)
-		Spawn('Short',0x0A,0x200,0x38)
-	else
-		Spawn('Short',0x0A,0x1FC,WarpRoom)
-		if WarpRoom == 0x15 and ReadByte(Save+0x1CFB) == 1 then --Computer Room Beam
-			Spawn('Short',0x0A,0x1FE,0x3B)
-		end
+	Spawn('Short',0x0A,0x1FC,WarpRoom)
+	if WarpRoom == 0x15 and ReadByte(Save+0x1CFB) == 1 then --Computer Room Beam
+		Spawn('Short',0x0A,0x1FE,0x3B)
 	end
 end
 --World Progress
