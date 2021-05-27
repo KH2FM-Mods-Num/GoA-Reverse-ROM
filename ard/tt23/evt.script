@@ -5,7 +5,7 @@ AreaSettings 0 -1
 	SetProgressFlag 0x891
 	SetUnk05 0x2
 	SetEvent "618" Type 2
-	SetJump Type 1 World HB Area 26 Entrance 33 LocalSet 0 FadeType 16386
+	SetJump Type 2 World TT Area 0 Entrance 0 LocalSet 60 FadeType 16386
 	SetPartyMenu 0
 
 Spawn "e_01"

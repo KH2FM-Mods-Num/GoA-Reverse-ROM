@@ -1,8 +1,8 @@
 --ROM Version
---Last Update: Fixed MCP Damage
+--Last Update: Minor Cleanups
 
 function _OnInit()
-local VersionNum = 'GoA Version 1.52.2'
+local VersionNum = 'GoA Version 1.52.3'
 if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" then --PCSX2
 	if ENGINE_VERSION < 3.0 then
 		print('LuaEngine is Outdated. Things might not work properly.')
@@ -1820,7 +1820,7 @@ elseif Place == 0x0012 and Events(0x77,0x77,0x77) then --Those Who Remain
 	BitNot(Save+0x1CEE,0x0C) --TT_TT21 (Computer Room Flag Fix)
 end
 --Block Mansion Post-Story
-if ReadByte(Save+0x1CFD) > 0 then
+if ReadByte(Save+0x1CFD) > 0 and ReadByte(Save+0x1CFF) == 8 then
 	if Place == 0x0E02 then --The Old Mansion -> Mansion: Foyer
 		Spawn('Short',0x04,0x024,0x0028)
 	elseif Place == 0x2802 then --Betwixt and Between -> Mansion: Basement Hall
@@ -2550,9 +2550,14 @@ if Place == 0x1A04 then
 	elseif PostSave == 5 then --Mansion: Computer Room
 		WarpRoom = 0x15
 	end
-	Spawn('Short',0x0A,0x1FC,WarpRoom)
-	if WarpRoom == 0x15 and ReadByte(Save+0x1CFB) == 1 then --Computer Room Beam
-		Spawn('Short',0x0A,0x1FE,0x3B)
+	if WarpRoom == 0x01 then
+		Spawn('Short',0x0A,0x1F8,0x02)
+		Spawn('Short',0x0A,0x200,0x37)
+	else
+		Spawn('Short',0x0A,0x1FC,WarpRoom)
+		if WarpRoom == 0x15 and ReadByte(Save+0x1CFB) == 1 then --Computer Room Beam
+			Spawn('Short',0x0A,0x1FE,0x3B)
+		end
 	end
 end
 --World Progress
@@ -2596,12 +2601,12 @@ elseif Place == 0x1302 and Events(0x88,0x88,0x88) then --In the Next Life
 	WriteShort(Save+0x0372,0x01) --Dining Room BTL
 	WriteShort(Save+0x2114,0x0000) --Station Plaza Barrier Removal
 	WriteShort(Save+0x211C,0x0000) --The Old Mansion Barrier Removal
-elseif Place == 0x1702 and Events(Null,Null,0x01) then --My Summer Vacation Is Over
+elseif Place == 0x1502 and Events(0x8B,0x8B,0x8B) then --DiZ and the Mysterious Figure
 	BitOr(Save+0x1ED9,0x40) --EH_FM_ROX_RE_CLEAR (Change Portal Color)
 	WriteByte(Save+0x1CFE,1) --Post-Story Save
 	WriteByte(Save+0x1CFF,0)
+	WriteShort(Save+0x0284,0x03) --The Old Mansion MAP (Gate Unlocked)
 	WriteShort(Save+0x02BA,0x0D) --Pod Room MAP (Data Door)
-	WriteShort(Save+0x02BE,0x00) --Pod Room EVT
 end
 --Simulated Twilight Town Post-Story Save
 if Place == 0x1A04 and ReadByte(Save+0x1CFE) > 0 and Door == 0x21 then
@@ -2763,9 +2768,13 @@ if ReadByte(Save+0x1CFF) == 13 then --STT Removals
 		Struggle = 0x1F5 --Struggle Wand
 	elseif ReadByte(Save+0x1CF8) == 3 then
 		Struggle = 0x1F6 --Struggle Hammer
+	elseif not(Place == 0x0402 and Events(0x4C,0x4C,0x4C)) then --No Struggle Weapon Chosen
+		WriteByte(Save+0x1CF8,math.random(3))
 	end
 	if Place == 0x0402 and Events(0x4C,0x4C,0x4C) then --Sandlot Weapons
-		if ReadByte(Save+0x1CF8) == 0 then
+		if Equip ~= 0x180 and Equip ~= 0x1F5 and Equip ~= 0x1F6 then
+			WriteByte(Save+0x1CF8,0) --Reset Struggle Weapon Flag
+		elseif ReadByte(Save+0x1CF8) == 0 then
 			if Equip == 0x180 then --Struggle Sword
 				WriteByte(Save+0x3651,ReadByte(Save+0x3651)+1)
 				WriteByte(Save+0x1CF8,1)
@@ -3073,20 +3082,20 @@ if true then
 		Path = 0
 	elseif Place == 0x1212 then --The Altar of Naught
 		Path = 1
-	elseif Place == 0x0608 then --Ridge
+	elseif Place == 0x0708 then --Summit
 		Path = 2
-	elseif Place == 0x0005 then --Entrance Hall
+	elseif Place == 0x0405 then --Ballroom
 		Path = 3
-	elseif Place == 0x020A then --The King's Den
+	elseif Place == 0x0D0A then --Peak
 		Path = 7
-	elseif Place == 0x1302 and ReadByte(Save+0x1CFF) == 8 then --Mansion: Basement Hall
+	elseif Place == 0x2802 and ReadByte(Save+0x1CFF) == 8 then --Betwixt & Between
 		Path = 8
 		WriteByte(Save+0x3FF5,10) --Battle Level TT3
-	elseif Place == 0x0804 then --Restoration Site (Destroyed)
+	elseif Place == 0x0804 then --Bailey (Intact)
 		Path = 9
-	elseif Place == 0x0D10 then --Isla de Muerta: Moonlight Nook
+	elseif Place == 0x0A10 then --Isla de Muerta: Treasure Heap
 		Path = 10
-	elseif Place == 0x1602 and ReadByte(Save+0x1CFF) == 13 then --Mansion: Basement Corridor
+	elseif Place == 0x1702 and ReadByte(Save+0x1CFF) == 13 then --Mansion: Pod Room
 		Path = 13
 		WriteByte(Save+0x3FF5,6) --Battle Level Day 6
 	elseif Place == 0x1A04 then --Garden of Assemblage

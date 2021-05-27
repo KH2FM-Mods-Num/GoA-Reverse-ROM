@@ -384,7 +384,7 @@ assets:
     method: spawnpoint
     source:
     - name: ard/ca10/m_11.yml
-- name: ard/dc00.ard #Audience Chamber (GoA Warp)
+- name: ard/dc00.ard #Audience Chamber (Reverse Warp)
   method: binarc
   source:
   - name: evt
@@ -981,6 +981,14 @@ assets:
     method: areadatascript
     source:
     - name: ard/tt14/evt.script
+- name: ard/tt16.ard #Mansion: Dining Room (Reverse Warp)
+  method: binarc
+  source:
+  - name: evt
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/tt16/evt.script
 - name: ard/tt20.ard #Mansion: Basement Hall (Axel II) (Drive Refill)
   method: binarc
   source:
@@ -989,6 +997,14 @@ assets:
     method: areadatascript
     source:
     - name: ard/tt20/evt.script
+- name: ard/tt21.ard #Mansion: Computer Room (Reverse Warp)
+  method: binarc
+  source:
+  - name: evt
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/tt21/evt.script
 - name: ard/tt23.ard #Mansion: Pod Room (GoA Warp & Data Warp)
   method: binarc
   source:
@@ -1128,7 +1144,7 @@ assets:
     method: areadatascript
     source:
     - name: ard/tt41/evt.script
-- name: ard/wi00.ard #Cornerstone Hill (GoA Warp)
+- name: ard/wi00.ard #Cornerstone Hill (Reverse Warp)
   method: binarc
   source:
   - name: evt
