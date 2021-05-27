@@ -89,7 +89,7 @@ Program 0x09
 MapVisibility 0x00000001 0x00000000
 AreaSettings 32 -1
 	SetUnk05 0x1
-	SetJump Type 1 World HB Area 8 Entrance 2 LocalSet 0 FadeType -1
+	SetJump Type 1 World HB Area 8 Entrance 1 LocalSet 0 FadeType -1
 	SetPartyMenu 0
 
 AreaSettings 34 -1
