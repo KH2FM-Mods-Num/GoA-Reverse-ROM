@@ -3034,16 +3034,16 @@ if Place == 0x020B and Events(Null,Null,0x02) then
 elseif Place == 0x1A04 then
 	local PrevEVT
 	local CurEVT = ReadShort(Save+0x10A0)
-	if CurEVT == 0x0D then
+	if CurEVT == 0x0D and ReadByte(Save+0x35CF) >= 1 then
 		PrevEVT = 0x14
 		WriteShort(Save+0x109A,0x02) --Ariel's Grotto EVT
-	elseif CurEVT == 0x0C then
+	elseif CurEVT == 0x0C and ReadByte(Slot1+0x1B2) >= 5 then
 		PrevEVT = 0x15
 		WriteShort(Save+0x10A6,0x01) --Undersea Courtyard (Dawn) EVT
-	elseif CurEVT == 0x07 then
+	elseif CurEVT == 0x07 and ReadByte(Save+0x35CF) >= 2 then
 		PrevEVT = 0x16
 		WriteShort(Save+0x10B2,0x02) --Sunken Ship EVT
-	elseif CurEVT == 0x06 then
+	elseif CurEVT == 0x06 and ReadByte(Save+0x3596) >= 3 then
 		WriteByte(Save+0x1DFF,0)
 		WriteShort(Save+0x10BE,0x01) --The Shore (Night) EVT
 	end
