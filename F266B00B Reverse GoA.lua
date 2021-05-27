@@ -458,11 +458,11 @@ if true then
 	local Bitmask, Visit
 	if World == 0x02 then --Twilight Town & Simulated Twilight Town
 		Visit = ReadByte(Save+0x3FF5)
-		if Visit == 1 or Visit == 2 or Visit == 3 then
+		if Visit == 6 then
 			Bitmask = 0x040001
 		elseif Visit == 4 or Visit == 5 then
 			Bitmask = 0x140001
-		elseif Visit == 6 then
+		elseif Visit == 1 or Visit == 2 or Visit == 3 then
 			Bitmask = 0x140401
 		elseif Visit == 10 then
 			Bitmask = 0x140C01
