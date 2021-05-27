@@ -290,7 +290,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteShort(Save+0x0D94,0x0B) --The Hundred Acre Wood EVT
 	WriteShort(Save+0x10A0,0x13) --Undersea Courtyard EVT
 	WriteShort(Save+0x10AC,0x02) --The Palace: Performance Hall EVT
-	WriteShort(Save+0x1238,0x01) --Gummi Hangar EVT
+	WriteShort(Save+0x122C,0x01) --Hall of the Cornerstone (Dark) EVT
 	WriteShort(Save+0x1B1A,0x01) --Alley to Between EVT
 	WriteShort(Save+0x1B5E,0x01) --Proof of Existence MAP (Lock Progress)
 	--Start at 2nd Visits
@@ -302,9 +302,10 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteByte(Save+0x1DDF,7) --Pride Lands
 	WriteByte(Save+0x1D0D,10)--Twilight Town
 	WriteByte(Save+0x1D2F,2) --Hollow Bastion
-	WriteByte(Save+0x1DFF,1) --Atlantica
 	WriteByte(Save+0x1E9F,5) --Port Royal
+	WriteByte(Save+0x1E1F,3) --Disney Castle
 	WriteByte(Save+0x1EBF,4) --Space Paranoids
+	WriteByte(Save+0x1DFF,1) --Atlantica
 	--Tutorial Flags & Form Weapons
 	BitOr(Save+0x239E,0x07)  --Pause Menu (1=Items, 2=Party, 4=Customize)
 	BitNot(Save+0x239E,0x80) --Show Struggle Bats Outside STT
@@ -1476,8 +1477,10 @@ elseif ReadByte(Save+0x1D6F) == 8 and ReadByte(Save+0x35AE) > 0 then --2nd Visit
 	WriteByte(Save+0x1D6F,9)
 	WriteShort(Save+0x0920,0x12) --Coliseum Gates (Destroyed) EVT
 	WriteShort(Save+0x0924,0x00) --Underworld Entrance BTL
+	WriteShort(Save+0x092E,0x02) --Valley of the Dead MAP (Spawn Skateboard)
 	WriteShort(Save+0x0936,0x00) --Hades' Chamber BTL
 	WriteShort(Save+0x094E,0x00) --Cave of the Dead: Inner Chamber BTL
+	WriteShort(Save+0x096A,0x01) --Cave of the Dead: Passage MAP (Spawn Skateboard)
 	if ReadShort(Save+0x0926) == 0x0A then
 		WriteShort(Save+0x0926,0x0B) --Underworld Entrance EVT
 	else
@@ -2067,8 +2070,13 @@ elseif Place == 0x0904 and Events(Null,Null,0x0B) then --The Rogue Security Syst
 elseif Place == 0x0504 and Events(Null,Null,0x0D) then --Wait for Us, Tron
 	WriteShort(Save+0x0662,0x0C) --Merlin's House EVT
 elseif Place == 0x0604 and Events(0x5E,0x5E,0x5E) then --Radiant Garden
+elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembrance Cleared
+	WriteShort(Save+0x0650,0x0A) --Marketplace EVT
+	WriteShort(Save+0x06A8,0x04) --Transport to Remembrance BTL
+	WriteShort(Save+0x06AA,0x00) --Transport to Remembrance EVT
+	BitOr(Save+0x1D27,0x04) --HB_FM_13TSUURO_OUT
 end
---Block CoR & Go Back to GoA
+--Block CoR & Go Back to GoA after Sephiroth
 if ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9 then
 	if Place == 0x0604 then --Postern -> Cavern of Remembrance: Depths
 		Spawn('Short',0x05,0x024,0x0306)
@@ -2172,13 +2180,6 @@ if Place == 0x0204 and Events(Null,0x02,0x03) then
 	WriteShort(Save+0x3EE8,900)
 	WriteShort(Save+0x3EEC,0x03) --Mushroom XII
 	WriteShort(Save+0x3EF0,50)
-end
---Transport to Remembrance Nobodies III Cleared (Skip GoA Stuff After)
-if ReadShort(Save+0x06A8) == 0x05 then
-	WriteShort(Save+0x0650,0x0A) --Marketplace EVT
-	WriteShort(Save+0x06A8,0x04) --Transport to Remembrance BTL
-	WriteShort(Save+0x06AA,0x00) --Transport to Remembrance EVT
-	BitOr(Save+0x1D27,0x04) --HB_FM_13TSUURO_OUT
 end
 end
 
@@ -2327,18 +2328,33 @@ elseif Place == 0x000C and Events(Null,Null,0x01) then --Heartless? Here?
 elseif Place == 0x040C and Events(Null,Null,0x02) then --The Strange Door
 	WriteByte(Save+0x1E1F,3)
 	WriteArray(Save+0x065E,ReadArray(Save+0x0664,6)) --Load Merlin's House Spawn ID
+elseif Place == 0x000D and Events(Null,Null,0x07) then --Back to Their Own World
+	WriteShort(Save+0x122A,0x01) --Hall of the Cornerstone (Dark) BTL
+	WriteShort(Save+0x1390,0x02) --Cornerstone Hill MAP (Transition to Hall of the Cornerstone (Dark))
 elseif Place == 0x050C and Events(Null,Null,0x01) then --The Castle is Secure
 	BitOr(Save+0x1D26,0x80) --HB_FM_MAR_RE_CLEAR (Change Portal Color)
 	WriteByte(Save+0x1E1E,3) --Post-Story Save
-	WriteShort(Save+0x1230,0x01) --Hall of the Cornerstone (Light) BTL
-elseif Place == 0x2604 and Events(0x7F,0x7F,0x7F) then --Marluxia Defeated
+	WriteShort(Save+0x1210,0x04) --Audience Chamber MAP (Transition to Hall of the Cornerstone (Light))
+	WriteShort(Save+0x1216,0x00) --Library MAP (Spawn Party Members)
+	WriteShort(Save+0x1218,0x00) --Library BTL
+	WriteShort(Save+0x121C,0x00) --Colonnade MAP (Spawn Party Members)
 	WriteShort(Save+0x1230,0x02) --Hall of the Cornerstone (Light) BTL
+	WriteShort(Save+0x1390,0x03) --Cornerstone Hill MAP (Transition to Hall of the Cornerstone (Light))
+elseif Place == 0x2604 and Events(0x7F,0x7F,0x7F) then --Marluxia Defeated
+	WriteByte(Save+0x1E1F,0)
+	WriteShort(Save+0x1238,0x01) --Gummi Hangar EVT
 elseif ReadByte(Save+0x36B2) > 0 and ReadByte(Save+0x1E1E) > 0 and ReadShort(Save+0x1232) == 0x00 then --Proof of Connection, DC Cleared, Terra Locked
-	WriteByte(Save+0x121A,0x11) --Library EVT
-	WriteByte(Save+0x1232,0x02) --Hall of the Cornerstone (Light) EVT
-	WriteByte(Save+0x1238,0x12) --Gummi Hangar EVT
+	WriteShort(Save+0x121A,0x11) --Library EVT
+	WriteShort(Save+0x1232,0x02) --Hall of the Cornerstone (Light) EVT
+	WriteShort(Save+0x1238,0x12) --Gummi Hangar EVT
 	BitOr(Save+0x1CB1,0x02) --ES_FM_URA_MOVIE (BBS Movie 1) (Show Prompt in TWtNW)
 	BitOr(Save+0x1E13,0x80) --DC_FM_NAZO_ON
+end
+--Block 1st Visit Areas
+if ReadByte(Save+0x1E1F) > 2 then
+	if Place == 0x040C then --Hall of the Cornerstone (Dark) -> Audience Chamber
+		Spawn('Short',0x03,0x024,0x0004)
+	end
 end
 --Disney Castle Post-Story Save
 if Place == 0x1A04 and ReadByte(Save+0x1E1E) > 0 then
