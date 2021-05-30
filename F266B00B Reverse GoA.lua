@@ -94,6 +94,7 @@ Slot8  = Slot7 - NextSlot
 Slot9  = Slot8 - NextSlot
 Slot10 = Slot9 - NextSlot
 Slot11 = Slot10 - NextSlot
+Slot12 = Slot11 - NextSlot
 Point2 = Point1 + NxtPoint
 Point3 = Point2 + NxtPoint
 Gauge2 = Gauge1 + NxtGauge
@@ -271,6 +272,7 @@ end
 if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	BitNot(Save+0x1CD2,0x80) --TT_SCENARIO_1_START (Show Gameplay Elements)
 	BitOr(Save+0x1CEA,0x02)  --TT_SORA_OLD_END (Play as KH2 Sora)
+	BitOr(Save+0x1CEB,0x08)  --TT_ROXAS_START (Prepare Roxas' Flag)
 	WriteByte(Pause,0x02) --Disable Pause
 	if ReadInt(CutLen) == 0x246 then --Dusks attack
 		WriteByte(CutSkp,1)
@@ -292,6 +294,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteByte(Slot1+0x1B1,5)   --Starting Drive Current
 	WriteByte(Slot1+0x1B2,5)   --Starting Drive Max
 	--Place Scripts
+	WriteShort(Save+0x027E,0x01) --The Woods MAP (STT)
 	WriteShort(Save+0x06AC,0x01) --Garden of Assemblage MAP (Before Computer)
 	WriteShort(Save+0x06B0,0x03) --Garden of Assemblage EVT
 	WriteShort(Save+0x0D90,0x0F) --The Hundred Acre Wood MAP (5th Page)
@@ -2541,9 +2544,7 @@ if Place == 0x1A04 then
 			WarpRoom = 0x02
 		elseif Progress == 11 then --[Before Entering the Library, Before Entering Computer Room]
 			WarpRoom = 0x12
-		elseif Progress == 12 then --Before Axel II
-			WarpRoom = 0x15
-		elseif Progress == 13 then --After Axel II
+		elseif Progress == 12 then --[Before Axel II, After Axel II]
 			WarpRoom = 0x15
 		end
 	elseif PostSave == 1 then --The Usual Spot
@@ -2587,6 +2588,9 @@ elseif Place == 0x0102 and Events(0x3B,0x3B,0x3B) then --A Troubled Awakening
 	WriteByte(Save+0x1D0E,5)
 elseif Place == 0x0102 and Events(0x3C,0x3C,0x3C) then --A Hazy Morning
 	WriteByte(Save+0x1D0E,6)
+	WriteShort(Save+0x035E,0x01) --The Woods MAP (STT)
+	WriteShort(Save+0x0364,0x01) --The Old Mansion MAP (Gate Locked)
+	WriteShort(Save+0x0394,0x01) --Mansion: Basement Corridor MAP (STT)
 elseif Place == 0x0902 and Events(Null,Null,0x0C) then --Seeking Out the Wonders
 	WriteByte(Save+0x1D0E,7)
 elseif Place == 0x2402 and Events(0x9F,0x9F,0x9F) then --Moans from the Tunnel
@@ -2600,20 +2604,25 @@ elseif Place == 0x1202 and Events(Null,Null,0x01) then --Sketches
 elseif Place == 0x1502 and Events(Null,Null,0x01) then --The Computer System
 	WriteByte(Save+0x1D0E,12)
 elseif Place == 0x1302 and Events(0x88,0x88,0x88) then --In the Next Life
-	WriteByte(Save+0x1D0E,13)
 	WriteShort(Save+0x0346,0x02) --Central Station MAP (Spawn Sunset Station Train)
 	WriteShort(Save+0x034A,0x13) --Central Station EVT
 	WriteShort(Save+0x0366,0x01) --The Old Mansion BTL
 	WriteShort(Save+0x036C,0x01) --Mansion Foyer BTL
 	WriteShort(Save+0x0372,0x01) --Dining Room BTL
-	WriteShort(Save+0x2114,0x0000) --Station Plaza Barrier Removal
-	WriteShort(Save+0x211C,0x0000) --The Old Mansion Barrier Removal
 elseif Place == 0x1502 and Events(0x8B,0x8B,0x8B) then --DiZ and the Mysterious Figure
 	BitOr(Save+0x1ED9,0x40) --EH_FM_ROX_RE_CLEAR (Change Portal Color)
 	WriteByte(Save+0x1CFE,1) --Post-Story Save
 	WriteByte(Save+0x1CFF,0)
 	WriteShort(Save+0x0284,0x03) --The Old Mansion MAP (Gate Unlocked)
 	WriteShort(Save+0x02BA,0x0D) --Pod Room MAP (Data Door)
+end
+--Block Mansion Post-Story
+if ReadByte(Save+0x1CFE) > 0 and ReadByte(Save+0x1CFF) == 13 then
+	if Place == 0x0E02 then --The Old Mansion -> Mansion: Foyer
+		Spawn('Short',0x04,0x024,0x0016)
+	elseif Place == 0x1602 then --Mansion: Basement Corridor -> Mansion: Basement Hall
+		Spawn('Short',0x03,0x024,0x010E)
+	end
 end
 --Simulated Twilight Town Post-Story Save
 if Place == 0x1A04 and ReadByte(Save+0x1CFE) > 0 and Door == 0x21 then
@@ -2681,11 +2690,9 @@ if ReadByte(Save+0x1CFF) == 2 then --Load Spawn ID upon Entering STT
 		elseif Progress == 11 then --[Before Entering the Library, Before Entering Computer Room]
 			Visit = 6
 			WriteShort(Save+0x211C,0xC548) --The Old Mansion Barrier
-		elseif Progress == 12 then --Before Axel II
+		elseif Progress == 12 then --[Before Axel II, After Axel II]
 			Visit = 6
 			WriteShort(Save+0x211C,0xC548) --The Old Mansion Barrier
-		elseif Progress == 13 then --After Axel II
-			Visit = 6
 		end
 	else
 		Visit = 6
@@ -2809,10 +2816,11 @@ if ReadByte(Save+0x1CFF) == 13 then --STT Removals
 			WriteShort(Save+0x24F0,Store) --Change Equipped Keyblade
 		end
 	end
-	if ReadShort(Sys3+0xC0CE) == 0x35 then --STT BGM
+	print(ReadByte(Save+0x3FF5),ReadShort(Sys3+0xC0CC))
+	if ReadShort(Sys3+0xC0CE) == 0x35 or (ReadByte(Save+0x3FF5) == 5 and ReadShort(Sys3+0xC0CC) == 0) then --STT BGM (Restore on Day 5)
 		for i = 0x00,0x29 do
 			local DefaultBGM = Sys3 + 0xC0CC + 0x40*i
-			if ReadShort(DefaultBGM+2) == 0x35 then
+			if ReadShort(DefaultBGM+2) == 0x35 or (ReadByte(Save+0x3FF5) == 5 and ReadShort(DefaultBGM) == 0) then
 				WriteShort(DefaultBGM+0x0,0x76) --Lazy Afternoons
 				WriteShort(DefaultBGM+0x2,0x77) --Sinister Sundowns
 				WriteShort(DefaultBGM+0x4,0x76)
