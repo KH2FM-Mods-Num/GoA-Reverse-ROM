@@ -1,10 +1,5 @@
 --ROM Version
 --Last Update: Minor Cleanups
---Todo: STT Woods & Mansion Chests
---LoD Village from Mountain Trail
---100AW Multiple Torn Page
---PR Isla de Muerta Barrier
---Remove Sanctuary
 
 function _OnInit()
 local VersionNum = 'GoA Version 1.52.3'
@@ -297,8 +292,10 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteShort(Save+0x027E,0x01) --The Woods MAP (STT)
 	WriteShort(Save+0x06AC,0x01) --Garden of Assemblage MAP (Before Computer)
 	WriteShort(Save+0x06B0,0x03) --Garden of Assemblage EVT
-	WriteShort(Save+0x0D90,0x0F) --The Hundred Acre Wood MAP (5th Page)
-	WriteShort(Save+0x0D94,0x0B) --The Hundred Acre Wood EVT
+	WriteShort(Save+0x0C22,0x02) --Mountain Trail MAP (Transition to Village (Destroyed))
+	WriteShort(Save+0x0D90,0x10) --The Hundred Acre Wood MAP (5th Page)
+	WriteShort(Save+0x0D94,0x00) --The Hundred Acre Wood EVT
+	WriteShort(Save+0x0D9A,0x01) --Starry Hill EVT
 	WriteShort(Save+0x10A0,0x13) --Undersea Courtyard EVT
 	WriteShort(Save+0x10AC,0x02) --The Palace: Performance Hall EVT
 	WriteShort(Save+0x122C,0x01) --Hall of the Cornerstone (Dark) EVT
@@ -2262,6 +2259,7 @@ elseif Place == 0x0B10 and Events(Null,Null,0x0A) then --The Ship Graveyard
 	WriteByte(Save+0x1E9F,9)
 elseif Place == 0x0E10 and Events(Null,Null,0x0A) then --Retrieve the Medallion!
 	WriteByte(Save+0x1E9F,10)
+	WriteShort(Save+0x1846,0x01) --Isla de Muerta: Cave Mouth MAP (Transition to Isla de Muerta: Rock Face (The Black Pearl))
 elseif Place == 0x0510 and Events(Null,Null,0x0E) then --Into the Ocean
 	WriteByte(Save+0x1E9F,0)
 	WriteShort(Save+0x1814,0x01) --Rampart EVT
@@ -2273,6 +2271,8 @@ if ReadByte(Save+0x1E9F) > 5 then
 		Spawn('Short',0x04,0x024,0x0100)
 	elseif Place == 0x0110 then --Harbor -> Town
 		Spawn('Short',0x04,0x024,0x0101)
+	elseif Place == 0x0910 then --Isla de Muerta: Cave Mouth -> Isla de Muerta: Powder Store
+		Spawn('Short',0x04,0x024,0x0109)
 	end
 end
 --Port Royal Post-Story Save
@@ -3034,7 +3034,6 @@ elseif ReadByte(Save+0x3598) > 0 and Place == 0x1A04 then
 	if PrevMAP and PrevEVT then
 		WriteShort(Save+0x0D90,PrevMAP) --The Hundred Acre Wood MAP
 		WriteShort(Save+0x0D94,PrevEVT) --The Hundred Acre Wood EVT
-		WriteByte(Save+0x3598,ReadByte(Save+0x3598)-1)
 	end
 end
 --Faster A Blustery Rescue
