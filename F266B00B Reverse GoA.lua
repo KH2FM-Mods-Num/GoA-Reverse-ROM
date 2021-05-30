@@ -1272,6 +1272,9 @@ elseif Place == 0x2004 and Events(0x79,0x79,0x79) then --Vexen Defeated
 	WriteByte(Save+0x1E5F,0)
 	WriteShort(Save+0x152C,0x01) --Hinterlands EVT
 	WriteShort(Save+0x1530,0x00) --Yuletide Hill BTL
+	if ReadByte(Save+0x1D7F) < 6 and ReadByte(Save+0x1E5F) < 7 and ReadByte(Save+0x1DDF) < 7 then
+		BitOr(Save+0x239D,0x02) --Cerberus Cup Unlocked
+	end
 end
 --Block 1st Visit Areas
 if ReadShort(Save+0x1E5F) > 7 then
@@ -1389,6 +1392,9 @@ elseif Place == 0x0007 and Events(Null,Null,0x0A) then --Cosmic Razzle-Dazzle
 elseif Place == 0x2104 and Events(0x7B,0x7B,0x7B) then --Lexaeus Defeated
 	WriteByte(Save+0x1D7F,0)
 	WriteShort(Save+0x0A94,0x01) --Agrabah EVT
+	if ReadByte(Save+0x1D7F) < 6 and ReadByte(Save+0x1E5F) < 7 and ReadByte(Save+0x1DDF) < 7 then
+		BitOr(Save+0x239D,0x02) --Cerberus Cup Unlocked
+	end
 end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1D7F) > 6 then
@@ -1481,6 +1487,7 @@ elseif Place == 0x1206 and Events(0xAB,0xAB,0xAB) then --The Aftermath
 	WriteByte(Save+0x1D6E,1) --Post-Story Save
 	WriteShort(Save+0x0926,0x0A) --Underworld Entrance EVT
 	WriteShort(Save+0x094E,0x02) --Cave of the Dead: Inner Chamber BTL
+	BitOr(Save+0x239C,0x08) --Titan Cup Unocked
 elseif ReadByte(Save+0x1D6F) == 8 and ReadByte(Save+0x35AE) > 0 then --2nd Visit
 	WriteByte(Save+0x1D6F,9)
 	WriteShort(Save+0x0920,0x12) --Coliseum Gates (Destroyed) EVT
@@ -1500,6 +1507,7 @@ elseif Place == 0x0606 and Events(Null,Null,0x0A) then --Voices from the Past
 	WriteByte(Save+0x1D6F,11)
 elseif Place == 0x0E06 and Events(Null,Null,0x0A) then --The Constellation of Heroes
 	WriteShort(Save+0x094E,0x01) --Cave of the Dead: Inner Chamber BTL
+	BitNot(Save+0x239C,0x08) --Titan Cup Locked
 elseif Place == 0x2204 and Events(0x7D,0x7D,0x7D) then --Zexion Defeated
 	WriteByte(Save+0x1D6F,0)
 	WriteShort(Save+0x0914,0x01) --The Coliseum EVT
@@ -1639,9 +1647,12 @@ elseif ReadByte(Save+0x1DDF) == 7 and ReadByte(Save+0x35B5) > 0 then --2nd Visit
 	WriteShort(Save+0x0F2C,0x0A) --Savannah EVT
 elseif Place == 0x000A and Events(Null,Null,0x0A) then --Scar's Ghost
 	WriteByte(Save+0x1DDF,9)
-elseif Place == 0x000A and Events(Null,Null,0x0E) then --Pride Lands Cleared
+elseif Place == 0x000A and Events(Null,Null,0x0E) then --The Circle of Life
 	WriteByte(Save+0x1DDF,0)
 	WriteShort(Save+0x0F6E,0x01) --Wildebeest Valley (Past) EVT
+	if ReadByte(Save+0x1D7F) < 6 and ReadByte(Save+0x1E5F) < 7 and ReadByte(Save+0x1DDF) < 7 then
+		BitOr(Save+0x239D,0x02) --Cerberus Cup Unlocked
+	end
 end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1DDF) > 7 then
