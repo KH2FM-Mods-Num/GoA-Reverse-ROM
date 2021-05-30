@@ -1,5 +1,10 @@
 --ROM Version
 --Last Update: Minor Cleanups
+--Todo: STT Woods & Mansion Chests
+--LoD Village from Mountain Trail
+--100AW Multiple Torn Page
+--PR Isla de Muerta Barrier
+--Remove Sanctuary
 
 function _OnInit()
 local VersionNum = 'GoA Version 1.52.3'
@@ -258,6 +263,9 @@ end
 if Place == 0x0102 and Events(0x34,0x34,0x34) then --Opening Cutscene
 	WriteShort(Save+0x03D0,0x01) --Station of Serenity MAP (Dream Weapons)
 	WriteShort(Save+0x03D4,0x01) --Station of Serenity EVT
+	if Platform == 'PS2' then
+		Warp(0x02,0x20,0x32,0x01,0x00,0x01) --Not warping here on PS2 causes crash later
+	end
 end
 --Start New Game 2
 if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
@@ -284,7 +292,6 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteByte(Slot1+0x1B1,5)   --Starting Drive Current
 	WriteByte(Slot1+0x1B2,5)   --Starting Drive Max
 	--Place Scripts
-	WriteShort(Save+0x023A,0x01) --Roxas' Room EVT
 	WriteShort(Save+0x06AC,0x01) --Garden of Assemblage MAP (Before Computer)
 	WriteShort(Save+0x06B0,0x03) --Garden of Assemblage EVT
 	WriteShort(Save+0x0D90,0x0F) --The Hundred Acre Wood MAP (5th Page)
