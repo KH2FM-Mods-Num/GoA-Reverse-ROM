@@ -1,8 +1,8 @@
 --ROM Version
---Last Update: Minor Cleanups
+--Last Update: Crash after STT Prevention
 
 function _OnInit()
-local VersionNum = 'GoA Version 1.52.3'
+local VersionNum = 'GoA Version 1.52.4'
 if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" then --PCSX2
 	if ENGINE_VERSION < 3.0 then
 		print('LuaEngine is Outdated. Things might not work properly.')
@@ -1864,7 +1864,7 @@ if Place == 0x1A04 and ReadByte(Save+0x1CFD) > 0 and Door == 0x1C then
 	end
 end
 --Spawn IDs
-if ReadByte(Save+0x1CFF) == 1 then --Load Spawn ID upon Entering TT
+if ReadShort(TxtBox) == 0x768 and PrevPlace == 0x1A04 and (World == 0x02 or Place == 0x0112) then --Load Spawn ID upon Entering TT
 	WriteInt(Save+0x353C,0x12020100) --Full Party
 	WriteByte(Save+0x1CFF,8) --TT Flag
 	for i = 0,143 do
@@ -2650,7 +2650,7 @@ if Place == 0x1A04 and ReadByte(Save+0x1CFE) > 0 and Door == 0x21 then
 	end
 end
 --Spawn IDs
-if ReadByte(Save+0x1CFF) == 2 then --Load Spawn ID upon Entering STT
+if ReadShort(TxtBox) == 0x76D and PrevPlace == 0x1A04 and World == 0x02 then --Load Spawn ID upon Entering STT
 	WriteInt(Save+0x353C,0x12121200) --Roxas Only
 	WriteByte(Save+0x1CFF,13) --STT Flag
 	for i = 0,143 do
@@ -2827,7 +2827,6 @@ if ReadByte(Save+0x1CFF) == 13 then --STT Removals
 			WriteShort(Save+0x24F0,Store) --Change Equipped Keyblade
 		end
 	end
-	print(ReadByte(Save+0x3FF5),ReadShort(Sys3+0xC0CC))
 	if ReadShort(Sys3+0xC0CE) == 0x35 or (ReadByte(Save+0x3FF5) == 5 and ReadShort(Sys3+0xC0CC) == 0) then --STT BGM (Restore on Day 5)
 		for i = 0x00,0x29 do
 			local DefaultBGM = Sys3 + 0xC0CC + 0x40*i
