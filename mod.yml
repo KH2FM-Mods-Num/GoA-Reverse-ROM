@@ -467,7 +467,15 @@ assets:
     method: areadatascript
     source:
     - name: ard/eh01/btl.script
-- name: ard/eh10.ard #Hall of Empty Melodies (Lower Level) (Prevent OoB in Xigbar's Arena)
+- name: ard/eh03.ard #Memory's Skyscraper (Reverse Warp)
+  method: binarc
+  source:
+  - name: evt
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh03/evt.script
+- name: ard/eh10.ard #Hall of Empty Melodies (Lower Level) (Prevent OoB in Xigbar's Arena & Reverse Warp)
   method: binarc
   source:
   - name: map
@@ -475,7 +483,20 @@ assets:
     method: areadatascript
     source:
     - name: ard/eh10/map.script
-- name: ard/eh18.ard #The Altar of Naught (Data Warp)
+  - name: evt
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh10/evt.script
+- name: ard/eh15.ard #Addled Impasse (Reverse Warp)
+  method: binarc
+  source:
+  - name: evt
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh15/evt.script
+- name: ard/eh18.ard #The Altar of Naught (Data Warp & Reverse Warp)
   method: binarc
   source:
   - name: map
@@ -488,6 +509,19 @@ assets:
     method: spawnpoint
     source:
     - name: ard/eh18/m_11.yml
+  - name: evt
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh18/evt.script
+- name: ard/eh19.ard #Memory's Contortion (Reverse Warp)
+  method: binarc
+  source:
+  - name: evt
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh19/evt.script
 - name: ard/eh27.ard #The World of Nothing (Part I) (Party Menu after Promise Charm)
   method: binarc
   source:
