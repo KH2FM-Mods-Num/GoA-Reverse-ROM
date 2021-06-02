@@ -301,7 +301,6 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteShort(Save+0x0D94,0x00) --The Hundred Acre Wood EVT
 	WriteShort(Save+0x0D9A,0x01) --Starry Hill EVT
 	WriteShort(Save+0x10A0,0x13) --Undersea Courtyard EVT
-	WriteShort(Save+0x10AC,0x02) --The Palace: Performance Hall EVT
 	WriteShort(Save+0x122C,0x01) --Hall of the Cornerstone (Dark) EVT
 	WriteShort(Save+0x1B1A,0x01) --Alley to Between EVT
 	WriteShort(Save+0x1B5E,0x01) --Proof of Existence MAP (Lock Progress)
@@ -379,10 +378,10 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	BitOr(Save+0x1DD0,0x01) --LK_START
 	BitOr(Save+0x1DD3,0x01) --LK_START2
 	BitOr(Save+0x1DF0,0x01) --LM_START
-	BitOr(Save+0x1DF1,0x04) --LM_START_2
-	BitOr(Save+0x1DF2,0x01) --LM_START_3
-	BitOr(Save+0x1DF2,0x10) --LM_START_4
-	BitOr(Save+0x1DF3,0x80) --LM_START_5
+	BitOr(Save+0x1DF4,0x40) --LM_GET_ITEM_2
+	BitOr(Save+0x1DF4,0x80) --LM_GET_ITEM_3
+	BitOr(Save+0x1DF5,0x01) --LM_GET_ITEM_4
+	BitOr(Save+0x1DF5,0x20) --LM_GET_ITEM_5
 	BitOr(Save+0x1E10,0x02) --DC_START
 	BitOr(Save+0x1E50,0x01) --NM_START
 	BitOr(Save+0x1E50,0x02) --NM_START2
@@ -3080,21 +3079,24 @@ end
 if Place == 0x020B and Events(Null,Null,0x01) then --The Kingdom Under the Sea
 	WriteByte(Save+0x1DFF,1)
 end
---Block Leaving Finny Fun & Reverse Visit Order
-if Place == 0x020B and Events(Null,Null,0x02) then
-	Spawn('Short',0x04,0x034,0x23A)
+--Atlantica Adjustments & Reverse Visit Order
+if Place == 0x020B then 
+	BitOr(Save+0x2393,0x20) --Part of Your World
+	BitOr(Save+0x2393,0x40) --Under the Sea
+	BitOr(Save+0x2393,0x80) --Ursula's Revenge
+	BitOr(Save+0x2394,0x01) --A New Day is Dawning
+	if Events(Null,Null,0x02) then --World Point -> Save Point (Block Leaving Finny Fun)
+		Spawn('Short',0x04,0x034,0x23A)
+	end
 elseif Place == 0x1A04 then
 	local PrevEVT
 	local CurEVT = ReadShort(Save+0x10A0)
 	if CurEVT == 0x0D and ReadByte(Save+0x35CF) >= 1 then
 		PrevEVT = 0x14
-		WriteShort(Save+0x109A,0x02) --Ariel's Grotto EVT
 	elseif CurEVT == 0x0C and ReadByte(Slot1+0x1B2) >= 5 then
 		PrevEVT = 0x15
-		WriteShort(Save+0x10A6,0x01) --Undersea Courtyard (Dawn) EVT
 	elseif CurEVT == 0x07 and ReadByte(Save+0x35CF) >= 2 then
 		PrevEVT = 0x16
-		WriteShort(Save+0x10B2,0x02) --Sunken Ship EVT
 	elseif CurEVT == 0x06 and ReadByte(Save+0x3596) >= 3 then
 		WriteByte(Save+0x1DFF,0)
 		WriteShort(Save+0x10BE,0x01) --The Shore (Night) EVT
