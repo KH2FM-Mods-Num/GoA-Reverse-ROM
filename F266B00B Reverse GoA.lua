@@ -1349,7 +1349,7 @@ if Place == 0x1A04 then
 		elseif Progress == 10 then --Before Carpet Escape
 			WarpRoom = 0x0B
 		elseif Progress == 11 then --Before Genie Jafar
-			WarpRoom = 0x04
+			WarpRoom = 0x0F
 		end
 	elseif PostSave == 1 then --The Peddler's Shop (Poor)
 		WarpRoom = 0x02
