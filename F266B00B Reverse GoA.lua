@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: SANCTUARY & Reverse TWtNW
+--Last Update: Merlin's House Post 100 AW & Better Spawn Spots
 --To Do: Check if stuff crashes after STT Beam or Sanctuary
 --Prevent choosing Ship Graveyard on PR1
 --Maybe add pause option to Atlantica?
@@ -354,6 +354,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	BitOr(Save+0x1D19,0x20) --HB_TR_202_END
 	BitOr(Save+0x1D1A,0x02) --HB_TR_tr04_ms202
 	BitOr(Save+0x1D1A,0x08) --HB_TR_tr09_ms205
+	BitOr(Save+0x1D20,0x10) --HB_POOH_CLEAR
 	BitOr(Save+0x1D21,0x10) --HB_RTN_ON
 	BitOr(Save+0x1D21,0x80) --HB_TR05_HIDDEN_ON
 	BitOr(Save+0x1D22,0x01) --HB_TR05_HIDDEN_OFF
@@ -1046,6 +1047,7 @@ elseif Place == 0x0B08 and Events(Null,Null,0x0B) then --The Highest Reward
 	WriteByte(Save+0x1D9F,0)
 	WriteShort(Save+0x0C10,0x01) --Bamboo Grove MAP (Burning Village)
 	WriteShort(Save+0x0C14,0x01) --Bamboo Grove EVT
+	WriteShort(Save+0x0C18,0x00) --Encampment BTL (Not enough RAM with forms)
 end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1D9F) > 4 then
@@ -1231,6 +1233,8 @@ if Place == 0x1A04 then
 			WarpRoom = 0x05
 		elseif Progress == 11 then --[Before Gift Wrapping, Before the Experiment]
 			WarpRoom = 0x08
+		elseif Progress == 12 then --Before Vexen
+			WarpRoom = 0x05
 		end
 	elseif PostSave == 1 then --Dr. Finklestein's Lab
 		WarpRoom = 0x01
@@ -1271,6 +1275,7 @@ elseif Place == 0x0A0E and Events(Null,Null,0x0A) then --The Three Culprits
 elseif Place == 0x000E and Events(Null,Null,0x0A) then --Retrieving the Presents
 	WriteByte(Save+0x1E5F,11)
 elseif Place == 0x000E and Events(Null,Null,0x0B) then --Merry Christmas!
+	WriteByte(Save+0x1E5F,12)
 	WriteShort(Save+0x1530,0x01) --Yuletide Hill BTL
 elseif Place == 0x2004 and Events(0x79,0x79,0x79) then --Vexen Defeated
 	WriteByte(Save+0x1E5F,0)
@@ -1344,7 +1349,7 @@ if Place == 0x1A04 then
 		elseif Progress == 10 then --Before Carpet Escape
 			WarpRoom = 0x0B
 		elseif Progress == 11 then --Before Genie Jafar
-			WarpRoom = 0x0F
+			WarpRoom = 0x04
 		end
 	elseif PostSave == 1 then --The Peddler's Shop (Poor)
 		WarpRoom = 0x02
@@ -1458,6 +1463,8 @@ if Place == 0x1A04 then
 			WarpRoom = 0x0A
 		elseif Progress == 11 then --Before Hades
 			WarpRoom = 0x03
+		elseif Progress == 12 then --Before Zexion
+			WarpRoom = 0x0A
 		end
 	elseif PostSave == 1 then --Underworld Entrance
 		WarpRoom = 0x03
@@ -1510,6 +1517,7 @@ elseif Place == 0x0306 and Events(Null,Null,0x14) then --(After) Sneaking into H
 elseif Place == 0x0606 and Events(Null,Null,0x0A) then --Voices from the Past
 	WriteByte(Save+0x1D6F,11)
 elseif Place == 0x0E06 and Events(Null,Null,0x0A) then --The Constellation of Heroes
+	WriteByte(Save+0x1D6F,12)
 	WriteShort(Save+0x094E,0x01) --Cave of the Dead: Inner Chamber BTL
 	BitNot(Save+0x239C,0x08) --Titan Cup Locked
 elseif Place == 0x2204 and Events(0x7D,0x7D,0x7D) then --Zexion Defeated
@@ -2025,8 +2033,8 @@ if Place == 0x1A04 then
 		elseif Progress == 10 then --Post 4th Visit
 			WarpRoom = 0x06
 			Visit = 4
-		elseif Progress == 11 then --5th Visit
-			WarpRoom = 0x0A
+		elseif Progress == 11 then --5th Visit (Before Sephiroth)
+			WarpRoom = 0x03
 			Visit = 5
 		elseif Progress == 12 then --After Borough Heartless III
 			WarpRoom = 0x06
@@ -2094,6 +2102,7 @@ elseif Place == 0x0504 and Events(Null,Null,0x0D) then --Wait for Us, Tron
 	WriteShort(Save+0x0662,0x0C) --Merlin's House EVT
 elseif Place == 0x0604 and Events(0x5E,0x5E,0x5E) then --Radiant Garden
 elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembrance Cleared
+	WriteByte(Save+0x1D2F,11)
 	WriteShort(Save+0x0650,0x0A) --Marketplace EVT
 	WriteShort(Save+0x06A8,0x04) --Transport to Remembrance BTL
 	WriteShort(Save+0x06AA,0x00) --Transport to Remembrance EVT
@@ -2122,7 +2131,7 @@ if Place == 0x1A04 and ReadByte(Save+0x1D2E) > 0 then
 	end
 end
 --Remove 100 Acre Wood Book
-if ReadShort(Save+0x065E) == 0x00 then
+if ReadShort(Save+0x065E) == 0x00 or ReadShort(Save+0x065E) == 0x04 then
 	WriteShort(Save+0x065E,0x01) --Merlin's House MAP
 end
 --Heartless Manufactory Early Access with Membership Card
@@ -2364,7 +2373,7 @@ elseif Place == 0x050C and Events(Null,Null,0x01) then --The Castle is Secure
 	WriteByte(Save+0x1E1E,3) --Post-Story Save
 	WriteShort(Save+0x1210,0x04) --Audience Chamber MAP (Transition to Hall of the Cornerstone (Light))
 	WriteShort(Save+0x1216,0x00) --Library MAP (Spawn Party Members)
-	WriteShort(Save+0x1218,0x00) --Library BTL
+	WriteShort(Save+0x1218,0x00) --Library BTL (Avoid double Minnie)
 	WriteShort(Save+0x121C,0x00) --Colonnade MAP (Spawn Party Members)
 	WriteShort(Save+0x1230,0x02) --Hall of the Cornerstone (Light) BTL
 	WriteShort(Save+0x1390,0x03) --Cornerstone Hill MAP (Transition to Hall of the Cornerstone (Light))
