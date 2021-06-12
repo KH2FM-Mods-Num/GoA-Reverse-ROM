@@ -1,8 +1,6 @@
 --ROM Version
---Last Update: Merlin's House Post 100 AW & Better Spawn Spots
+--Last Update: Minor Cleanup
 --To Do: Check if stuff crashes after STT Beam or Sanctuary
---Prevent choosing Ship Graveyard on PR1
---Maybe add pause option to Atlantica?
 
 function _OnInit()
 local VersionNum = 'GoA Version 1.52.5'
@@ -248,7 +246,7 @@ if Place == 0xFFFF or Place == 0x0101 or (Place == 0x0102 and Events(0x34,0x34,0
 	WriteShort(Btl0+0x2EB4C,500) --Fast MCP (50% Base HP)
 	WriteShort(Btl0+0x2EB8C,300) --Double Max Damage %
 	WriteShort(Btl0+0x2EB8E,100) --Double Min Damage %
-	--Changed Form's Icons in PC From Analog Stick
+	--Change Form's Icons in PC From Analog Stick
 	if Platform == 'PC' then
 		WriteByte(Sys3+0x116DB,0x3B) --Valor
 		WriteByte(Sys3+0x116F3,0x3B) --Wisdom
@@ -320,6 +318,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	--Tutorial Flags & Form Weapons
 	BitOr(Save+0x239E,0x07)  --Pause Menu (1=Items, 2=Party, 4=Customize)
 	BitNot(Save+0x239E,0x80) --Show Struggle Bats Outside STT
+	BitOr(Save+0x36E8,0x01)  --Enable Item in Command Menu
 	WriteShort(Save+0x32F4,0x051) --Valor Form equips FAKE
 	WriteShort(Save+0x339C,0x02C) --Master Form equips Detection Saber
 	WriteShort(Save+0x33D4,0x02D) --Final Form equips Edge of Ultima
@@ -376,6 +375,7 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	BitOr(Save+0x1DB3,0x01) --PO_PAGE_3
 	BitOr(Save+0x1DB4,0x01) --PO_PAGE_4
 	BitOr(Save+0x1DB4,0x80) --PO_PAGE_5
+	BitOr(Save+0x1DB5,0x01) --PO_501_END (Show Starry Hill Chests)
 	BitOr(Save+0x1DD0,0x01) --LK_START
 	BitOr(Save+0x1DD3,0x01) --LK_START2
 	BitOr(Save+0x1DF0,0x01) --LM_START
@@ -476,12 +476,10 @@ if true then
 		elseif Visit == 1 or Visit == 2 or Visit == 3 then
 			Bitmask = 0x140401
 		elseif Visit == 10 then
-			Bitmask = 0x140C01
-		elseif Visit == 9 then
 			Bitmask = 0x141C01
-		elseif Visit == 7 then
+		elseif Visit == 9 then
 			Bitmask = 0x143D01
-		elseif Visit == 8 then
+		elseif Visit == 7 or Visit == 8 then
 			Bitmask = 0x157D79
 		elseif Visit == 13 then --Road to Data
 			Bitmask = 0x060000
@@ -1729,9 +1727,9 @@ if Place == 0x1A04 then
 			WarpRoom = 0x02
 		elseif Progress == 7 then --2nd Visit
 			WarpEvt = 0x40
-		elseif Progress == 8 then --Before Sandlot Nobodies
+		elseif Progress == 8 then --Before Sandlot Nobodies II
 			WarpRoom = 0x02
-		elseif Progress == 9 then --After Sandlot Nobodies
+		elseif Progress == 9 then --After Sandlot Nobodies II
 			WarpRoom = 0x02
 		elseif Progress == 10 then --Post 2nd Visit
 			WarpRoom = 0x02
@@ -1919,12 +1917,12 @@ if ReadShort(TxtBox) == 0x768 and PrevPlace == 0x1A04 and ReadByte(Save+0x1CFF) 
 			WriteShort(Save+0x2120,0xC54A) --Mansion Foyer Barrier
 		elseif Progress == 7 then --2nd Visit
 			Visit = 9
-		elseif Progress == 8 then --Before Sandlot Nobodies
+		elseif Progress == 8 then --Before Sandlot Nobodies II
 			Visit = 9
 			WriteShort(Save+0x2080,0xC663) --Central Station Barrier
 			WriteShort(Save+0x20E4,0xC66D) --Underground Concourse Barrier
 			WriteShort(Save+0x2120,0xC665) --Mansion Foyer Barrier
-		elseif Progress == 9 then --After Sandlot Nobodies
+		elseif Progress == 9 then --After Sandlot Nobodies II
 			Visit = 9
 			WriteShort(Save+0x20E4,0xC66F) --Underground Concourse Barrier
 			WriteShort(Save+0x2120,0xC667) --Mansion Foyer Barrier
@@ -2552,7 +2550,7 @@ if Place == 0x1A04 then
 			WarpRoom = 0x02
 		elseif Progress == 2 then --Munny Collection
 			WarpRoom = 0x02
-		elseif Progress == 3 then --Before Sandlot Dusks
+		elseif Progress == 3 then --Before Sandlot Nobodies I
 			WarpRoom = 0x02
 		elseif Progress == 4 then --Before Twilight Thorn
 			WarpRoom = 0x20
@@ -2691,7 +2689,7 @@ if ReadShort(TxtBox) == 0x76D and PrevPlace == 0x1A04 and ReadByte(Save+0x1CFF) 
 			WriteShort(Save+0x2080,0xC44B) --Central Station Barrier
 			WriteShort(Save+0x20E8,0x9F4A) --The Woods Barrier
 			WriteShort(Save+0x20EC,0x9F49) --Sandlot Barrier
-		elseif Progress == 3 then --Before Sandlot Dusks
+		elseif Progress == 3 then --Before Sandlot Nobodies I
 			Visit = 3
 			WriteShort(Save+0x20EC,0xC44C) --Sandlot Barrier
 		elseif Progress == 4 then --Before Twilight Thorn

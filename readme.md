@@ -30,9 +30,6 @@ Data paths are hidden behind an out-of-place door while Data AS can be accessed 
 **Can I get an unbeatable seed when I don't miss any check?**
 Sadly, yes. Having a Torn Page in Pooh's House means it is impossible to obtain along with whatever else is there. In addition, having all of a type of black magic (Fire, Blizzard, Thunder) behind Ag2 carpet will cause the rest of Agrabah to be inaccessible.
 
-**Why does TT2's battle level look so low?**
-It's using Mysterious Tower's battle level. Start of TT1 will use TT2's battle level while Mysterious Tower will use TT3's.
-
 **Do I have to do the entire HT, Ag, and PL to unlock Cerberus Cup?**
 Thankfully, no. You only have to beat Vexen, Lexaeus, and Groundshaker. You do still need to finish the entire DC, OC, and TWtNW to unlock their respective cups, though.
 
