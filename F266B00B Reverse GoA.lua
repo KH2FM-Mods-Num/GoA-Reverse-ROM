@@ -1039,6 +1039,7 @@ elseif ReadByte(Save+0x1D9F) == 4 and ReadByte(Save+0x35AF) > 0 then --2nd Visit
 	WriteShort(Save+0x0C42,0x0A) --Imperial Square BTL
 	WriteShort(Save+0x0C48,0x0A) --Palace Gate BTL
 	WriteShort(Save+0x0C5C,0x0A) --Village (Destroyed) EVT
+	BitOr(Save+0x1D93,0x01) --MU_MULAN_START
 elseif Place == 0x0608 and Events(Null,Null,0x0C) then --The City is in Danger!
 	WriteByte(Save+0x1D9F,6)
 elseif Place == 0x0B08 and Events(Null,Null,0x0A) then --To the Emperor
@@ -1048,6 +1049,7 @@ elseif Place == 0x0B08 and Events(Null,Null,0x0B) then --The Highest Reward
 	WriteShort(Save+0x0C10,0x01) --Bamboo Grove MAP (Burning Village)
 	WriteShort(Save+0x0C14,0x01) --Bamboo Grove EVT
 	WriteShort(Save+0x0C18,0x00) --Encampment BTL (Not enough RAM with forms)
+	BitNot(Save+0x1D93,0x01) --MU_MULAN_START
 end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1D9F) > 4 then
@@ -1268,6 +1270,7 @@ elseif ReadByte(Save+0x1E5F) == 7 and ReadByte(Save+0x35B4) > 0 then --2nd Visit
 	WriteShort(Save+0x1534,0x04) --Candy Cane Lane MAP (Destroyed Sleigh)
 	WriteShort(Save+0x1540,0x02) --Santa's House MAP (Visibility)
 	WriteShort(Save+0x1546,0x00) --Toy Factory: Shipping and Receiving MAP (Despawn Skateboard)
+	BitOr(Save+0x1E57,0x04) --NM_SANTA_START
 elseif Place == 0x080E and Events(Null,Null,0x14) then --The Stolen Presents
 	WriteByte(Save+0x1E5F,9)
 elseif Place == 0x0A0E and Events(Null,Null,0x0A) then --The Three Culprits
@@ -1281,6 +1284,7 @@ elseif Place == 0x2004 and Events(0x79,0x79,0x79) then --Vexen Defeated
 	WriteByte(Save+0x1E5F,0)
 	WriteShort(Save+0x152C,0x01) --Hinterlands EVT
 	WriteShort(Save+0x1530,0x00) --Yuletide Hill BTL
+	BitNot(Save+0x1E57,0x04) --NM_SANTA_START
 	if ReadByte(Save+0x1D7F) < 6 and ReadByte(Save+0x1E5F) < 7 and ReadByte(Save+0x1DDF) < 7 then
 		BitOr(Save+0x239D,0x02) --Cerberus Cup Unlocked
 	end
