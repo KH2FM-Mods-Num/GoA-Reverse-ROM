@@ -743,6 +743,14 @@ assets:
     method: areadatascript
     source:
     - name: ard/hb38/evt.script
+- name: ard/he03.ard #Underworld Entrance (Party)
+  method: binarc
+  source:
+  - name: evt
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/he03/evt.script
 - name: ard/he08.ard #Well of Captivity (Skip Megara Escort)
   method: binarc
   source:
