@@ -1531,13 +1531,14 @@ elseif Place == 0x0806 and Events(Null,Null,0x01) then --Presistent Ol' Pete
 elseif Place == 0x1206 and Events(0xAB,0xAB,0xAB) then --The Aftermath
 	BitOr(Save+0x1D26,0x04)  --HB_FM_ZEX_RE_CLEAR (Change Portal Color)
 	WriteByte(Save+0x1D6E,1) --Post-Story Save
+	WriteShort(Save+0x0924,0x14) --Underworld Entrance BTL
 	WriteShort(Save+0x0926,0x0A) --Underworld Entrance EVT
 	WriteShort(Save+0x094E,0x02) --Cave of the Dead: Inner Chamber BTL
 	BitOr(Save+0x239C,0x08) --Titan Cup Unocked
 elseif ReadByte(Save+0x1D6F) == 8 and ReadByte(Save+0x35AE) > 0 then --2nd Visit
 	WriteByte(Save+0x1D6F,9)
 	WriteShort(Save+0x0920,0x12) --Coliseum Gates (Destroyed) EVT
-	WriteShort(Save+0x0924,0x00) --Underworld Entrance BTL
+	WriteShort(Save+0x0924,0x15) --Underworld Entrance BTL
 	WriteShort(Save+0x092E,0x02) --Valley of the Dead MAP (Spawn Skateboard)
 	WriteShort(Save+0x0936,0x00) --Hades' Chamber BTL
 	WriteShort(Save+0x094E,0x00) --Cave of the Dead: Inner Chamber BTL
