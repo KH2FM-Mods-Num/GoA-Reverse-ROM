@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: LuaFrontend Support
+--Last Update: PR Fixes
 
 function _OnInit()
 local VersionNum = 'GoA Version 1.52.7'
@@ -2319,7 +2319,8 @@ elseif Place == 0x0E10 and Events(Null,Null,0x0A) then --Retrieve the Medallion!
 elseif Place == 0x0510 and Events(Null,Null,0x0E) then --Into the Ocean
 	WriteByte(Save+0x1E9F,0)
 	WriteShort(Save+0x1814,0x01) --Rampart EVT
-	BitNot(Save+0x2397,0x02) --Show The Black Pearl in Map
+	WriteShort(Save+0x1846,0x00) --Isla de Muerta: Cave Mouth MAP (Transition to Isla de Muerta: Rock Face (The Interceptor))
+	BitNot(Save+0x2397,0x0E) --PR1 ship map state
 end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1E9F) > 5 then
