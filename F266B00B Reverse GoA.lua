@@ -1,14 +1,18 @@
 --ROM Version
---Last Update: PR Fixes
+--Last Update: Minor Optimizations
+
+LUAGUI_NAME = 'GoA Reverse ROM Build'
+LUAGUI_AUTH = 'Num'
+LUAGUI_DESC = 'Go through the visits in reverse.'
 
 function _OnInit()
-local VersionNum = 'GoA Version 1.52.7'
+local VersionNum = 'GoA Version 1.52.8'
 if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" then --PCSX2
 	if ENGINE_VERSION < 3.0 then
 		print('LuaEngine is Outdated. Things might not work properly.')
 	end
 	print(VersionNum)
-	Platform = 'PS2'
+	Platform = 0
 	Now = 0x032BAE0 --Current Location
 	Sve = 0x1D5A970 --Saved Location
 	BGM = 0x0347D34 --Background Music
@@ -47,7 +51,7 @@ elseif GAME_ID == 0x431219CC and ENGINE_TYPE == 'BACKEND' then --PC
 		ConsolePrint('LuaFrontend is Outdated. Things might not work properly.',2)
 	end
 	ConsolePrint(VersionNum,0)
-	Platform = 'PC'
+	Platform = 1
 	Now = 0x0714DB8 - 0x56450E
 	Sve = 0x2A09C00 - 0x56450E
 	BGM = 0x0AB8504 - 0x56450E
@@ -133,7 +137,7 @@ if Platform == 'PS2' and ReadInt(ARD) == 0x01524142 and Subfile <= ReadInt(ARD+4
 	elseif Type == 'String' then
 		WriteString(Address,Value)
 	end
-elseif Platform == 'PC' then
+elseif Platform == 1 then
 	local x = ARD&0xFFFFFF000000
 	if ENGINE_VERSION < 5.0 then --LuaBackend
 		if ReadIntA(ARD) == 0x01524142 and Subfile <= ReadIntA(ARD+4) then
@@ -168,7 +172,7 @@ end
 end
 
 function BitOr(Address,Bit,Abs)
-if Abs and Platform == 'PC' then
+if Abs and Platform == 1 then
 	if ENGINE_VERSION < 5.0 then
 		WriteByteA(Address,ReadByte(Address)|Bit)
 	else
@@ -180,7 +184,7 @@ end
 end
 
 function BitNot(Address,Bit,Abs)
-if Abs and Platform == 'PC' then
+if Abs and Platform == 1 then
 	if ENGINE_VERSION < 5.0 then
 		WriteByteA(Address,ReadByte(Address)&~Bit)
 	else
@@ -200,7 +204,7 @@ if Platform == 'PS2' then
 		WriteByte(0x0349E1C,0x01) --Normal Speed
 		WriteByte(0x0349E20,0x01)
 	end
-elseif Platform == 'PC' then
+elseif Platform == 1 then
 	if Toggle then
 		WriteFloat(0x07151D4 - 0x56450E,2) --Faster Speed
 	else
@@ -239,7 +243,7 @@ if true then --Define current values for common addresses
 	MSN    = MSNLoad + (ReadInt(MSNLoad+4)+1) * 0x10
 	if Platform == 'PS2' then
 		ARD = ReadInt(0x034ECF4) --Base ARD Address
-	elseif Platform == 'PC' then
+	elseif Platform == 1 then
 		ARD = ReadLong(0x2A0CEE8 - 0x56450E) --Base ARD Address
 		if GetHertz() < 240 then
 			SetHertz(240)
@@ -269,7 +273,7 @@ end
 
 function NewGame()
 --Before New Game
-if Platform == 'PC' and ReadByte(Sys3+0x116DB) == 0x19 then --Change Form's Icons in PC From Analog Stick
+if Platform == 1 and ReadByte(Sys3+0x116DB) == 0x19 then --Change Form's Icons in PC From Analog Stick
 	WriteByte(Sys3+0x116DB,0x3B) --Valor
 	WriteByte(Sys3+0x116F3,0x3B) --Wisdom
 	WriteByte(Sys3+0x1170B,0x3B) --Limit
@@ -452,7 +456,7 @@ if ReadShort(Save+0x06AC) == 0x02 then
 end
 --World Map -> Garden of Assemblage
 if Place == 0x000F then
-	local WarpDoor
+	local WarpDoor = false
 	if Door == 0x0C then --The World that Never Was
 		WarpDoor = 0x15
 	elseif Door == 0x03 then --Land of Dragons
@@ -489,7 +493,7 @@ if Place == 0x000F then
 end
 --Battle Level
 if true then
-	local Bitmask, Visit
+	local Bitmask, Visit = false
 	if World == 0x02 then --Twilight Town & Simulated Twilight Town
 		Visit = ReadByte(Save+0x3FF5)
 		if Visit == 6 then
@@ -619,7 +623,7 @@ if true then --No Valor, Wisdom, Master, or Final
 	if Platform == 'PS2' then
 		CurSubmenu = ReadInt(Menu2)
 		CurSubmenu = ReadByte(CurSubmenu)
-	elseif Platform == 'PC' then
+	elseif Platform == 1 then
 		CurSubmenu = ReadLong(Menu2)
 		if ENGINE_VERSION < 5.0 then
 			CurSubmenu = ReadByteA(CurSubmenu)
@@ -750,7 +754,7 @@ end
 --Donald's Staff Active Abilities
 if true then
 	local Staff = ReadShort(Save+0x2604)
-	local Ability
+	local Ability = false
 	if Staff == 0x04B then --Mage's Staff
 		Ability = 0x13F36
 	elseif Staff == 0x094 then --Hammer Staff
@@ -820,7 +824,7 @@ end
 --Goofy's Shield Active Abilities
 if true then
 	local Shield = ReadShort(Save+0x2718)
-	local Ability --Safeguard if none of the above (i.e. Main Menu)
+	local Ability = false
 	if Shield == 0x031 then --Knight's Shield
 		Ability = 0x13FE6
 	elseif Shield == 0x08B then --Adamant Shield
@@ -2439,13 +2443,13 @@ if Place == 0x2604 and ReadInt(CutNow) == 0x7A then
 	if Events(0x91,0x91,0x91) then --AS
 		if Platform == 'PS2' and ReadShort(0x1C58FE0) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
-		elseif Platform == 'PC' and ReadShort(0x29ED484 - 0x56450E) ~= 0x923 then
+		elseif Platform == 1 and ReadShort(0x29ED484 - 0x56450E) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		end
 	elseif Events(0x96,0x96,0x96) then --Data
 		if Platform == 'PS2' and ReadShort(0x1C59114) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
-		elseif Platform == 'PC' and ReadShort(0x29ED5C4 - 0x56450E) ~= 0x923 then
+		elseif Platform == 1 and ReadShort(0x29ED5C4 - 0x56450E) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		end
 	end
@@ -2961,7 +2965,7 @@ if Place == 0x2202 and Events(0x9D,0x9D,0x9D) then
 		Faster(true)
 	elseif Platform == 'PS2' then
 		Faster(false)
-	elseif Platform == 'PC' and ReadFloat(0x07151D4) > 1 then --Exclude death cutscene
+	elseif Platform == 1 and ReadFloat(0x07151D4) > 1 then --Exclude death cutscene
 		Faster(false)
 	end
 end
