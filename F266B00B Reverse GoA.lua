@@ -125,7 +125,7 @@ end
 function Spawn(Type,Subfile,Offset,Value)
 local Subpoint = ARD + 0x08 + 0x10*Subfile
 local Address
-if Platform == 'PS2' and ReadInt(ARD) == 0x01524142 and Subfile <= ReadInt(ARD+4) then
+if Platform == 0 and ReadInt(ARD) == 0x01524142 and Subfile <= ReadInt(ARD+4) then
 	--Exclusions on Crash Spots in PCSX2-EX
 	Address = ReadInt(Subpoint) + Offset
 	if Type == 'Short' then
@@ -196,7 +196,7 @@ end
 end
 
 function Faster(Toggle)
-if Platform == 'PS2' then
+if Platform == 0 then
 	if Toggle then
 		WriteByte(0x0349E1C,0x00) --Faster Speed
 		WriteByte(0x0349E20,0x00)
@@ -241,7 +241,7 @@ if true then --Define current values for common addresses
 	Evt    = ReadShort(Now+0x08)
 	PrevPlace = ReadShort(Now+0x30)
 	MSN    = MSNLoad + (ReadInt(MSNLoad+4)+1) * 0x10
-	if Platform == 'PS2' then
+	if Platform == 0 then
 		ARD = ReadInt(0x034ECF4) --Base ARD Address
 	elseif Platform == 1 then
 		ARD = ReadLong(0x2A0CEE8 - 0x56450E) --Base ARD Address
@@ -285,7 +285,7 @@ end
 if Place == 0x0102 and Events(0x34,0x34,0x34) then --Opening Cutscene
 	WriteShort(Save+0x03D0,0x01) --Station of Serenity MAP (Dream Weapons)
 	WriteShort(Save+0x03D4,0x01) --Station of Serenity EVT
-	if Platform == 'PS2' then
+	if Platform == 0 then
 		Warp(0x02,0x20,0x32,0x01,0x00,0x01) --Not warping here on PS2 causes crash later
 	end
 end
@@ -620,7 +620,7 @@ end
 --Fix Genie Crash
 if true then --No Valor, Wisdom, Master, or Final
 	local CurSubmenu
-	if Platform == 'PS2' then
+	if Platform == 0 then
 		CurSubmenu = ReadInt(Menu2)
 		CurSubmenu = ReadByte(CurSubmenu)
 	elseif Platform == 1 then
@@ -1208,7 +1208,7 @@ if Place == 0x1A04 and ReadByte(Save+0x1D3E) > 0 then
 end
 --Mrs. Potts Teleport in Lantern Minigame
 if Place == 0x0C05 and Events(Null,0x16,0x02) then
-	if Platform == 'PS2' then --PC Address is Currently Unknown
+	if Platform == 0 then --PC Address is Currently Unknown
 		local PottsLocAddress = 0x1ABB7D0
 		if ReadFloat(Gauge1) == 0 then --Cogsworth Out of Stamina
 			if not PottsCoordinate then
@@ -2122,6 +2122,7 @@ elseif Place == 0x0104 and Events(Null,Null,0x01) then --Xemnas's Agenda
 	BitNot(Save+0x1D15,0x08) --HB_418_END (Change Spawn ID in Next Cutscene Properly)
 elseif Place == 0x0104 and Events(0x5C,0x5C,0x5C) then --A Box of Memories
 	WriteByte(Save+0x1D2F,10)
+	WriteShort(Save+0x067C,0x01) --Restoration Site (Destroyed) MAP (Door to GoA Revealed)
 elseif ReadByte(Save+0x1D2F) == 10 and false then --5th Visit
 	WriteByte(Save+0x1D2F,11)
 	WriteShort(Save+0x0650,0x0A) --Marketplace EVT
@@ -2436,13 +2437,13 @@ end
 --Marluxia HUD Pop-Up
 if Place == 0x2604 and ReadInt(CutNow) == 0x7A then
 	if Events(0x91,0x91,0x91) then --AS
-		if Platform == 'PS2' and ReadShort(0x1C58FE0) ~= 0x923 then
+		if Platform == 0 and ReadShort(0x1C58FE0) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		elseif Platform == 1 and ReadShort(0x29ED484 - 0x56450E) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		end
 	elseif Events(0x96,0x96,0x96) then --Data
-		if Platform == 'PS2' and ReadShort(0x1C59114) ~= 0x923 then
+		if Platform == 0 and ReadShort(0x1C59114) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		elseif Platform == 1 and ReadShort(0x29ED5C4 - 0x56450E) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
@@ -2958,7 +2959,7 @@ if Place == 0x2202 and Events(0x9D,0x9D,0x9D) then
 	end
 	if ReadByte(Save+0x1CFB)&0x02 == 0x02 then
 		Faster(true)
-	elseif Platform == 'PS2' then
+	elseif Platform == 0 then
 		Faster(false)
 	elseif Platform == 1 and ReadFloat(0x07151D4) > 1 then --Exclude death cutscene
 		Faster(false)
@@ -3200,7 +3201,7 @@ elseif Place == 0x1512 and Events(0x71,0x71,0x71) then --Data Roxas
 	WriteByte(Save+0x1CFF,0) --Reset TT & STT Flag
 end
 --Music Change - Final Fights
-if ReadShort(Save+0x03D6) == 15 --[[and Platform == 'PS2'--]] then
+if ReadShort(Save+0x03D6) == 15 --[[and Platform == 0--]] then
 	if Place == 0x1B12 then --Part I
 		Spawn('Short',0x06,0x0A4,0x09C) --Guardando nel buio
 		Spawn('Short',0x06,0x0A6,0x09C)
