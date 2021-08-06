@@ -1,7 +1,7 @@
 --ROM Version
 --Last Update: Minor Optimizations
 
-LUAGUI_NAME = 'GoA Reverse ROM Build'
+LUAGUI_NAME = 'GoA ROM Reverse Randomizer Build'
 LUAGUI_AUTH = 'Num'
 LUAGUI_DESC = 'Go through the visits in reverse.'
 
@@ -2874,8 +2874,9 @@ if ReadByte(Save+0x1CFF) == 13 then --STT Removals
 		end
 	end
 	if ReadShort(Sys3+0xC0CE) == 0x35 or (ReadByte(Save+0x3FF5) == 5 and ReadShort(Sys3+0xC0CC) == 0) then --STT BGM (Restore on Day 5)
+		local BaseDefaultBGM = Sys3 + 0xC0CC
 		for i = 0x00,0x29 do
-			local DefaultBGM = Sys3 + 0xC0CC + 0x40*i
+			local DefaultBGM = BaseDefaultBGM + 0x40*i
 			if ReadShort(DefaultBGM+2) == 0x35 or (ReadByte(Save+0x3FF5) == 5 and ReadShort(DefaultBGM) == 0) then
 				WriteShort(DefaultBGM+0x0,0x76) --Lazy Afternoons
 				WriteShort(DefaultBGM+0x2,0x77) --Sinister Sundowns
@@ -2886,8 +2887,9 @@ if ReadByte(Save+0x1CFF) == 13 then --STT Removals
 			end
 		end
 	elseif ReadByte(Save+0x3FF5) == 6 and ReadByte(Save+0x1CFE) == 0 and ReadShort(Sys3+0xC0CC) == 0x76 then --Day 6 & STT Not Cleared
+		local BaseDefaultBGM = Sys3 + 0xC0CC
 		for i = 0x00,0x29 do
-			local DefaultBGM = Sys3 + 0xC0CC + 0x40*i
+			local DefaultBGM = BaseDefaultBGM + 0x40*i
 			if ReadShort(DefaultBGM+2) == 0x77 then
 				WriteShort(DefaultBGM+0x0,0) --Remove Field Music
 				WriteShort(DefaultBGM+0x4,0)
@@ -2932,8 +2934,9 @@ else --Restore Outside STT
 	end
 	WriteShort(Save+0x1CF9,0) --Remove stored Keyblade
 	if ReadShort(Sys3+0xC0CE) == 0x77 then --TT BGM
+		local BaseDefaultBGM = Sys3 + 0xC0CC
 		for i = 0x00,0x29 do
-			local DefaultBGM = Sys3 + 0xC0CC + 0x40*i
+			local DefaultBGM = BaseDefaultBGM + 0x40*i
 			if ReadShort(DefaultBGM+2) == 0x77 then
 				WriteShort(DefaultBGM+0x0,0x34) --The Afternoon Streets
 				WriteShort(DefaultBGM+0x2,0x35) --Working Together
@@ -3161,14 +3164,14 @@ if true then
 		Path = 3
 	elseif Place == 0x0D0A then --Peak
 		Path = 7
-	elseif Place == 0x2802 and ReadByte(Save+0x1CFF) == 8 then --Betwixt & Between
+	elseif Place == 0x2802 and ReadByte(Save+0x1CFF) == 8 and ReadByte(Cntrl) == 0 then --Betwixt & Between
 		Path = 8
 		WriteByte(Save+0x3FF5,10) --Battle Level TT3
 	elseif Place == 0x0804 then --Bailey (Intact)
 		Path = 9
 	elseif Place == 0x0A10 then --Isla de Muerta: Treasure Heap
 		Path = 10
-	elseif Place == 0x1702 and ReadByte(Save+0x1CFF) == 13 then --Mansion: Pod Room
+	elseif Place == 0x1702 and ReadByte(Save+0x1CFF) == 13 and ReadByte(Cntrl) == 0 then --Mansion: Pod Room
 		Path = 13
 		WriteByte(Save+0x3FF5,6) --Battle Level Day 6
 	elseif Place == 0x1A04 then --Garden of Assemblage

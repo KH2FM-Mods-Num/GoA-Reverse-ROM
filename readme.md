@@ -13,7 +13,7 @@ Yes, there is. Make sure to get all the chests and optional popups before finish
 Each in-game Day is reversed except Day 1, which is bundled with Day 2 (since it has no check and no World Point). This means that STT goes Day 6 -> Day 5 -> Day 4 -> Day 3 -> Day 1 -> Day 2.
 
 **How is HB reversed?**
-Finishing HB2 unlocks CoR. Finishing CoR (including Transport to Remembrance) unlocks Heartless Manufactory, Mushroom XIII, and Sephiroth. Heartless Manufactory can be unlocked early using Membership Card as usual while Mushroom XIII does not require Proof of Peace anymore. Finally, beating Sephiroth unlocks HB1. CoR battle level has been changed to Pre-100AW, TtR to Pre-TR, and Sephiroth to Post-story.
+Finishing HB2 unlocks CoR. Finishing CoR (including Transport to Remembrance) unlocks Heartless Manufactory, Mushroom XIII, and Sephiroth. Heartless Manufactory can be unlocked early using Membership Card as usual while Mushroom XIII does not require Proof of Peace anymore. Finally, beating Sephiroth unlocks HB1. CoR battle level has been changed to Pre-100AW, TtR to Pre-TR, and Sephiroth to Post-story. PS: There's a shortcut to the end of CoR hidden somewhere in HB.
 
 **How is DC reversed?**
 You will have to finish TR before you can access DC. Wisdom Form check still requires finishing DC fully.
