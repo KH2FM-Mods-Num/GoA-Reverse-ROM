@@ -1,12 +1,12 @@
 --ROM Version
---Last Update: Minor Optimizations
+--Last Update: OC Demyx Bugfix & TT/STT BGM Code Optimization
 
 LUAGUI_NAME = 'GoA ROM Reverse Randomizer Build'
 LUAGUI_AUTH = 'Num'
 LUAGUI_DESC = 'Go through the visits in reverse.'
 
 function _OnInit()
-local VersionNum = 'GoA Version 1.52.8'
+local VersionNum = 'GoA Version 1.52.9'
 if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" then --PCSX2
 	if ENGINE_VERSION < 3.0 then
 		print('LuaEngine is Outdated. Things might not work properly.')
@@ -1521,7 +1521,7 @@ elseif Place == 0x0106 and Events(Null,Null,0x02) then --The Reunion
 	WriteByte(Save+0x1D6F,4)
 elseif Place == 0x0306 and Events(Null,Null,0x05) then --Arriving in the Underworld
 	WriteByte(Save+0x1D6F,5)
-elseif Place == 0x1106 and Events(Null,Null,0x01) then --Sora and Friends vs. Demyx
+elseif Place == 0x1106 and Events(0x7B,0x7B,0x7B) then --Regained Power
 	WriteByte(Save+0x1D6F,6)
 elseif Place == 0x0806 and Events(Null,Null,0x01) then --Presistent Ol' Pete
 	WriteByte(Save+0x1D6F,7)
@@ -1532,7 +1532,7 @@ elseif Place == 0x1206 and Events(0xAB,0xAB,0xAB) then --The Aftermath
 	WriteShort(Save+0x0924,0x14) --Underworld Entrance BTL
 	WriteShort(Save+0x0926,0x0A) --Underworld Entrance EVT
 	WriteShort(Save+0x094E,0x02) --Cave of the Dead: Inner Chamber BTL
-	BitOr(Save+0x239C,0x08) --Titan Cup Unocked
+	BitOr(Save+0x239C,0x08) --Titan Cup Unlocked
 elseif ReadByte(Save+0x1D6F) == 8 and ReadByte(Save+0x35AE) > 0 then --2nd Visit
 	WriteByte(Save+0x1D6F,9)
 	WriteShort(Save+0x0920,0x12) --Coliseum Gates (Destroyed) EVT
@@ -2873,29 +2873,10 @@ if ReadByte(Save+0x1CFF) == 13 then --STT Removals
 			WriteShort(Save+0x24F0,Store) --Change Equipped Keyblade
 		end
 	end
-	if ReadShort(Sys3+0xC0CE) == 0x35 or (ReadByte(Save+0x3FF5) == 5 and ReadShort(Sys3+0xC0CC) == 0) then --STT BGM (Restore on Day 5)
-		local BaseDefaultBGM = Sys3 + 0xC0CC
-		for i = 0x00,0x29 do
-			local DefaultBGM = BaseDefaultBGM + 0x40*i
-			if ReadShort(DefaultBGM+2) == 0x35 or (ReadByte(Save+0x3FF5) == 5 and ReadShort(DefaultBGM) == 0) then
-				WriteShort(DefaultBGM+0x0,0x76) --Lazy Afternoons
-				WriteShort(DefaultBGM+0x2,0x77) --Sinister Sundowns
-				WriteShort(DefaultBGM+0x4,0x76)
-				WriteShort(DefaultBGM+0x6,0x77)
-				WriteShort(DefaultBGM+0x8,0x76)
-				WriteShort(DefaultBGM+0xA,0x77)
-			end
-		end
-	elseif ReadByte(Save+0x3FF5) == 6 and ReadByte(Save+0x1CFE) == 0 and ReadShort(Sys3+0xC0CC) == 0x76 then --Day 6 & STT Not Cleared
-		local BaseDefaultBGM = Sys3 + 0xC0CC
-		for i = 0x00,0x29 do
-			local DefaultBGM = BaseDefaultBGM + 0x40*i
-			if ReadShort(DefaultBGM+2) == 0x77 then
-				WriteShort(DefaultBGM+0x0,0) --Remove Field Music
-				WriteShort(DefaultBGM+0x4,0)
-				WriteShort(DefaultBGM+0x8,0)
-			end
-		end
+	if ReadByte(Save+0x3FF5) == 6 and ReadByte(Save+0x1CFE) == 0 then --Day 6 & STT Not Cleared
+		WriteByte(Save+0x23EE,2) --STT Music: Sinister Sundowns (No Field Music)
+	else
+		WriteByte(Save+0x23EE,0) --STT Music: Lazy Afternoons & Sinister Sundowns
 	end
 else --Restore Outside STT
 	BitOr(Save+0x1CEA,0x01) --TT_ROXAS_END (Play as Sora)
@@ -2933,20 +2914,7 @@ else --Restore Outside STT
 		WriteByte(Save+0x35D0,ReadByte(Save+0x35D0)+1)
 	end
 	WriteShort(Save+0x1CF9,0) --Remove stored Keyblade
-	if ReadShort(Sys3+0xC0CE) == 0x77 then --TT BGM
-		local BaseDefaultBGM = Sys3 + 0xC0CC
-		for i = 0x00,0x29 do
-			local DefaultBGM = BaseDefaultBGM + 0x40*i
-			if ReadShort(DefaultBGM+2) == 0x77 then
-				WriteShort(DefaultBGM+0x0,0x34) --The Afternoon Streets
-				WriteShort(DefaultBGM+0x2,0x35) --Working Together
-				WriteShort(DefaultBGM+0x4,0x34)
-				WriteShort(DefaultBGM+0x6,0x35)
-				WriteShort(DefaultBGM+0x8,0x34)
-				WriteShort(DefaultBGM+0xA,0x35)
-			end
-		end
-	end
+	WriteByte(Save+0x23EE,1)  --TT Music: The Afternoon Streets & Working Together
 end
 --Faster Twilight Thorn Reaction Commands
 if Place == 0x2202 and Events(0x9D,0x9D,0x9D) then
