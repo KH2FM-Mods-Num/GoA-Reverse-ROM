@@ -13,7 +13,7 @@ Yes, there is. Make sure to get all the chests and optional popups before finish
 Each in-game Day is reversed except Day 1, which is bundled with Day 2 (since it has no check and no World Point). This means that STT goes Day 6 -> Day 5 -> Day 4 -> Day 3 -> Day 1 -> Day 2.
 
 **How is HB reversed?**
-Finishing HB2 unlocks CoR. Finishing CoR (including Transport to Remembrance) unlocks Heartless Manufactory, Mushroom XIII, and Sephiroth. Heartless Manufactory can be unlocked early using Membership Card as usual while Mushroom XIII does not require Proof of Peace anymore. Finally, beating Sephiroth unlocks HB1. CoR battle level has been changed to Pre-100AW, TtR to Pre-TR, and Sephiroth to Post-story. PS: There's a shortcut to the end of CoR hidden somewhere in HB.
+Finishing HB2 unlocks CoR. Finishing CoR (including Transport to Remembrance) unlocks Heartless Manufactory, Mushroom XIII, and Sephiroth. Heartless Manufactory can be unlocked early using Membership Card as usual while Mushroom XIII does not require Proof of Peace anymore. Finally, beating Sephiroth unlocks HB1. CoR battle level has been changed to Pre-100AW, TtR to Pre-TR, and Sephiroth to Post-story. PS: After you beat the 1st forced fight in CoR, a shortcut to the end of TtR will open somewhere in HB.
 
 **How is DC reversed?**
 You will have to finish TR before you can access DC. Wisdom Form check still requires finishing DC fully.
@@ -28,10 +28,10 @@ Worlds with Absent Silhouettes require their respective AS to be beaten before t
 Data paths are hidden behind an out-of-place door while Data AS can be accessed by examining the portal post-story. Data AS' rewards are obtained separately from regular AS.
 
 **Can I get an unbeatable seed when I don't miss any check?**
-Sadly, yes. Having a Torn Page in Pooh's House means it is impossible to obtain along with whatever else is there. In addition, having all of a type of black magic (Fire, Blizzard, Thunder) behind Ag2 carpet will cause the rest of Agrabah to be inaccessible.
+Sadly, yes. Having a Torn Page in Pooh's House means it is impossible to obtain along with whatever else is there. In addition, having all of a type of black magic (Fire, Blizzard, Thunder) behind Ag2 carpet will cause the rest of Agrabah to be inaccessible. Having Thunder in particular be inaccessible this way will cause Atlantica Tutorial check to also be impossible. If any of these checks contain Proof of Connection, Terra will not be available.
 
 **Do I have to do the entire HT, Ag, and PL to unlock Cerberus Cup?**
-Thankfully, no. You only have to beat Vexen, Lexaeus, and Groundshaker. You do still need to finish the entire DC, OC, and TWtNW to unlock their respective cups, though.
+No. You only have to beat Vexen, Lexaeus, and Groundshaker. You do still need to finish the entire DC, OC, and TWtNW to unlock their respective cups, though.
 
 **Why can't I exit Twilight Town, Atlantica, or 100 Acre Wood?**
 Ya gotta commit :P

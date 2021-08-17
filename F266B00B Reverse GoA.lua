@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: OC Demyx Bugfix & TT/STT BGM Code Optimization
+--Last Update: Shortcut to TtR's activation condition changed
 
 LUAGUI_NAME = 'GoA ROM Reverse Randomizer Build'
 LUAGUI_AUTH = 'Num'
@@ -2122,7 +2122,6 @@ elseif Place == 0x0104 and Events(Null,Null,0x01) then --Xemnas's Agenda
 	BitNot(Save+0x1D15,0x08) --HB_418_END (Change Spawn ID in Next Cutscene Properly)
 elseif Place == 0x0104 and Events(0x5C,0x5C,0x5C) then --A Box of Memories
 	WriteByte(Save+0x1D2F,10)
-	WriteShort(Save+0x067C,0x01) --Restoration Site (Destroyed) MAP (Door to GoA Revealed)
 elseif ReadByte(Save+0x1D2F) == 10 and false then --5th Visit
 	WriteByte(Save+0x1D2F,11)
 	WriteShort(Save+0x0650,0x0A) --Marketplace EVT
@@ -2131,6 +2130,8 @@ elseif Place == 0x0904 and Events(Null,Null,0x0B) then --The Rogue Security Syst
 elseif Place == 0x0504 and Events(Null,Null,0x0D) then --Wait for Us, Tron
 	WriteShort(Save+0x0662,0x0C) --Merlin's House EVT
 elseif Place == 0x0604 and Events(0x5E,0x5E,0x5E) then --Radiant Garden
+elseif Place == 0x1804 and Events(0x03,0x02,0x02) then --Mineshaft Heartless I Cleared
+	WriteShort(Save+0x067C,0x01) --Restoration Site (Destroyed) MAP (Door to GoA Revealed)
 elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembrance Cleared
 	WriteByte(Save+0x1D2F,11)
 	WriteShort(Save+0x0650,0x0A) --Marketplace EVT
