@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: Shortcut to TtR's activation condition changed
+--Last Update: HT Skateboard Spawn, Marluxia HUD Bugfix, CoR 2nd Fight Battle Lv Increase, SP Pre-Larxene Party Member Spawn
 
 LUAGUI_NAME = 'GoA ROM Reverse Randomizer Build'
 LUAGUI_AUTH = 'Num'
@@ -529,12 +529,12 @@ if true then
 			Spawn('Short',0x0B,0x038,15) --BTL 0x19
 			Spawn('Short',0x0B,0x054,15) --BTL 0x1A
 		elseif Place == 0x1704 then --Cavern of Remembrance: Engine Chamber
-			Spawn('Short',0x09,0x018,15) --BTL 0x01
-			Spawn('Short',0x09,0x040,15) --BTL 0x19
-			Spawn('Short',0x09,0x064,15) --BTL 0x1A
+			Spawn('Short',0x09,0x018,28) --BTL 0x01
+			Spawn('Short',0x09,0x040,28) --BTL 0x19
+			Spawn('Short',0x09,0x064,28) --BTL 0x1A
 		elseif Place == 0x1804 then --Cavern of Remembrance: Mineshaft
 			Spawn('Short',0x0F,0x038,15) --BTL 0x01
-			Spawn('Short',0x0F,0x07C,15) --BTL 0x02
+			Spawn('Short',0x0F,0x07C,28) --BTL 0x02
 		elseif Place == 0x1904 then --Transport to Remembrance
 			Spawn('Short',0x05,0x038,30) --BTL 0x01
 			Spawn('Short',0x05,0x07C,30) --BTL 0x02
@@ -1295,7 +1295,10 @@ elseif Place == 0x060E and Events(Null,Null,0x05) then --Everyone Has a Job to D
 	WriteShort(Save+0x1530,0x02) --Yuletide Hill BTL
 elseif ReadByte(Save+0x1E5F) == 7 and ReadByte(Save+0x35B4) > 0 then --2nd Visit
 	WriteByte(Save+0x1E5F,8)
+	WriteShort(Save+0x1510,0x02) --Halloween Town Square MAP (Spawn Skateboard)
 	WriteShort(Save+0x151A,0x0A) --Dr. Finklestein's Lab EVT
+	WriteShort(Save+0x151C,0x04) --Graveyard MAP (Spawn Skateboard)
+	WriteShort(Save+0x1528,0x03) --Hinterlands MAP (Spawn Skateboard)
 	WriteShort(Save+0x1534,0x04) --Candy Cane Lane MAP (Destroyed Sleigh)
 	WriteShort(Save+0x1540,0x02) --Santa's House MAP (Visibility)
 	WriteShort(Save+0x1546,0x00) --Toy Factory: Shipping and Receiving MAP (Despawn Skateboard)
@@ -2440,13 +2443,13 @@ if Place == 0x2604 and ReadInt(CutNow) == 0x7A then
 	if Events(0x91,0x91,0x91) then --AS
 		if Platform == 0 and ReadShort(0x1C58FE0) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
-		elseif Platform == 1 and ReadShort(0x29ED484 - 0x56450E) ~= 0x923 then
+		elseif Platform == 1 and ReadShort(0x29ED460 - 0x56450E) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		end
 	elseif Events(0x96,0x96,0x96) then --Data
 		if Platform == 0 and ReadShort(0x1C59114) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
-		elseif Platform == 1 and ReadShort(0x29ED5C4 - 0x56450E) ~= 0x923 then
+		elseif Platform == 1 and ReadShort(0x29ED594 - 0x56450E) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		end
 	end
@@ -2486,6 +2489,8 @@ if Place == 0x1A04 then
 		elseif Progress == 9 then --Before Sark & MCP
 			WarpRoom = 0x08
 			WarpDoor = 0x37
+		elseif Progress == 10 then --Before Larxene
+			WarpRoom = 0x08
 		end
 	elseif PostSave == 1 then --Pit Cell
 		WarpRoom = 0x00
@@ -2545,6 +2550,7 @@ elseif Place == 0x0411 and Events(Null,Null,0x0A) then --Facing Danger
 elseif Place == 0x0811 and Events(Null,Null,0x0A) then --The System's Core
 	WriteByte(Save+0x1EBF,9)
 elseif Place == 0x0911 and Events(0x3B,0x3B,0x3B) then --Destroying the MCP
+	WriteByte(Save+0x1EBF,10)
 	WriteShort(Save+0x19C2,0x01) --Central Computer Mesa BTL
 elseif Place == 0x2104 and Events(0x81,0x81,0x81) then --Larxene Defeated
 	WriteByte(Save+0x1EBF,0)
