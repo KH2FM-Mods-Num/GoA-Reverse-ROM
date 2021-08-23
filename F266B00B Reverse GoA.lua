@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: HT Skateboard Spawn, Marluxia HUD Bugfix, CoR 2nd Fight Battle Lv Increase, SP Pre-Larxene Party Member Spawn
+--Last Update: Fixed typo preventing save warp to Postern before Ansem's Study and shortcut to Ansem's Study after clearing Transport to Remembrance
 
 LUAGUI_NAME = 'GoA ROM Reverse Randomizer Build'
 LUAGUI_AUTH = 'Num'
@@ -2104,7 +2104,7 @@ elseif ReadByte(Save+0x1D2F) == 2 and ReadByte(Save+0x35C1) > 0 then --4th Visit
 	WriteShort(Save+0x0650,0x02) --Marketplace EVT
 elseif Place == 0x0D04 and Events(Null,Null,0x02) then --Cid's Report
 	WriteByte(Save+0x1D2F,4)
-elseif Place == 0x0604 and Events(Null,Null,0x02) then --The Underground Corridor
+elseif Place == 0x0604 and Events(Null,Null,0x01) then --The Underground Corridor
 	WriteByte(Save+0x1D2F,5)
 elseif Place == 0x0504 and Events(Null,Null,0x03) then --Transportation Device
 	WriteByte(Save+0x1D2F,6)
@@ -2141,6 +2141,7 @@ elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembranc
 	WriteShort(Save+0x06A8,0x04) --Transport to Remembrance BTL
 	WriteShort(Save+0x06AA,0x00) --Transport to Remembrance EVT
 	BitOr(Save+0x1D27,0x04) --HB_FM_13TSUURO_OUT
+	Spawn('Short',0x04,0x024,0x3205) --Shortcut to Ansem's Study
 end
 --Block CoR & Go Back to GoA after Sephiroth
 if ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9 then
