@@ -2536,7 +2536,7 @@ elseif Place == 0x0511 and Events(Null,Null,0x04) then --To Hollow Bastion
 elseif ReadByte(Save+0x1EBF) == 4 and ReadByte(Save+0x35C2) > 0 then --2nd Visit
 	WriteByte(Save+0x1EBF,5)
 	WriteShort(Save+0x1990,0x03) --Pit Cell MAP (Despawn Party Members)
-	WriteShort(Save+0x1996,0x00) --Canyon MAP (Elevator to I/O Tower)
+	WriteShort(Save+0x1996,0x05) --Canyon MAP (Elevator to I/O Tower & Spawn Skateboard)
 	WriteShort(Save+0x199A,0x0A) --Canyon EVT
 	WriteShort(Save+0x199E,0x00) --Game Grid BTL
 	WriteShort(Save+0x19A0,0x0A) --Game Grid EVT
