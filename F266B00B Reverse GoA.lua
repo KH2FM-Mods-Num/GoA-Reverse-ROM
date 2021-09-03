@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: Fixed typo preventing save warp to Postern before Ansem's Study and shortcut to Ansem's Study after clearing Transport to Remembrance
+--Last Update: Fixed Post HB Battle Lv
 
 LUAGUI_NAME = 'GoA ROM Reverse Randomizer Build'
 LUAGUI_AUTH = 'Num'
@@ -2074,16 +2074,16 @@ if Place == 0x1A04 then
 		end
 	elseif PostSave == 1 then --Merlin's House
 		WarpRoom = 0x0D
-		Visit = 5
+		Visit = 1
 	elseif PostSave == 2 then --Postern
 		WarpRoom = 0x06
-		Visit = 5
+		Visit = 1
 	elseif PostSave == 3 then --Ansem's Study
 		WarpRoom = 0x05
-		Visit = 5
+		Visit = 1
 	elseif PostSave == 4 then --Crystal Fissure
 		WarpRoom = 0x03
-		Visit = 5
+		Visit = 1
 	end
 	Spawn('Short',0x0A,0x17C,WarpRoom)
 	WriteByte(Save+0x3FFD,Visit)
