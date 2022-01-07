@@ -9,6 +9,16 @@ AreaSettings 0 -1
 	SetInventory 269 511
 	SetPartyMenu 0
 
+Program 0x13
+Bgm Default Default
+AreaSettings 0 -1
+	SetProgressFlag 0x1099
+	SetJump Type 1 World HB Area 26 Entrance 29 LocalSet 0 FadeType 1
+	SetPartyMenu 0
+
+Spawn "e_50"
+Spawn "e_51"
+
 Program 0x14
 AreaSettings 9 -1
 	SetProgressFlag 0x107F

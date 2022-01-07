@@ -1,0 +1,15 @@
+Program 0x01
+Capacity 51
+Mission 0x1AB "HB24_CONFINE"
+BattleLevel 15
+Spawn "b_81"
+
+Program 0x02
+Capacity 52
+Mission 0x1B3 "HB24_CONFINE_2"
+BattleLevel 28
+Spawn "b_82"
+
+Program 0x03
+Mission 0x1B4 "HB24_CONFINE_3"
+BattleLevel 28

@@ -1,0 +1,28 @@
+Program 0x01
+Capacity 90
+Mission 0x1AC "HB25_CONFINE_1"
+BattleLevel 30
+Spawn "b_81"
+
+Program 0x02
+Capacity 79
+Mission 0x1AD "HB25_CONFINE_2"
+BattleLevel 30
+Spawn "b_82"
+
+Program 0x03
+Capacity 84
+Mission 0x1AE "HB25_CONFINE_3"
+BattleLevel 30
+Spawn "b_83"
+
+Program 0x04
+Capacity 70
+Unk06 0
+BattleLevel 30
+RandomSpawn "b_84" "b_85"
+
+Program 0x05
+Capacity 84
+Mission 0x1B2 "HB25_CONFINE_4"
+BattleLevel 30

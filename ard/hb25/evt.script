@@ -1,0 +1,11 @@
+Program 0x04
+AreaSettings 1 101
+	SetProgressFlag 0x10BA
+	SetPartyMenu 0
+
+AreaSettings 1 102
+	SetProgressFlag 0x10BA
+	SetJump Type 1 World HB Area 5 Entrance 50 LocalSet 0 FadeType -1
+	SetPartyMenu 0
+
+Spawn "b_80"
