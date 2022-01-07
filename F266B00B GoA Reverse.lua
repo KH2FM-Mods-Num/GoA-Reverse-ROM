@@ -1,6 +1,5 @@
 --ROM Version
---Last Update: 1st Visit Ridge room transition bugfix, Black Pearl icon in PR2 map
---Todo: Battle Levels
+--Last Update: Overhaul, 1st Visit Ridge room transition bugfix, Black Pearl icon in PR2 map
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
 LUAGUI_AUTH = 'SonicShadowSilver2 (Ported by Num)'
