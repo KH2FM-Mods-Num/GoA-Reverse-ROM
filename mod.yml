@@ -923,11 +923,21 @@ assets:
     method: areadatascript
     source:
     - name: ard/hb23/btl.script
-- name: ard/hb24.ard #Cavern of Remembrance: Depths (Battle Lv)
+- name: ard/hb24.ard #Cavern of Remembrance: Mineshaft (Softlock Prevention & Battle Lv)
   multi:
   - name: ard/us/hb24.ard
   method: binarc
   source:
+  - name: map
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/hb24/map.script
+  - name: m_17 #Room Transition to Mineshaft Entrance
+    type: areadataspawn
+    method: spawnpoint
+    source:
+    - name: ard/hb24/m_17.yml
   - name: btl
     type: areadatascript
     method: areadatascript
