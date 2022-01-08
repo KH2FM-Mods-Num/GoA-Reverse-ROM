@@ -1,6 +1,5 @@
-assets:
-title: Test GoA
-description: GoA, but with a lot of stuff done through ROM editing to reduce workload on Lua.
+title: GoA Reverse ROM
+description: Do the visits in reverse.
 assets:
 #Jiminy Journal New Flag Requirements
 - name: menu/fm/jiminy.bar
