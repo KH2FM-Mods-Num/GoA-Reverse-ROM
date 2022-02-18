@@ -2172,3 +2172,8 @@ assets:
     method: areadatascript
     source:
     - name: ard/wm00/evt.script
+#Fix Form Icon Glitch
+- name: remastered/msg/us/fontimage.bar/US_fontimage_bar2.png
+  method: copy
+  source:
+  - name: remastered/fontimage_bar2.png
