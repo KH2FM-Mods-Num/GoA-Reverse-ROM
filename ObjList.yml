@@ -1,4 +1,4 @@
-324:
+324: #Default Large -> Small Chest
   ObjectId: 324
   ObjectType: TREASURE
   SubType: 0
@@ -28,7 +28,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-325:
+325: #Space Paranoids Large -> Small Chest
   ObjectId: 325
   ObjectType: TREASURE
   SubType: 0
@@ -58,7 +58,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-826:
+826: #Beast's Castle Large -> Small Chest
   ObjectId: 826
   ObjectType: TREASURE
   SubType: 0
@@ -88,7 +88,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-827:
+827: #Olympus Coliseum Large -> Small Chest
   ObjectId: 827
   ObjectType: TREASURE
   SubType: 0
@@ -118,7 +118,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-828:
+828: #Agrabah Large -> Small Chest
   ObjectId: 828
   ObjectType: TREASURE
   SubType: 0
@@ -148,7 +148,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-829:
+829: #Port Royal Large -> Small Chest
   ObjectId: 829
   ObjectType: TREASURE
   SubType: 0
@@ -178,7 +178,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-830:
+830: #Halloween Town Large -> Small Chest
   ObjectId: 830
   ObjectType: TREASURE
   SubType: 0
@@ -208,7 +208,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-831:
+831: #Land of Dragons Large -> Small Chest
   ObjectId: 831
   ObjectType: TREASURE
   SubType: 0
@@ -238,7 +238,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-832:
+832: #100 Acre Wood Large -> Small Chest
   ObjectId: 832
   ObjectType: TREASURE
   SubType: 0
@@ -268,7 +268,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-833:
+833: #Disney Castle Large -> Small Chest
   ObjectId: 833
   ObjectType: TREASURE
   SubType: 0
@@ -298,7 +298,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-834:
+834: #Timeless River Large -> Small Chest
   ObjectId: 834
   ObjectType: TREASURE
   SubType: 0
@@ -328,7 +328,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-835:
+835: #The World that Never Was Large -> Small Chest
   ObjectId: 835
   ObjectType: TREASURE
   SubType: 0
@@ -358,7 +358,307 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-2133:
+900: #Antiform Dummy -> Pureblood
+  ObjectId: 900
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 0
+  ModelName: W_EX010_X0
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 0
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1694: #TR Kingdom Key -> Kingdom Key D
+  ObjectId: 1694
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_00
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1958: #TR Oathkeeper -> HT Kingdom Key D
+  ObjectId: 1958
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_00_NM
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1959: #TR Oblivion -> SP Kingdom Key D
+  ObjectId: 1959
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_00_TR
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1960: #TR Star Seeker -> HT Pureblood
+  ObjectId: 1960
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_X0_NM
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1961: #TR Hidden Dragon -> SP Pureblood
+  ObjectId: 1961
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_X0_TR
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1962: #TR Hero's Crest -> HT Alpha Weapon
+  ObjectId: 1962
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_Y0_NM
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1963: #TR Monochrome -> SP Alpha Weapon
+  ObjectId: 1963
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_Y0_TR
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1964: #TR Follow the Wind -> HT Omega Weapon
+  ObjectId: 1964
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_Z0_NM
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1965: #TR Circle of Life -> SP Omega Weapon
+  ObjectId: 1965
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_Z0_TR
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+2133: #Pride Lands Large -> Small Chest
   ObjectId: 2133
   ObjectType: TREASURE
   SubType: 0
@@ -388,7 +688,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-2143:
+2143: #Christmas Town Large -> Small Chest
   ObjectId: 2143
   ObjectType: TREASURE
   SubType: 0
@@ -418,7 +718,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-2236:
+2236: #Twilight Town? Large -> Small Chest
   ObjectId: 2236
   ObjectType: TREASURE
   SubType: 0
@@ -448,7 +748,7 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-2540:
+2540: #Garden of Assemblage Large -> Small Chest
   ObjectId: 2540
   ObjectType: TREASURE
   SubType: 0
