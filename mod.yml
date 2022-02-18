@@ -11,13 +11,6 @@ assets:
     source:
     - name: worl.bin
 #Antiform Dummy -> Pureblood
-- name: obj/W_EX010_X0.a.fm
-  multi:
-  - name: obj/W_EX010_X0_NM.a.fm
-  - name: obj/W_EX010_X0_TR.a.fm
-  method: copy
-  source:
-  - name: obj/W_EX010_Pureblood.a.fm
 - name: obj/W_EX010_X0.mdlx
   method: copy
   source:
@@ -30,14 +23,61 @@ assets:
   method: copy
   source:
   - name: obj/W_EX010_Pureblood_TR.mdlx
-#Detection Saber -> Alpha Weapon
-- name: obj/W_EX010_Y0.a.fm
+- name: obj/W_EX010_X0.a.fm
   multi:
-  - name: obj/W_EX010_Y0_NM.a.fm
-  - name: obj/W_EX010_Y0_TR.a.fm
+  - name: obj/W_EX010_X0_NM.a.fm
+  - name: obj/W_EX010_X0_TR.a.fm
   method: copy
   source:
-  - name: obj/W_EX010_AlphaWeapon.a.fm
+  - name: obj/W_EX010_Pureblood.a.fm
+- name: obj/W_EX010_X0.a.us
+  multi:
+  - name: obj/W_EX010_X0_NM.a.us
+  - name: obj/W_EX010_X0_TR.a.us
+  method: copy
+  source:
+  - name: obj/W_EX010_Pureblood.a.us
+- name: remastered/obj/W_EX010_X0.a.us/-0.dds
+  multi:
+  - name: remastered/obj/W_EX010_X0_NM.a.us/-0.dds
+  - name: remastered/obj/W_EX010_X0_TR.a.us/-0.dds
+  method: copy
+  source: remastered/obj/W_EX010_Pureblood.a.us/-0.dds
+- name: remastered/obj/W_EX010_X0.a.us/-1.dds
+  multi:
+  - name: remastered/obj/W_EX010_X0_NM.a.us/-1.dds
+  - name: remastered/obj/W_EX010_X0_TR.a.us/-1.dds
+  - name: remastered/obj/W_EX010_X0.a.us/-2.dds
+  - name: remastered/obj/W_EX010_X0_NM.a.us/-2.dds
+  - name: remastered/obj/W_EX010_X0_TR.a.us/-2.dds
+  method: copy
+  source: remastered/obj/W_EX010_Pureblood.a.us/-1.dds
+- name: remastered/obj/W_EX010_X0.a.us/-3.dds
+  - name: remastered/obj/W_EX010_X0_NM.a.us/-3.dds
+  - name: remastered/obj/W_EX010_X0_TR.a.us/-3.dds
+  method: copy
+  source: remastered/obj/W_EX010_Pureblood.a.us/-3.dds
+- name: remastered/obj/W_EX010_X0.a.us/-4.dds
+  - name: remastered/obj/W_EX010_X0_NM.a.us/-4.dds
+  - name: remastered/obj/W_EX010_X0_TR.a.us/-4.dds
+  method: copy
+  source: remastered/obj/W_EX010_Pureblood.a.us/-4.dds
+- name: remastered/obj/W_EX010_X0.a.us/-5.dds
+  - name: remastered/obj/W_EX010_X0_NM.a.us/-5.dds
+  - name: remastered/obj/W_EX010_X0_TR.a.us/-5.dds
+  method: copy
+  source: remastered/obj/W_EX010_Pureblood.a.us/-5.dds
+- name: remastered/obj/W_EX010_X0.a.us/-6.dds
+  - name: remastered/obj/W_EX010_X0_NM.a.us/-6.dds
+  - name: remastered/obj/W_EX010_X0_TR.a.us/-6.dds
+  method: copy
+  source: remastered/obj/W_EX010_Pureblood.a.us/-6.dds
+- name: remastered/obj/W_EX010_X0.a.us/se/obj/se503
+  - name: remastered/obj/W_EX010_X0_NM.a.us/se/obj/se503
+  - name: remastered/obj/W_EX010_X0_TR.a.us/se/obj/se503
+  method: copy
+  source: remastered/obj/W_EX010_Pureblood.a.us/se503
+#Detection Saber -> Alpha Weapon
 - name: obj/W_EX010_Y0.mdlx
   method: copy
   source:
@@ -50,14 +90,57 @@ assets:
   method: copy
   source:
   - name: obj/W_EX010_AlphaWeapon_TR.mdlx
-#Frontier of Ultima -> Omega Weapon
-- name: obj/W_EX010_Z0.a.fm
+- name: obj/W_EX010_Y0.a.fm
   multi:
-  - name: obj/W_EX010_Z0_NM.a.fm
-  - name: obj/W_EX010_Z0_TR.a.fm
+  - name: obj/W_EX010_Y0_NM.a.fm
+  - name: obj/W_EX010_Y0_TR.a.fm
   method: copy
   source:
-  - name: obj/W_EX010_OmegaWeapon.a.fm
+  - name: obj/W_EX010_AlphaWeapon.a.fm
+- name: obj/W_EX010_Y0.a.us
+  multi:
+  - name: obj/W_EX010_Y0_NM.a.us
+  - name: obj/W_EX010_Y0_TR.a.us
+  method: copy
+  source:
+  - name: obj/W_EX010_AlphaWeapon.a.us
+- name: remastered/obj/W_EX010_Y0.a.us/-0.dds
+  multi:
+  - name: remastered/obj/W_EX010_Y0_NM.a.us/-0.dds
+  - name: remastered/obj/W_EX010_Y0_TR.a.us/-0.dds
+  method: copy
+  source: remastered/obj/W_EX010_AlphaWeapon.a.us/-0.dds
+- name: remastered/obj/W_EX010_Y0.a.us/-1.dds
+  multi:
+  - name: remastered/obj/W_EX010_Y0_NM.a.us/-1.dds
+  - name: remastered/obj/W_EX010_Y0_TR.a.us/-1.dds
+  method: copy
+  source: remastered/obj/W_EX010_AlphaWeapon.a.us/-1.dds
+- name: remastered/obj/W_EX010_Y0.a.us/-2.dds
+  multi:
+  - name: remastered/obj/W_EX010_Y0_NM.a.us/-2.dds
+  - name: remastered/obj/W_EX010_Y0_TR.a.us/-2.dds
+  method: copy
+  source: remastered/obj/W_EX010_AlphaWeapon.a.us/-2.dds
+- name: remastered/obj/W_EX010_Y0.a.us/-3.dds
+  multi:
+  - name: remastered/obj/W_EX010_Y0_NM.a.us/-3.dds
+  - name: remastered/obj/W_EX010_Y0_TR.a.us/-3.dds
+  method: copy
+  source: remastered/obj/W_EX010_AlphaWeapon.a.us/-3.dds
+- name: remastered/obj/W_EX010_Y0.a.us/-4.dds
+  multi:
+  - name: remastered/obj/W_EX010_Y0_NM.a.us/-4.dds
+  - name: remastered/obj/W_EX010_Y0_TR.a.us/-4.dds
+  method: copy
+  source: remastered/obj/W_EX010_AlphaWeapon.a.us/-4.dds
+- name: remastered/obj/W_EX010_Y0.a.us/se/obj/se501
+  multi:
+  - name: remastered/obj/W_EX010_Y0_NM.a.us/se/obj/se501
+  - name: remastered/obj/W_EX010_Y0_TR.a.us/se/obj/se501
+  method: copy
+  source: remastered/obj/W_EX010_AlphaWeapon.a.us/se501
+#Frontier of Ultima -> Omega Weapon
 - name: obj/W_EX010_Z0.mdlx
   method: copy
   source:
@@ -70,14 +153,57 @@ assets:
   method: copy
   source:
   - name: obj/W_EX010_OmegaWeapon_TR.mdlx
-#FAKE -> Kingdom Key D
-- name: obj/W_EX010_00.a.fm
+- name: obj/W_EX010_Z0.a.fm
   multi:
-  - name: obj/W_EX010_00_NM.a.fm
-  - name: obj/W_EX010_00_TR.a.fm
+  - name: obj/W_EX010_Z0_NM.a.fm
+  - name: obj/W_EX010_Z0_TR.a.fm
   method: copy
   source:
-  - name: obj/W_EX010_KingdomKeyD.a.fm
+  - name: obj/W_EX010_OmegaWeapon.a.fm
+- name: obj/W_EX010_Z0.a.us
+  multi:
+  - name: obj/W_EX010_Z0_NM.a.us
+  - name: obj/W_EX010_Z0_TR.a.us
+  method: copy
+  source:
+  - name: obj/W_EX010_OmegaWeapon.a.fm
+- name: remastered/obj/W_EX010_Z0.a.us/-0.dds
+  multi:
+  - name: remastered/obj/W_EX010_Z0_NM.a.us/-0.dds
+  - name: remastered/obj/W_EX010_Z0_TR.a.us/-0.dds
+  method: copy
+  source: remastered/obj/W_EX010_OmegaWeapon.a.us/-0.dds
+- name: remastered/obj/W_EX010_Z0.a.us/-1.dds
+  multi:
+  - name: remastered/obj/W_EX010_Z0_NM.a.us/-1.dds
+  - name: remastered/obj/W_EX010_Z0_TR.a.us/-1.dds
+  method: copy
+  source: remastered/obj/W_EX010_OmegaWeapon.a.us/-1.dds
+- name: remastered/obj/W_EX010_Z0.a.us/-2.dds
+  multi:
+  - name: remastered/obj/W_EX010_Z0_NM.a.us/-2.dds
+  - name: remastered/obj/W_EX010_Z0_TR.a.us/-2.dds
+  method: copy
+  source: remastered/obj/W_EX010_OmegaWeapon.a.us/-2.dds
+- name: remastered/obj/W_EX010_Z0.a.us/-3.dds
+  multi:
+  - name: remastered/obj/W_EX010_Z0_NM.a.us/-3.dds
+  - name: remastered/obj/W_EX010_Z0_TR.a.us/-3.dds
+  method: copy
+  source: remastered/obj/W_EX010_OmegaWeapon.a.us/-3.dds
+- name: remastered/obj/W_EX010_Z0.a.us/-4.dds
+  multi:
+  - name: remastered/obj/W_EX010_Z0_NM.a.us/-4.dds
+  - name: remastered/obj/W_EX010_Z0_TR.a.us/-4.dds
+  method: copy
+  source: remastered/obj/W_EX010_OmegaWeapon.a.us/-4.dds
+- name: remastered/obj/W_EX010_Z0.a.us/se/obj/se519
+  multi:
+  - name: remastered/obj/W_EX010_Z0_NM.a.us/se/obj/se519
+  - name: remastered/obj/W_EX010_Z0_TR.a.us/se/obj/se519
+  method: copy
+  source: remastered/obj/W_EX010_OmegaWeapon.a.us/se519
+#FAKE -> Kingdom Key D
 - name: obj/W_EX010_00.mdlx
   method: copy
   source:
@@ -90,6 +216,32 @@ assets:
   method: copy
   source:
   - name: obj/W_EX010_KingdomKeyD_TR.mdlx
+- name: obj/W_EX010_00.a.fm
+  multi:
+  - name: obj/W_EX010_00_NM.a.fm
+  - name: obj/W_EX010_00_TR.a.fm
+  method: copy
+  source:
+  - name: obj/W_EX010_KingdomKeyD.a.fm
+- name: obj/W_EX010_00.a.us
+  multi:
+  - name: obj/W_EX010_00_NM.a.us
+  - name: obj/W_EX010_00_TR.a.us
+  method: copy
+  source:
+  - name: obj/W_EX010_KingdomKeyD.a.us
+- name: remastered/obj/W_EX010_00.a.us/-0.dds
+  multi:
+  - name: remastered/obj/W_EX010_00_NM.a.us/-0.dds
+  - name: remastered/obj/W_EX010_00_TR.a.us/-0.dds
+  method: copy
+  source: remastered/obj/W_EX010_KingdomKeyD.a.us/-0.dds
+- name: remastered/obj/W_EX010_00.a.us/se/obj/se500
+  multi:
+  - name: remastered/obj/W_EX010_00_NM.a.us/se/obj/se500
+  - name: remastered/obj/W_EX010_00_TR.a.us/se/obj/se500
+  method: copy
+  source: remastered/obj/W_EX010_KingdomKeyD.a.us/se500
 #GoA Data Portal New Flag Requirements
 - name: obj/F_HB130.mdlx
   method: binarc
