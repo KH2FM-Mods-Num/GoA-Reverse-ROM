@@ -424,17 +424,17 @@ assets:
   source:
   - name: itempic/Limit Form.imd
 - name: itempic/item-296.imd #Pureblood
-  method: imd
+  method: copy
   source:
-  - name: itempic/Pureblood.png
+  - name: itempic/Pureblood.imd
 - name: itempic/item-297.imd #Alpha Weapon
-  method: imd
+  method: copy
   source:
-  - name: itempic/Alpha Weapon.png
+  - name: itempic/Alpha Weapon.imd
 - name: itempic/item-298.imd #Omega Weapon
-  method: imd
+  method: copy
   source:
-  - name: itempic/Omega Weapon.png
+  - name: itempic/Omega Weapon.imd
 - name: itempic/item-299.imd #Kingdom Key D
   method: copy
   source:
@@ -479,6 +479,142 @@ assets:
   method: imd
   source:
   - name: itempic/Reflect.png
+- name: remastered/itempic/item-000.imd/-0.dds #Unused Items
+  method: copy
+  source:
+  - name: remastered/itempic/Unused.dds
+- name: remastered/itempic/item-012.imd/-0.dds #Action Ability
+  method: copy
+  source:
+  - name: remastered/itempic/Action.dds
+- name: remastered/itempic/item-013.imd/-0.dds #Growth Ability
+  method: copy
+  source:
+  - name: remastered/itempic/Growth.dds
+- name: remastered/itempic/item-014.imd/-0.dds #Support Ability
+  method: copy
+  source:
+  - name: remastered/itempic/Support.dds
+- name: remastered/itempic/item-015.imd/-0.dds #DUMMY 23 (HP Up)
+  method: copy
+  source:
+  - name: remastered/itempic/DUMMY 23 HP.dds
+- name: remastered/itempic/item-016.imd/-0.dds #DUMMY 24 (MP Up)
+  method: copy
+  source:
+  - name: remastered/itempic/DUMMY 24 MP.dds
+- name: remastered/itempic/item-017.imd/-0.dds #DUMMY 25 (Drive Up)
+  method: copy
+  source:
+  - name: remastered/itempic/DUMMY 25 Drive.dds
+- name: remastered/itempic/item-018.imd/-0.dds #DUMMY 26 (Armor Up)
+  method: copy
+  source:
+  - name: remastered/itempic/DUMMY 26 Armor.dds
+- name: remastered/itempic/item-019.imd/-0.dds #DUMMY 27 (Accessory Up)
+  method: copy
+  source:
+  - name: remastered/itempic/DUMMY 27 Accessory.dds
+- name: remastered/itempic/item-020.imd/-0.dds #DUMMY 16 (Item Up)
+  method: copy
+  source:
+  - name: remastered/itempic/DUMMY 16 Item.dds
+- name: remastered/itempic/item-221.imd/-0.dds #Lamp Charm
+  method: copy
+  source:
+  - name: remastered/itempic/Lamp Charm.dds
+- name: remastered/itempic/item-222.imd/-0.dds #Ukulele Charm
+  method: copy
+  source:
+  - name: remastered/itempic/Ukulele Charm.dds
+- name: remastered/itempic/item-223.imd/-0.dds #Feather Charm
+  method: copy
+  source:
+  - name: remastered/itempic/Feather Charm.dds
+- name: remastered/itempic/item-224.imd/-0.dds #Baseball Charm
+  method: copy
+  source:
+  - name: remastered/itempic/Baseball Charm.dds
+- name: remastered/itempic/item-266.imd/-0.dds #Valor Form
+  method: copy
+  source:
+  - name: remastered/itempic/Valor Form.dds
+- name: remastered/itempic/item-267.imd/-0.dds #Wisdom Form
+  method: copy
+  source:
+  - name: remastered/itempic/Wisdom Form.dds
+- name: remastered/itempic/item-268.imd/-0.dds #Master Form
+  method: copy
+  source:
+  - name: remastered/itempic/Master Form.dds
+- name: remastered/itempic/item-269.imd/-0.dds #Final Form
+  method: copy
+  source:
+  - name: remastered/itempic/Final Form.dds
+- name: remastered/itempic/item-271.imd/-0.dds #Anti Form
+  method: copy
+  source:
+  - name: remastered/itempic/Anti Form.dds
+- name: remastered/itempic/item-320.imd/-0.dds #Limit Form
+  method: copy
+  source:
+  - name: remastered/itempic/Limit Form.dds
+- name: remastered/itempic/item-296.imd/-0.dds #Pureblood
+  method: copy
+  source:
+  - name: remastered/itempic/Pureblood.dds
+- name: remastered/itempic/item-297.imd/-0.dds #Alpha Weapon
+  method: copy
+  source:
+  - name: remastered/itempic/Alpha Weapon.dds
+- name: remastered/itempic/item-298.imd/-0.dds #Omega Weapon
+  method: copy
+  source:
+  - name: remastered/itempic/Omega Weapon.dds
+- name: remastered/itempic/item-299.imd/-0.dds #Kingdom Key D
+  method: copy
+  source:
+  - name: remastered/itempic/Kingdom Key D.dds
+- name: remastered/itempic/item-242.imd/-0.dds #Promise Charm
+  method: copy
+  source:
+  - name: remastered/itempic/Promise Charm.dds
+- name: remastered/itempic/item-321.imd/-0.dds #Proof of Connection
+  method: copy
+  source:
+  - name: remastered/itempic/Proof of Connection.dds
+- name: remastered/itempic/item-322.imd/-0.dds #Proof of Nonexistence
+  method: copy
+  source:
+  - name: remastered/itempic/Proof of Nonexistence.dds
+- name: remastered/itempic/item-323.imd/-0.dds #Proof of Peace
+  method: copy
+  source:
+  - name: remastered/itempic/Proof of Peace.dds
+- name: remastered/itempic/item-324.imd/-0.dds #Fire
+  method: copy
+  source:
+  - name: remastered/itempic/Fire.dds
+- name: remastered/itempic/item-325.imd/-0.dds #Blizzard
+  method: copy
+  source:
+  - name: remastered/itempic/Blizzard.dds
+- name: remastered/itempic/item-326.imd/-0.dds #Thunder
+  method: copy
+  source:
+  - name: remastered/itempic/Thunder.dds
+- name: remastered/itempic/item-327.imd/-0.dds #Cure
+  method: copy
+  source:
+  - name: remastered/itempic/Cure.dds
+- name: remastered/itempic/item-328.imd/-0.dds #Magnet
+  method: copy
+  source:
+  - name: remastered/itempic/Magnet.dds
+- name: remastered/itempic/item-329.imd/-0.dds #Reflect
+  method: copy
+  source:
+  - name: remastered/itempic/Reflect.dds
 #GoA World Icons
 - name: map/jp/hb26.map
   method: copy
