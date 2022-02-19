@@ -1,173 +1,15 @@
 title: GoA Reverse ROM
 description: Do the visits in reverse.
 assets:
-#Relocate Twilight Thorn HP Bonus & Halve MCP's HP & Unequip Auto Limit
-- name: 00battle.bin
+#Jiminy Journal New Flag Requirements
+- name: menu/fm/jiminy.bar
   method: binarc
   source:
-  - name: bons
-    type: list
-    method: listpatch
-    source:
-    - name: 00battle.bin/BonsList.yml
-      type: bons
-  - name: enmp
-    type: list
+  - name: worl
+    type: jimidata
     method: copy
     source:
-    - name: 00battle.bin/Enmp.bin
-  - name: plrp
-    type: list
-    method: listpatch
-    source:
-    - name: 00battle.bin/PlrpList.yml
-      type: plrp
-#Big Chest -> Small Chest & TR Keyblade -> New Keyblade
-- name: 00objentry.bin
-  method: listpatch
-  type: List
-  source:
-  - name: ObjList.yml
-    type: objentry
-#Progress Flags
-- name: 00progress.bin
-  method: binarc
-  source:
-  - name: zz
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/zz.bin
-  - name: es
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/es.bin
-  - name: tt
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/tt.bin
-  - name: di
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/di.bin
-  - name: hb
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/hb.bin
-  - name: bb
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/bb.bin
-  - name: he
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/he.bin
-  - name: al
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/al.bin
-  - name: mu
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/mu.bin
-  - name: po
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/po.bin
-  - name: lk
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/lk.bin
-  - name: lm
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/lm.bin
-  - name: dc
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/dc.bin
-  - name: wi
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/wi.bin
-  - name: nm
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/nm.bin
-  - name: wm
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/wm.bin
-  - name: ca
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/ca.bin
-  - name: tr
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/tr.bin
-  - name: eh
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/eh.bin
-  - name: wlds
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/wlds.bin
-  - name: link
-    type: list
-    method: copy
-    source:
-    - name: 00progress.bin/link.bin
-#Implement New Pictures & Stats & Add GoA Chests to Journal
-- name: 03system.bin
-  method: binarc
-  source:
-  - name: went
-    type: list
-    method: copy
-    source:
-      - name: 03system.bin/went.bin
-  - name: item
-    type: list
-    method: listpatch
-    source:
-    - name: 03system.bin/ItemList.yml
-      type: item
-  - name: trsr
-    type: list
-    method: listpatch
-    source:
-    - name: 03system.bin/TrsrList.yml
-      type: trsr
-#Garden of Assemblage Small Chest
-- name: obj/F_EX030_HB.mdlx
-  method: copy
-  source:
-  - name: obj/F_EX030_HB.mdlx
-- name: obj/F_EX030_HB.a.fm
-  method: copy
-  source:
-  - name: obj/F_EX030_HB.a.fm
+    - name: worl.bin
 #Antiform Dummy -> Pureblood
 - name: obj/W_EX010_X0.mdlx
   method: copy
@@ -462,15 +304,6 @@ assets:
   method: copy
   source:
   - name: remastered/obj/W_EX010_KingdomKeyD.a.us/se500
-#Jiminy Journal New Flag Requirements
-- name: menu/fm/jiminy.bar
-  method: binarc
-  source:
-  - name: worl
-    type: jimidata
-    method: copy
-    source:
-    - name: worl.bin
 #GoA Data Portal New Flag Requirements
 - name: obj/F_HB130.mdlx
   method: binarc
@@ -832,6 +665,164 @@ assets:
   method: copy
   source:
   - name: remastered/tr_tm_2ld2.png
+#Implement New Pictures & Stats & Add STT Chests to Journal
+- name: 03system.bin
+  method: binarc
+  source:
+  - name: went
+    type: list
+    method: copy
+    source:
+      - name: 03system.bin/went.bin
+  - name: item
+    type: list
+    method: listpatch
+    source:
+    - name: 03system.bin/ItemList.yml
+      type: item
+  - name: trsr
+    type: list
+    method: listpatch
+    source:
+    - name: 03system.bin/TrsrList.yml
+      type: trsr
+#Relocate Twilight Thorn HP Bonus & Halve MCP's HP & Unequip Auto Limit
+- name: 00battle.bin
+  method: binarc
+  source:
+  - name: bons
+    type: list
+    method: listpatch
+    source:
+    - name: 00battle.bin/BonsList.yml
+      type: bons
+  - name: enmp
+    type: list
+    method: copy
+    source:
+    - name: 00battle.bin/Enmp.bin
+  - name: plrp
+    type: list
+    method: listpatch
+    source:
+    - name: 00battle.bin/PlrpList.yml
+      type: plrp
+#Big Chest -> Small Chest
+- name: 00objentry.bin
+  method: listpatch
+  type: List
+  source:
+  - name: ObjList.yml
+    type: objentry
+#Progress Flags
+- name: 00progress.bin
+  method: binarc
+  source:
+  - name: zz
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/zz.bin
+  - name: es
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/es.bin
+  - name: tt
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/tt.bin
+  - name: di
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/di.bin
+  - name: hb
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/hb.bin
+  - name: bb
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/bb.bin
+  - name: he
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/he.bin
+  - name: al
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/al.bin
+  - name: mu
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/mu.bin
+  - name: po
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/po.bin
+  - name: lk
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/lk.bin
+  - name: lm
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/lm.bin
+  - name: dc
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/dc.bin
+  - name: wi
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/wi.bin
+  - name: nm
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/nm.bin
+  - name: wm
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/wm.bin
+  - name: ca
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/ca.bin
+  - name: tr
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/tr.bin
+  - name: eh
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/eh.bin
+  - name: wlds
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/wlds.bin
+  - name: link
+    type: list
+    method: copy
+    source:
+    - name: 00progress.bin/link.bin
 #Texts & Libretto
 - name: msg/jp/sys.bar
   multi:
@@ -2185,11 +2176,7 @@ assets:
     method: areadatascript
     source:
     - name: ard/wm00/evt.script
-#Fix Synth & Form Icons
-#- name: msg/us/fontimage.bar
-#  method: copy
-#  source:
-#  - name: msg/fontimage.bar
+#Fix Form Icon Glitch
 - name: remastered/msg/us/fontimage.bar/US_fontimage_bar2.png
   method: copy
   source:
