@@ -754,7 +754,7 @@
   SubType: 0
   DrawPriority: 0
   WeaponJoint: 0
-  ModelName: F_EX030_HB
+  ModelName: F_EX030_EH
   AnimationName: F_EX030.mset
   Flags: 0
   ObjectTargetType: M
