@@ -816,9 +816,14 @@ assets:
   - name: hb26.map
 #GoA Picture in SP Terminal
 - name: file/jp/tr_tm.2ld
-  method: copy
+  method: binarc
   source:
-  - name: tr_tm.2ld
+  - name: tr_t
+    type: imgz
+    method: imgz
+    source:
+    - name: tr_tm_2.png
+      index: 2
 - name: remastered/file/us/tr_tm.2ld/US_tr_tm_2ld2.png
   method: copy
   source:
@@ -925,6 +930,11 @@ assets:
   method: copy
   source:
   - name: msg/libretto-tr.bar
+#Fix Form Icons
+- name: remastered/msg/us/fontimage.bar/US_fontimage_bar2.png
+  method: copy
+  source:
+  - name: remastered/fontimage_bar2.png
 #ARD Editing
 - name: ard/al00.ard #Agrabah (GoA Warp)
   multi:
@@ -2176,12 +2186,3 @@ assets:
     method: areadatascript
     source:
     - name: ard/wm00/evt.script
-#Fix Synth & Form Icons
-#- name: msg/us/fontimage.bar
-#  method: copy
-#  source:
-#  - name: msg/fontimage.bar
-- name: remastered/msg/us/fontimage.bar/US_fontimage_bar2.png
-  method: copy
-  source:
-  - name: remastered/fontimage_bar2.png
