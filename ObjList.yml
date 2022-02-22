@@ -418,38 +418,8 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-1992: #TR Victory Bell -> HT Kingdom Key D
+1992: #TR Victory Bell -> HT Pureblood
   ObjectId: 1992
-  ObjectType: WEAPON
-  SubType: 0
-  DrawPriority: 0
-  WeaponJoint: 25
-  ModelName: W_EX010_00_NM
-  AnimationName: ''
-  Flags: 0
-  ObjectTargetType: M
-  Padding: 0
-  NeoStatus: 0
-  NeoMoveset: 0
-  Weight: 0
-  SpawnLimiter: 0
-  Page: 17
-  ObjectShadowSize: SmallShadow
-  ObjectForm: Default
-  SpawnObject1: 0
-  SpawnObject2: 0
-  SpawnObject3: 0
-  SpawnObject4: 0
-  NoApdx: false
-  Before: false
-  FixColor: false
-  Fly: false
-  Scissoring: false
-  IsPirate: false
-  WallOcclusion: false
-  Hift: false
-1993: #TR Meteor Staff -> HT Pureblood
-  ObjectId: 1993
   ObjectType: WEAPON
   SubType: 0
   DrawPriority: 0
@@ -478,8 +448,8 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-1994: #TR Comet Staff -> HT Alpha Weapon
-  ObjectId: 1994
+1993: #TR Meteor Staff -> HT Alpha Weapon
+  ObjectId: 1993
   ObjectType: WEAPON
   SubType: 0
   DrawPriority: 0
@@ -508,8 +478,8 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-1995: #TR Lord's Broom -> HT Omega Weapon
-  ObjectId: 1995
+1994: #TR Comet Staff -> HT Omega Weapon
+  ObjectId: 1994
   ObjectType: WEAPON
   SubType: 0
   DrawPriority: 0
@@ -538,13 +508,13 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-1996: #TR Wisdom Wand -> SP Kingdom Key D
-  ObjectId: 1996
+1995: #TR Lord's Broom -> HT Kingdom Key D
+  ObjectId: 1995
   ObjectType: WEAPON
   SubType: 0
   DrawPriority: 0
   WeaponJoint: 25
-  ModelName: W_EX010_00_TR
+  ModelName: W_EX010_00_NM
   AnimationName: ''
   Flags: 0
   ObjectTargetType: M
@@ -568,8 +538,8 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-1997: #TR Rising Dragon -> SP Pureblood
-  ObjectId: 1997
+1996: #TR Wisdom Wand -> SP Pureblood
+  ObjectId: 1996
   ObjectType: WEAPON
   SubType: 0
   DrawPriority: 0
@@ -598,8 +568,8 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-1998: #TR Nobody Lance -> SP Alpha Weapon
-  ObjectId: 1998
+1997: #TR Rising Dragon -> SP Alpha Weapon
+  ObjectId: 1997
   ObjectType: WEAPON
   SubType: 0
   DrawPriority: 0
@@ -628,13 +598,43 @@
   IsPirate: false
   WallOcclusion: false
   Hift: false
-1999: #TR Shaman's Relic -> SP Omega Weapon
-  ObjectId: 1999
+1998: #TR Nobody Lance -> SP Omega Weapon
+  ObjectId: 1998
   ObjectType: WEAPON
   SubType: 0
   DrawPriority: 0
   WeaponJoint: 25
   ModelName: W_EX010_Z0_TR
+  AnimationName: ''
+  Flags: 0
+  ObjectTargetType: M
+  Padding: 0
+  NeoStatus: 0
+  NeoMoveset: 0
+  Weight: 0
+  SpawnLimiter: 0
+  Page: 17
+  ObjectShadowSize: SmallShadow
+  ObjectForm: Default
+  SpawnObject1: 0
+  SpawnObject2: 0
+  SpawnObject3: 0
+  SpawnObject4: 0
+  NoApdx: false
+  Before: false
+  FixColor: false
+  Fly: false
+  Scissoring: false
+  IsPirate: false
+  WallOcclusion: false
+  Hift: false
+1999: #TR Shaman's Relic -> SP Kingdom Key D
+  ObjectId: 1999
+  ObjectType: WEAPON
+  SubType: 0
+  DrawPriority: 0
+  WeaponJoint: 25
+  ModelName: W_EX010_00_TR
   AnimationName: ''
   Flags: 0
   ObjectTargetType: M
@@ -754,7 +754,7 @@
   SubType: 0
   DrawPriority: 0
   WeaponJoint: 0
-  ModelName: F_EX030_EH
+  ModelName: F_EX030_HB
   AnimationName: F_EX030.mset
   Flags: 0
   ObjectTargetType: M
