@@ -264,11 +264,11 @@ assets:
   - name: remastered/obj/W_EX010_Pureblood.a.us/-6.dds
 - name: remastered/obj/W_EX010_X0.a.us/se/obj/se9001
   multi:
-  - name: remastered/obj/W_EX010_X0_NM.a.us/se/obj/se503
-  - name: remastered/obj/W_EX010_X0_TR.a.us/se/obj/se503
+  - name: remastered/obj/W_EX010_X0_NM.a.us/se/obj/se9001
+  - name: remastered/obj/W_EX010_X0_TR.a.us/se/obj/se9001
   method: copy
   source:
-  - name: remastered/obj/W_EX010_Pureblood.a.us/se503
+  - name: remastered/obj/W_EX010_Pureblood.a.us/se9001
 #Detection Saber -> Alpha Weapon
 - name: obj/W_EX010_Y0.mdlx
   method: copy
@@ -345,11 +345,11 @@ assets:
   - name: remastered/obj/W_EX010_AlphaWeapon.a.us/-4.dds
 - name: remastered/obj/W_EX010_Y0.a.us/se/obj/se9002
   multi:
-  - name: remastered/obj/W_EX010_Y0_NM.a.us/se/obj/se501
-  - name: remastered/obj/W_EX010_Y0_TR.a.us/se/obj/se501
+  - name: remastered/obj/W_EX010_Y0_NM.a.us/se/obj/se9002
+  - name: remastered/obj/W_EX010_Y0_TR.a.us/se/obj/se9002
   method: copy
   source:
-  - name: remastered/obj/W_EX010_AlphaWeapon.a.us/se501
+  - name: remastered/obj/W_EX010_AlphaWeapon.a.us/se9002
 #Frontier of Ultima -> Omega Weapon
 - name: obj/W_EX010_Z0.mdlx
   method: copy
@@ -426,11 +426,11 @@ assets:
   - name: remastered/obj/W_EX010_OmegaWeapon.a.us/-4.dds
 - name: remastered/obj/W_EX010_Z0.a.us/se/obj/se9003
   multi:
-  - name: remastered/obj/W_EX010_Z0_NM.a.us/se/obj/se519
-  - name: remastered/obj/W_EX010_Z0_TR.a.us/se/obj/se519
+  - name: remastered/obj/W_EX010_Z0_NM.a.us/se/obj/se9003
+  - name: remastered/obj/W_EX010_Z0_TR.a.us/se/obj/se9003
   method: copy
   source:
-  - name: remastered/obj/W_EX010_OmegaWeapon.a.us/se519
+  - name: remastered/obj/W_EX010_OmegaWeapon.a.us/se9003
 #FAKE -> Kingdom Key D
 - name: obj/W_EX010_00.mdlx
   method: copy
@@ -479,11 +479,11 @@ assets:
   - name: remastered/obj/W_EX010_KingdomKeyD.a.us/-0.dds
 - name: remastered/obj/W_EX010_00.a.us/se/obj/se9000
   multi:
-  - name: remastered/obj/W_EX010_00_NM.a.us/se/obj/se500
-  - name: remastered/obj/W_EX010_00_TR.a.us/se/obj/se500
+  - name: remastered/obj/W_EX010_00_NM.a.us/se/obj/se9000
+  - name: remastered/obj/W_EX010_00_TR.a.us/se/obj/se9000
   method: copy
   source:
-  - name: remastered/obj/W_EX010_KingdomKeyD.a.us/se500
+  - name: remastered/obj/W_EX010_KingdomKeyD.a.us/se9000
 #Kingdom Key Update
 - name: obj/W_EX010.mdlx
   method: copy
