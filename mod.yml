@@ -517,6 +517,7 @@ assets:
   - name: menu/gr/jiminy.bar
   - name: menu/it/jiminy.bar
   - name: menu/sp/jiminy.bar
+  - name: menu/uk/jiminy.bar
   method: binarc
   source:
   - name: worl
@@ -815,6 +816,10 @@ assets:
   method: copy
   source:
   - name: remastered/itempic/Limit Form.dds
+- name: remastered/itempic/item-043.imd/-0.dds #Kingdom Key
+  method: copy
+  source:
+  - name: remastered/itempic/Kingdom Key.dds
 - name: remastered/itempic/item-296.imd/-0.dds #Pureblood
   method: copy
   source:
@@ -1106,6 +1111,12 @@ assets:
   - name: remastered/hb26.map/-123.dds
 #GoA Picture in SP Terminal
 - name: file/jp/tr_tm.2ld
+  multi:
+  - name: file/us/tr_tm.2ld
+  - name: file/fr/tr_tm.2ld
+  - name: file/gr/tr_tm.2ld
+  - name: file/it/tr_tm.2ld
+  - name: file/sp/tr_tm.2ld
   method: binarc
   source:
   - name: tr_t
