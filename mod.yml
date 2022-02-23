@@ -262,7 +262,7 @@ assets:
   method: copy
   source:
   - name: remastered/obj/W_EX010_Pureblood.a.us/-6.dds
-- name: remastered/obj/W_EX010_X0.a.us/se/obj/se503
+- name: remastered/obj/W_EX010_X0.a.us/se/obj/se9001
   multi:
   - name: remastered/obj/W_EX010_X0_NM.a.us/se/obj/se503
   - name: remastered/obj/W_EX010_X0_TR.a.us/se/obj/se503
@@ -343,7 +343,7 @@ assets:
   method: copy
   source:
   - name: remastered/obj/W_EX010_AlphaWeapon.a.us/-4.dds
-- name: remastered/obj/W_EX010_Y0.a.us/se/obj/se501
+- name: remastered/obj/W_EX010_Y0.a.us/se/obj/se9002
   multi:
   - name: remastered/obj/W_EX010_Y0_NM.a.us/se/obj/se501
   - name: remastered/obj/W_EX010_Y0_TR.a.us/se/obj/se501
@@ -424,7 +424,7 @@ assets:
   method: copy
   source:
   - name: remastered/obj/W_EX010_OmegaWeapon.a.us/-4.dds
-- name: remastered/obj/W_EX010_Z0.a.us/se/obj/se519
+- name: remastered/obj/W_EX010_Z0.a.us/se/obj/se9003
   multi:
   - name: remastered/obj/W_EX010_Z0_NM.a.us/se/obj/se519
   - name: remastered/obj/W_EX010_Z0_TR.a.us/se/obj/se519
@@ -477,7 +477,7 @@ assets:
   method: copy
   source:
   - name: remastered/obj/W_EX010_KingdomKeyD.a.us/-0.dds
-- name: remastered/obj/W_EX010_00.a.us/se/obj/se500
+- name: remastered/obj/W_EX010_00.a.us/se/obj/se9000
   multi:
   - name: remastered/obj/W_EX010_00_NM.a.us/se/obj/se500
   - name: remastered/obj/W_EX010_00_TR.a.us/se/obj/se500
@@ -511,6 +511,12 @@ assets:
   - name: remastered/obj/W_EX010_KingdomKey.mdlx/TR.dds
 #Jiminy Journal New Flag Requirements
 - name: menu/fm/jiminy.bar
+  multi:
+  - name: menu/us/jiminy.bar
+  - name: menu/fr/jiminy.bar
+  - name: menu/gr/jiminy.bar
+  - name: menu/it/jiminy.bar
+  - name: menu/sp/jiminy.bar
   method: binarc
   source:
   - name: worl
@@ -1109,6 +1115,11 @@ assets:
     - name: tr_tm_2.png
       index: 2
 - name: remastered/file/us/tr_tm.2ld/US_tr_tm_2ld2.png
+  multi:
+  - name: remastered/file/fr/tr_tm.2ld/FR_tr_tm_2ld2.png
+  - name: remastered/file/gr/tr_tm.2ld/GR_tr_tm_2ld2.png
+  - name: remastered/file/it/tr_tm.2ld/IT_tr_tm_2ld2.png
+  - name: remastered/file/sp/tr_tm.2ld/SP_tr_tm_2ld2.png
   method: copy
   source:
   - name: remastered/tr_tm_2ld2.png
@@ -1116,6 +1127,10 @@ assets:
 - name: msg/jp/sys.bar
   multi:
   - name: msg/us/sys.bar
+  - name: msg/fr/sys.bar
+  - name: msg/gr/sys.bar
+  - name: msg/it/sys.bar
+  - name: msg/sp/sys.bar
   method: binarc
   source:
   - name: sys
@@ -1127,6 +1142,10 @@ assets:
 - name: msg/jp/al.bar
   multi:
   - name: msg/us/al.bar
+  - name: msg/fr/al.bar
+  - name: msg/gr/al.bar
+  - name: msg/it/al.bar
+  - name: msg/sp/al.bar
   method: binarc
   source:
   - name: al
@@ -1138,6 +1157,10 @@ assets:
 - name: msg/jp/dc.bar
   multi:
   - name: msg/us/dc.bar
+  - name: msg/fr/dc.bar
+  - name: msg/gr/dc.bar
+  - name: msg/it/dc.bar
+  - name: msg/sp/dc.bar
   method: binarc
   source:
   - name: dc
@@ -1149,6 +1172,10 @@ assets:
 - name: msg/jp/hb.bar
   multi:
   - name: msg/us/hb.bar
+  - name: msg/fr/hb.bar
+  - name: msg/gr/hb.bar
+  - name: msg/it/hb.bar
+  - name: msg/sp/hb.bar
   method: binarc
   source:
   - name: hb
@@ -1160,6 +1187,10 @@ assets:
 - name: msg/jp/he.bar
   multi:
   - name: msg/us/he.bar
+  - name: msg/fr/he.bar
+  - name: msg/gr/he.bar
+  - name: msg/it/he.bar
+  - name: msg/sp/he.bar
   method: binarc
   source:
   - name: he
@@ -1171,6 +1202,10 @@ assets:
 - name: msg/jp/nm.bar
   multi:
   - name: msg/us/nm.bar
+  - name: msg/fr/nm.bar
+  - name: msg/gr/nm.bar
+  - name: msg/it/nm.bar
+  - name: msg/sp/nm.bar
   method: binarc
   source:
   - name: nm
@@ -1182,6 +1217,10 @@ assets:
 - name: msg/jp/tr.bar
   multi:
   - name: msg/us/tr.bar
+  - name: msg/fr/tr.bar
+  - name: msg/gr/tr.bar
+  - name: msg/it/tr.bar
+  - name: msg/sp/tr.bar
   method: binarc
   source:
   - name: tr
@@ -1219,10 +1258,35 @@ assets:
   method: copy
   source:
   - name: remastered/fontimage_bar2.png
+#Add Missing PC BGM
+- name: bgm/music150.win32.scd #Squirming Evil
+  method: copy
+  source:
+  - name: bgm/Squirming Evil.scd
+#- name: bgm/music130.win32.scd #Neverland Sky
+#  method: copy
+#  source:
+#  - name: bgm/Neverland Sky.scd
+#- name: bgm/music140.win32.scd #Under the Sea (KH I)
+#  method: copy
+#  source:
+#  - name: bgm/Under the Sea (KH I).scd
+#- name: bgm/music147.win32.scd #An Adventure in Atlantica
+#  method: copy
+#  source:
+#  - name: bgm/An Adventure in Atlantica.scd
+#- name: bgm/music156.win32.scd #Guardando nel Buio
+#  method: copy
+#  source:
+#  - name: bgm/Guardando nel Buio.scd
 #ARD Editing
 - name: ard/al00.ard #Agrabah (GoA Warp)
   multi:
   - name: ard/us/al00.ard
+  - name: ard/fr/al00.ard
+  - name: ard/gr/al00.ard
+  - name: ard/it/al00.ard
+  - name: ard/sp/al00.ard
   method: binarc
   source:
   - name: evt
@@ -1233,6 +1297,10 @@ assets:
 - name: ard/al02.ard #The Peddler's Shop (Poor) (AS Warp)
   multi:
   - name: ard/us/al02.ard
+  - name: ard/fr/al02.ard
+  - name: ard/gr/al02.ard
+  - name: ard/it/al02.ard
+  - name: ard/sp/al02.ard
   method: binarc
   source:
   - name: btl
@@ -1253,6 +1321,10 @@ assets:
 - name: ard/al03.ard #The Palace (GoA Warp)
   multi:
   - name: ard/us/al03.ard
+  - name: ard/fr/al03.ard
+  - name: ard/gr/al03.ard
+  - name: ard/it/al03.ard
+  - name: ard/sp/al03.ard
   method: binarc
   source:
   - name: evt
@@ -1263,6 +1335,10 @@ assets:
 - name: ard/al10.ard #Treasure Room (Checkpoint)
   multi:
   - name: ard/us/al10.ard
+  - name: ard/fr/al10.ard
+  - name: ard/gr/al10.ard
+  - name: ard/it/al10.ard
+  - name: ard/sp/al10.ard
   method: binarc
   source:
   - name: evt
@@ -1278,6 +1354,10 @@ assets:
 - name: ard/al14.ard #Sandswept Ruins (Skip Jafar Clone)
   multi:
   - name: ard/us/al14.ard
+  - name: ard/fr/al14.ard
+  - name: ard/gr/al14.ard
+  - name: ard/it/al14.ard
+  - name: ard/sp/al14.ard
   method: binarc
   source:
   - name: evt
@@ -1288,6 +1368,10 @@ assets:
 - name: ard/al15.ard #The Peddler's Shop (Rich) (AS Warp)
   multi:
   - name: ard/us/al15.ard
+  - name: ard/fr/al15.ard
+  - name: ard/gr/al15.ard
+  - name: ard/it/al15.ard
+  - name: ard/sp/al15.ard
   method: binarc
   source:
   - name: btl
@@ -1313,6 +1397,10 @@ assets:
 - name: ard/bb04.ard #Ballroom (Data Warp)
   multi:
   - name: ard/us/bb04.ard
+  - name: ard/fr/bb04.ard
+  - name: ard/gr/bb04.ard
+  - name: ard/it/bb04.ard
+  - name: ard/sp/bb04.ard
   method: binarc
   source:
   - name: map
@@ -1328,6 +1416,10 @@ assets:
 - name: ard/bb06.ard #Courtyard (GoA Warp)
   multi:
   - name: ard/us/bb06.ard
+  - name: ard/fr/bb06.ard
+  - name: ard/gr/bb06.ard
+  - name: ard/it/bb06.ard
+  - name: ard/sp/bb06.ard
   method: binarc
   source:
   - name: evt
@@ -1338,6 +1430,10 @@ assets:
 - name: ard/bb14.ard #Ballroom (Post Dark Thorn) (GoA Warp)
   multi:
   - name: ard/us/bb14.ard
+  - name: ard/fr/bb14.ard
+  - name: ard/gr/bb14.ard
+  - name: ard/it/bb14.ard
+  - name: ard/sp/bb14.ard
   method: binarc
   source:
   - name: evt
@@ -1348,6 +1444,10 @@ assets:
 - name: ard/ca05.ard #The Black Pearl (GoA Warp)
   multi:
   - name: ard/us/ca05.ard
+  - name: ard/fr/ca05.ard
+  - name: ard/gr/ca05.ard
+  - name: ard/it/ca05.ard
+  - name: ard/sp/ca05.ard
   method: binarc
   source:
   - name: evt
@@ -1358,6 +1458,10 @@ assets:
 - name: ard/ca08.ard #Isla de Muerta: Rock Face (1st Visit) (GoA Warp)
   multi:
   - name: ard/us/ca08.ard
+  - name: ard/fr/ca08.ard
+  - name: ard/gr/ca08.ard
+  - name: ard/it/ca08.ard
+  - name: ard/sp/ca08.ard
   method: binarc
   source:
   - name: evt
@@ -1368,6 +1472,10 @@ assets:
 - name: ard/ca10.ard #Isla de Muerta: Treasure Heap (Data Warp)
   multi:
   - name: ard/us/ca10.ard
+  - name: ard/fr/ca10.ard
+  - name: ard/gr/ca10.ard
+  - name: ard/it/ca10.ard
+  - name: ard/sp/ca10.ard
   method: binarc
   source:
   - name: map
@@ -1383,6 +1491,10 @@ assets:
 - name: ard/dc00.ard #Audience Chamber (Reverse Warp)
   multi:
   - name: ard/us/dc00.ard
+  - name: ard/fr/dc00.ard
+  - name: ard/gr/dc00.ard
+  - name: ard/it/dc00.ard
+  - name: ard/sp/dc00.ard
   method: binarc
   source:
   - name: evt
@@ -1393,6 +1505,10 @@ assets:
 - name: ard/dc04.ard #The Hall of the Cornerstone (Dark) (Skip WM & Skip HB & AS Warp)
   multi:
   - name: ard/us/dc04.ard
+  - name: ard/fr/dc04.ard
+  - name: ard/gr/dc04.ard
+  - name: ard/it/dc04.ard
+  - name: ard/sp/dc04.ard
   method: binarc
   source:
   - name: btl
@@ -1418,6 +1534,10 @@ assets:
 - name: ard/dc05.ard #The Hall of the Cornerstone (Light) (GoA Warp & AS Warp)
   multi:
   - name: ard/us/dc05.ard
+  - name: ard/fr/dc05.ard
+  - name: ard/gr/dc05.ard
+  - name: ard/it/dc05.ard
+  - name: ard/sp/dc05.ard
   method: binarc
   source:
   - name: btl
@@ -1443,6 +1563,10 @@ assets:
 - name: ard/dc07.ard #Gathering Place (Early Manifest Illusion)
   multi:
   - name: ard/us/dc07.ard
+  - name: ard/fr/dc07.ard
+  - name: ard/gr/dc07.ard
+  - name: ard/it/dc07.ard
+  - name: ard/sp/dc07.ard
   method: binarc
   source:
   - name: evt
@@ -1453,6 +1577,10 @@ assets:
 - name: ard/eh00.ard #Where Nothing Gathers (GoA Warp & Reverse Warp)
   multi:
   - name: ard/us/eh00.ard
+  - name: ard/fr/eh00.ard
+  - name: ard/gr/eh00.ard
+  - name: ard/it/eh00.ard
+  - name: ard/sp/eh00.ard
   method: binarc
   source:
   - name: evt
@@ -1463,6 +1591,10 @@ assets:
 - name: ard/eh01.ard #Alley to Between (GoA Warp)
   multi:
   - name: ard/us/eh01.ard
+  - name: ard/fr/eh01.ard
+  - name: ard/gr/eh01.ard
+  - name: ard/it/eh01.ard
+  - name: ard/sp/eh01.ard
   method: binarc
   source:
   - name: btl
@@ -1473,6 +1605,10 @@ assets:
 - name: ard/eh03.ard #Memory's Skyscraper (Reverse Warp)
   multi:
   - name: ard/us/eh03.ard
+  - name: ard/fr/eh03.ard
+  - name: ard/gr/eh03.ard
+  - name: ard/it/eh03.ard
+  - name: ard/sp/eh03.ard
   method: binarc
   source:
   - name: evt
@@ -1483,6 +1619,10 @@ assets:
 - name: ard/eh10.ard #Hall of Empty Melodies (Lower Level) (Prevent OoB in Xigbar's Arena & Reverse Warp)
   multi:
   - name: ard/us/eh10.ard
+  - name: ard/fr/eh10.ard
+  - name: ard/gr/eh10.ard
+  - name: ard/it/eh10.ard
+  - name: ard/sp/eh10.ard
   method: binarc
   source:
   - name: map
@@ -1498,6 +1638,10 @@ assets:
 - name: ard/eh15.ard #Addled Impasse (Reverse Warp)
   multi:
   - name: ard/us/eh15.ard
+  - name: ard/fr/eh15.ard
+  - name: ard/gr/eh15.ard
+  - name: ard/it/eh15.ard
+  - name: ard/sp/eh15.ard
   method: binarc
   source:
   - name: evt
@@ -1508,6 +1652,10 @@ assets:
 - name: ard/eh18.ard #The Altar of Naught (Data Warp & Reverse Warp)
   multi:
   - name: ard/us/eh18.ard
+  - name: ard/fr/eh18.ard
+  - name: ard/gr/eh18.ard
+  - name: ard/it/eh18.ard
+  - name: ard/sp/eh18.ard
   method: binarc
   source:
   - name: map
@@ -1528,6 +1676,10 @@ assets:
 - name: ard/eh19.ard #Memory's Contortion (Reverse Warp)
   multi:
   - name: ard/us/eh19.ard
+  - name: ard/fr/eh19.ard
+  - name: ard/gr/eh19.ard
+  - name: ard/it/eh19.ard
+  - name: ard/sp/eh19.ard
   method: binarc
   source:
   - name: evt
@@ -1538,6 +1690,10 @@ assets:
 - name: ard/eh20.ard #The World of Nothing (Xemnas II) (Enable Pause)
   multi:
   - name: ard/us/eh20.ard
+  - name: ard/fr/eh20.ard
+  - name: ard/gr/eh20.ard
+  - name: ard/it/eh20.ard
+  - name: ard/sp/eh20.ard
   method: binarc
   source:
   - name: evt
@@ -1548,6 +1704,10 @@ assets:
 - name: ard/eh27.ard #The World of Nothing (Part I) (Promise Charm)
   multi:
   - name: ard/us/eh27.ard
+  - name: ard/fr/eh27.ard
+  - name: ard/gr/eh27.ard
+  - name: ard/it/eh27.ard
+  - name: ard/sp/eh27.ard
   method: binarc
   source:
   - name: evt
@@ -1558,6 +1718,10 @@ assets:
 - name: ard/es00.ard #The Dark Margin (Enable Pause)
   multi:
   - name: ard/us/es00.ard
+  - name: ard/fr/es00.ard
+  - name: ard/gr/es00.ard
+  - name: ard/it/es00.ard
+  - name: ard/sp/es00.ard
   method: binarc
   source:
   - name: evt
@@ -1568,6 +1732,10 @@ assets:
 - name: ard/hb00.ard #Villain's Vale (Early 2nd Cutscene)
   multi:
   - name: ard/us/hb00.ard
+  - name: ard/fr/hb00.ard
+  - name: ard/gr/hb00.ard
+  - name: ard/it/hb00.ard
+  - name: ard/sp/hb00.ard
   method: binarc
   source:
   - name: evt
@@ -1578,6 +1746,10 @@ assets:
 - name: ard/hb01.ard #The Dark Depths (GoA Warp & Battle Lv & Skip Cloud)
   multi:
   - name: ard/us/hb01.ard
+  - name: ard/fr/hb01.ard
+  - name: ard/gr/hb01.ard
+  - name: ard/it/hb01.ard
+  - name: ard/sp/hb01.ard
   method: binarc
   source:
   - name: btl
@@ -1598,6 +1770,10 @@ assets:
 - name: ard/hb04.ard #Castle Gate (Checkpoint)
   multi:
   - name: ard/us/hb04.ard
+  - name: ard/fr/hb04.ard
+  - name: ard/gr/hb04.ard
+  - name: ard/it/hb04.ard
+  - name: ard/sp/hb04.ard
   method: binarc
   source:
   - name: evt
@@ -1613,6 +1789,10 @@ assets:
 - name: ard/hb05.ard #Ansem's Study (Remove Computer & Skip SP & Early Sleeping Lion)
   multi:
   - name: ard/us/hb05.ard
+  - name: ard/fr/hb05.ard
+  - name: ard/gr/hb05.ard
+  - name: ard/it/hb05.ard
+  - name: ard/sp/hb05.ard
   method: binarc
   source:
   - name: map
@@ -1633,6 +1813,10 @@ assets:
 - name: ard/hb06.ard #Postern (Skip SP & GoA Warp)
   multi:
   - name: ard/us/hb06.ard
+  - name: ard/fr/hb06.ard
+  - name: ard/gr/hb06.ard
+  - name: ard/it/hb06.ard
+  - name: ard/sp/hb06.ard
   method: binarc
   source:
   - name: evt
@@ -1643,6 +1827,10 @@ assets:
 - name: ard/hb08.ard #Bailey (Intact) (Early Chicken Little)
   multi:
   - name: ard/us/hb08.ard
+  - name: ard/fr/hb08.ard
+  - name: ard/gr/hb08.ard
+  - name: ard/it/hb08.ard
+  - name: ard/sp/hb08.ard
   method: binarc
   source:
   - name: map
@@ -1663,6 +1851,10 @@ assets:
 - name: ard/hb10.ard #Marketplace (Skip Cloud)
   multi:
   - name: ard/us/hb10.ard
+  - name: ard/fr/hb10.ard
+  - name: ard/gr/hb10.ard
+  - name: ard/it/hb10.ard
+  - name: ard/sp/hb10.ard
   method: binarc
   source:
   - name: evt
@@ -1673,6 +1865,10 @@ assets:
 - name: ard/hb13.ard #Merlin's House (Remove Chicken Little & Skip SP & GoA Warp)
   multi:
   - name: ard/us/hb13.ard
+  - name: ard/fr/hb13.ard
+  - name: ard/gr/hb13.ard
+  - name: ard/it/hb13.ard
+  - name: ard/sp/hb13.ard
   method: binarc
   source:
   - name: evt
@@ -1683,6 +1879,10 @@ assets:
 - name: ard/hb18.ard #Restoration Site (Destroyed) (Reverse Warp)
   multi:
   - name: ard/us/hb18.ard
+  - name: ard/fr/hb18.ard
+  - name: ard/gr/hb18.ard
+  - name: ard/it/hb18.ard
+  - name: ard/sp/hb18.ard
   method: binarc
   source:
   - name: m_12 #Room Transition to Transport to Remembrance
@@ -1693,6 +1893,10 @@ assets:
 - name: ard/hb21.ard #Cavern of Remembrance: Depths (Battle Lv)
   multi:
   - name: ard/us/hb21.ard
+  - name: ard/fr/hb21.ard
+  - name: ard/gr/hb21.ard
+  - name: ard/it/hb21.ard
+  - name: ard/sp/hb21.ard
   method: binarc
   source:
   - name: btl
@@ -1703,6 +1907,10 @@ assets:
 - name: ard/hb23.ard #Cavern of Remembrance: Depths (Battle Lv)
   multi:
   - name: ard/us/hb23.ard
+  - name: ard/fr/hb23.ard
+  - name: ard/gr/hb23.ard
+  - name: ard/it/hb23.ard
+  - name: ard/sp/hb23.ard
   method: binarc
   source:
   - name: btl
@@ -1713,6 +1921,10 @@ assets:
 - name: ard/hb24.ard #Cavern of Remembrance: Mineshaft (Softlock Prevention & Battle Lv)
   multi:
   - name: ard/us/hb24.ard
+  - name: ard/fr/hb24.ard
+  - name: ard/gr/hb24.ard
+  - name: ard/it/hb24.ard
+  - name: ard/sp/hb24.ard
   method: binarc
   source:
   - name: map
@@ -1733,6 +1945,10 @@ assets:
 - name: ard/hb25.ard #Transport to Remembrance (Battle Lv & Reverse Warp)
   multi:
   - name: ard/us/hb25.ard
+  - name: ard/fr/hb25.ard
+  - name: ard/gr/hb25.ard
+  - name: ard/it/hb25.ard
+  - name: ard/sp/hb25.ard
   method: binarc
   source:
   - name: btl
@@ -1748,6 +1964,10 @@ assets:
 - name: ard/hb26.ard #Garden of Assemblage (Various Stuff)
   multi:
   - name: ard/us/hb26.ard
+  - name: ard/fr/hb26.ard
+  - name: ard/gr/hb26.ard
+  - name: ard/it/hb26.ard
+  - name: ard/sp/hb26.ard
   method: binarc
   source:
   - name: m_70 #Chest Relocation, Save Point, Moogle Shop
@@ -1763,6 +1983,10 @@ assets:
 - name: ard/hb32.ard #The Old Mansion (AS Warp & Battle Lv)
   multi:
   - name: ard/us/hb32.ard
+  - name: ard/fr/hb32.ard
+  - name: ard/gr/hb32.ard
+  - name: ard/it/hb32.ard
+  - name: ard/sp/hb32.ard
   method: binarc
   source:
   - name: btl
@@ -1778,6 +2002,10 @@ assets:
 - name: ard/hb33.ard #Station of Remembrance (AS Warp & Battle Lv)
   multi:
   - name: ard/us/hb33.ard
+  - name: ard/fr/hb33.ard
+  - name: ard/gr/hb33.ard
+  - name: ard/it/hb33.ard
+  - name: ard/sp/hb33.ard
   method: binarc
   source:
   - name: btl
@@ -1793,6 +2021,10 @@ assets:
 - name: ard/hb34.ard #Destiny Island (AS Warp & Battle Lv)
   multi:
   - name: ard/us/hb34.ard
+  - name: ard/fr/hb34.ard
+  - name: ard/gr/hb34.ard
+  - name: ard/it/hb34.ard
+  - name: ard/sp/hb34.ard
   method: binarc
   source:
   - name: btl
@@ -1808,6 +2040,10 @@ assets:
 - name: ard/hb38.ard #Station of Oblivion (AS Warp & Battle Lv)
   multi:
   - name: ard/us/hb38.ard
+  - name: ard/fr/hb38.ard
+  - name: ard/gr/hb38.ard
+  - name: ard/it/hb38.ard
+  - name: ard/sp/hb38.ard
   method: binarc
   source:
   - name: btl
@@ -1823,6 +2059,10 @@ assets:
 - name: ard/he08.ard #Well of Captivity (Skip Megara Escort)
   multi:
   - name: ard/us/he08.ard
+  - name: ard/fr/he08.ard
+  - name: ard/gr/he08.ard
+  - name: ard/it/he08.ard
+  - name: ard/sp/he08.ard
   method: binarc
   source:
   - name: evt
@@ -1833,6 +2073,10 @@ assets:
 - name: ard/he10.ard #Cave of the Dead: Inner Chamber (AS Warp)
   multi:
   - name: ard/us/he10.ard
+  - name: ard/fr/he10.ard
+  - name: ard/gr/he10.ard
+  - name: ard/it/he10.ard
+  - name: ard/sp/he10.ard
   method: binarc
   source:
   - name: btl
@@ -1853,6 +2097,10 @@ assets:
 - name: ard/he14.ard #Coliseum Gates (Night) (GoA Warp)
   multi:
   - name: ard/us/he14.ard
+  - name: ard/fr/he14.ard
+  - name: ard/gr/he14.ard
+  - name: ard/it/he14.ard
+  - name: ard/sp/he14.ard
   method: binarc
   source:
   - name: evt
@@ -1863,6 +2111,10 @@ assets:
 - name: ard/he18.ard #Coliseum Gates (Hydra) (GoA Warp)
   multi:
   - name: ard/us/he18.ard
+  - name: ard/fr/he18.ard
+  - name: ard/gr/he18.ard
+  - name: ard/it/he18.ard
+  - name: ard/sp/he18.ard
   method: binarc
   source:
   - name: evt
@@ -1873,6 +2125,10 @@ assets:
 - name: ard/lk00.ard #Pride Rock (GoA Warp)
   multi:
   - name: ard/us/lk00.ard
+  - name: ard/fr/lk00.ard
+  - name: ard/gr/lk00.ard
+  - name: ard/it/lk00.ard
+  - name: ard/sp/lk00.ard
   method: binarc
   source:
   - name: evt
@@ -1883,6 +2139,10 @@ assets:
 - name: ard/lk13.ard #Peak (Data Warp)
   multi:
   - name: ard/us/lk13.ard
+  - name: ard/fr/lk13.ard
+  - name: ard/gr/lk13.ard
+  - name: ard/it/lk13.ard
+  - name: ard/sp/lk13.ard
   method: binarc
   source:
   - name: map
@@ -1898,6 +2158,10 @@ assets:
 - name: ard/lk14.ard #Scar's Darkness (BGM Change)
   multi:
   - name: ard/us/lk14.ard
+  - name: ard/fr/lk14.ard
+  - name: ard/gr/lk14.ard
+  - name: ard/it/lk14.ard
+  - name: ard/sp/lk14.ard
   method: binarc
   source:
   - name: evt
@@ -1908,6 +2172,10 @@ assets:
 - name: ard/lm02.ard #Undersea Courtyard (GoA Warp)
   multi:
   - name: ard/us/lm02.ard
+  - name: ard/fr/lm02.ard
+  - name: ard/gr/lm02.ard
+  - name: ard/it/lm02.ard
+  - name: ard/sp/lm02.ard
   method: binarc
   source:
   - name: evt
@@ -1918,6 +2186,10 @@ assets:
 - name: ard/lm04.ard #The Palace: Performance Hall (GoA Warp)
   multi:
   - name: ard/us/lm04.ard
+  - name: ard/fr/lm04.ard
+  - name: ard/gr/lm04.ard
+  - name: ard/it/lm04.ard
+  - name: ard/sp/lm04.ard
   method: binarc
   source:
   - name: evt
@@ -1928,6 +2200,10 @@ assets:
 - name: ard/lm05.ard #Sunken Ship (GoA Warp)
   multi:
   - name: ard/us/lm05.ard
+  - name: ard/fr/lm05.ard
+  - name: ard/gr/lm05.ard
+  - name: ard/it/lm05.ard
+  - name: ard/sp/lm05.ard
   method: binarc
   source:
   - name: evt
@@ -1938,6 +2214,10 @@ assets:
 - name: ard/lm06.ard #The Shore (Day) (GoA Warp)
   multi:
   - name: ard/us/lm06.ard
+  - name: ard/fr/lm06.ard
+  - name: ard/gr/lm06.ard
+  - name: ard/it/lm06.ard
+  - name: ard/sp/lm06.ard
   method: binarc
   source:
   - name: evt
@@ -1948,6 +2228,10 @@ assets:
 - name: ard/mu07.ard #Summit (Auto Limit Unequip & Drive Revert & Data Warp)
   multi:
   - name: ard/us/mu07.ard
+  - name: ard/fr/mu07.ard
+  - name: ard/gr/mu07.ard
+  - name: ard/it/mu07.ard
+  - name: ard/sp/mu07.ard
   method: binarc
   source:
   - name: map
@@ -1973,6 +2257,10 @@ assets:
 - name: ard/mu09.ard #Palace Gate (GoA Warp)
   multi:
   - name: ard/us/mu09.ard
+  - name: ard/fr/mu09.ard
+  - name: ard/gr/mu09.ard
+  - name: ard/it/mu09.ard
+  - name: ard/sp/mu09.ard
   method: binarc
   source:
   - name: evt
@@ -1983,6 +2271,10 @@ assets:
 - name: ard/mu11.ard #Throne Room (GoA Warp)
   multi:
   - name: ard/us/mu11.ard
+  - name: ard/fr/mu11.ard
+  - name: ard/gr/mu11.ard
+  - name: ard/it/mu11.ard
+  - name: ard/sp/mu11.ard
   method: binarc
   source:
   - name: evt
@@ -1993,6 +2285,10 @@ assets:
 - name: ard/nm00.ard #Halloween Town Square (GoA Warp)
   multi:
   - name: ard/us/nm00.ard
+  - name: ard/fr/nm00.ard
+  - name: ard/gr/nm00.ard
+  - name: ard/it/nm00.ard
+  - name: ard/sp/nm00.ard
   method: binarc
   source:
   - name: evt
@@ -2003,6 +2299,10 @@ assets:
 - name: ard/nm05.ard #Yuletide Hill (Vexen's AS Portal)
   multi:
   - name: ard/us/nm05.ard
+  - name: ard/fr/nm05.ard
+  - name: ard/gr/nm05.ard
+  - name: ard/it/nm05.ard
+  - name: ard/sp/nm05.ard
   method: binarc
   source:
   - name: btl
@@ -2023,6 +2323,10 @@ assets:
 - name: ard/nm06.ard #Candy Cane Lane (GoA Warp)
   multi:
   - name: ard/us/nm06.ard
+  - name: ard/fr/nm06.ard
+  - name: ard/gr/nm06.ard
+  - name: ard/it/nm06.ard
+  - name: ard/sp/nm06.ard
   method: binarc
   source:
   - name: evt
@@ -2033,6 +2337,10 @@ assets:
 - name: ard/po00.ard #The Hundred Acre Wood (GoA Warp)
   multi:
   - name: ard/us/po00.ard
+  - name: ard/fr/po00.ard
+  - name: ard/gr/po00.ard
+  - name: ard/it/po00.ard
+  - name: ard/sp/po00.ard
   method: binarc
   source:
   - name: map
@@ -2048,6 +2356,10 @@ assets:
 - name: ard/po01.ard #Starry Hill (GoA Warp)
   multi:
   - name: ard/us/po01.ard
+  - name: ard/fr/po01.ard
+  - name: ard/gr/po01.ard
+  - name: ard/it/po01.ard
+  - name: ard/sp/po01.ard
   method: binarc
   source:
   - name: evt
@@ -2058,6 +2370,10 @@ assets:
 - name: ard/po06.ard #A Windsday Tale (BGM Change)
   multi:
   - name: ard/us/po06.ard
+  - name: ard/fr/po06.ard
+  - name: ard/gr/po06.ard
+  - name: ard/it/po06.ard
+  - name: ard/sp/po06.ard
   method: binarc
   source:
   - name: evt
@@ -2068,6 +2384,10 @@ assets:
 - name: ard/tr00.ard #Pit Cell (GoA Warp & Skip HB)
   multi:
   - name: ard/us/tr00.ard
+  - name: ard/fr/tr00.ard
+  - name: ard/gr/tr00.ard
+  - name: ard/it/tr00.ard
+  - name: ard/sp/tr00.ard
   method: binarc
   source:
   - name: m_00 #Combine Computer Spawns (Party)
@@ -2093,6 +2413,10 @@ assets:
 - name: ard/tr01.ard #Canyon (Skip HB)
   multi:
   - name: ard/us/tr01.ard
+  - name: ard/fr/tr01.ard
+  - name: ard/gr/tr01.ard
+  - name: ard/it/tr01.ard
+  - name: ard/sp/tr01.ard
   method: binarc
   source:
   - name: evt
@@ -2103,6 +2427,10 @@ assets:
 - name: ard/tr03.ard #Dataspace (Auto Limit Unequip)
   multi:
   - name: ard/us/tr03.ard
+  - name: ard/fr/tr03.ard
+  - name: ard/gr/tr03.ard
+  - name: ard/it/tr03.ard
+  - name: ard/sp/tr03.ard
   method: binarc
   source:
   - name: tr_g
@@ -2113,6 +2441,10 @@ assets:
 - name: ard/tr04.ard #I/O Tower: Hallway (Skip HB)
   multi:
   - name: ard/us/tr04.ard
+  - name: ard/fr/tr04.ard
+  - name: ard/gr/tr04.ard
+  - name: ard/it/tr04.ard
+  - name: ard/sp/tr04.ard
   method: binarc
   source:
   - name: evt
@@ -2123,6 +2455,10 @@ assets:
 - name: ard/tr05.ard #I/O Tower: Communications Room (GoA Warp)
   multi:
   - name: ard/us/tr05.ard
+  - name: ard/fr/tr05.ard
+  - name: ard/gr/tr05.ard
+  - name: ard/it/tr05.ard
+  - name: ard/sp/tr05.ard
   method: binarc
   source:
   - name: map
@@ -2153,6 +2489,10 @@ assets:
 - name: ard/tr08.ard #Central Computer Mesa (GoA Warp)
   multi:
   - name: ard/us/tr08.ard
+  - name: ard/fr/tr08.ard
+  - name: ard/gr/tr08.ard
+  - name: ard/it/tr08.ard
+  - name: ard/sp/tr08.ard
   method: binarc
   source:
   - name: m_00 #Combine Computer Spawns (Party)
@@ -2193,6 +2533,10 @@ assets:
 - name: ard/tr09.ard #Central Computer Core (GoA Warp)
   multi:
   - name: ard/us/tr09.ard
+  - name: ard/fr/tr09.ard
+  - name: ard/gr/tr09.ard
+  - name: ard/it/tr09.ard
+  - name: ard/sp/tr09.ard
   method: binarc
   source:
   - name: evt
@@ -2203,6 +2547,10 @@ assets:
 - name: ard/tr10.ard #I/O Tower: Communications Room (GoA Warp)
   multi:
   - name: ard/us/tr10.ard
+  - name: ard/fr/tr10.ard
+  - name: ard/gr/tr10.ard
+  - name: ard/it/tr10.ard
+  - name: ard/sp/tr10.ard
   method: binarc
   source:
   - name: map
@@ -2213,6 +2561,10 @@ assets:
 - name: ard/tt02.ard #The Usual Spot (Skip WM)
   multi:
   - name: ard/us/tt02.ard
+  - name: ard/fr/tt02.ard
+  - name: ard/gr/tt02.ard
+  - name: ard/it/tt02.ard
+  - name: ard/sp/tt02.ard
   method: binarc
   source:
   - name: evt
@@ -2223,6 +2575,10 @@ assets:
 - name: ard/tt06.ard #Market Street: Station Heights (Short Day 2)
   multi:
   - name: ard/us/tt06.ard
+  - name: ard/fr/tt06.ard
+  - name: ard/gr/tt06.ard
+  - name: ard/it/tt06.ard
+  - name: ard/sp/tt06.ard
   method: binarc
   source:
   - name: evt
@@ -2233,6 +2589,10 @@ assets:
 - name: ard/tt07.ard #Market Street: Tram Commons (Short Day 2)
   multi:
   - name: ard/us/tt07.ard
+  - name: ard/fr/tt07.ard
+  - name: ard/gr/tt07.ard
+  - name: ard/it/tt07.ard
+  - name: ard/sp/tt07.ard
   method: binarc
   source:
   - name: evt
@@ -2243,6 +2603,10 @@ assets:
 - name: ard/tt08.ard #Station Plaza (Prevent Promise Charm Removal)
   multi:
   - name: ard/us/tt08.ard
+  - name: ard/fr/tt08.ard
+  - name: ard/gr/tt08.ard
+  - name: ard/it/tt08.ard
+  - name: ard/sp/tt08.ard
   method: binarc
   source:
   - name: evt
@@ -2253,6 +2617,10 @@ assets:
 - name: ard/tt09.ard #Central Station (Drive Refill)
   multi:
   - name: ard/us/tt09.ard
+  - name: ard/fr/tt09.ard
+  - name: ard/gr/tt09.ard
+  - name: ard/it/tt09.ard
+  - name: ard/sp/tt09.ard
   method: binarc
   source:
   - name: evt
@@ -2263,6 +2631,10 @@ assets:
 - name: ard/tt14.ard #The Old Mansion (BGM Change)
   multi:
   - name: ard/us/tt14.ard
+  - name: ard/fr/tt14.ard
+  - name: ard/gr/tt14.ard
+  - name: ard/it/tt14.ard
+  - name: ard/sp/tt14.ard
   method: binarc
   source:
   - name: evt
@@ -2273,6 +2645,10 @@ assets:
 - name: ard/tt16.ard #Mansion: Dining Room (Reverse Warp)
   multi:
   - name: ard/us/tt16.ard
+  - name: ard/fr/tt16.ard
+  - name: ard/gr/tt16.ard
+  - name: ard/it/tt16.ard
+  - name: ard/sp/tt16.ard
   method: binarc
   source:
   - name: evt
@@ -2283,6 +2659,10 @@ assets:
 - name: ard/tt20.ard #Mansion: Basement Hall (Axel II) (Drive Refill)
   multi:
   - name: ard/us/tt20.ard
+  - name: ard/fr/tt20.ard
+  - name: ard/gr/tt20.ard
+  - name: ard/it/tt20.ard
+  - name: ard/sp/tt20.ard
   method: binarc
   source:
   - name: evt
@@ -2293,6 +2673,10 @@ assets:
 - name: ard/tt21.ard #Mansion: Computer Room (Reverse Warp)
   multi:
   - name: ard/us/tt21.ard
+  - name: ard/fr/tt21.ard
+  - name: ard/gr/tt21.ard
+  - name: ard/it/tt21.ard
+  - name: ard/sp/tt21.ard
   method: binarc
   source:
   - name: evt
@@ -2303,6 +2687,10 @@ assets:
 - name: ard/tt23.ard #Mansion: Pod Room (Reverse Warp & Data Warp)
   multi:
   - name: ard/us/tt23.ard
+  - name: ard/fr/tt23.ard
+  - name: ard/gr/tt23.ard
+  - name: ard/it/tt23.ard
+  - name: ard/sp/tt23.ard
   method: binarc
   source:
   - name: map
@@ -2323,6 +2711,10 @@ assets:
 - name: ard/tt26.ard #Tower: Entryway (Drive Refill)
   multi:
   - name: ard/us/tt26.ard
+  - name: ard/fr/tt26.ard
+  - name: ard/gr/tt26.ard
+  - name: ard/it/tt26.ard
+  - name: ard/sp/tt26.ard
   method: binarc
   source:
   - name: evt
@@ -2333,6 +2725,10 @@ assets:
 - name: ard/tt27.ard #Tower: Sorcerer's Loft (Drive Refill)
   multi:
   - name: ard/us/tt27.ard
+  - name: ard/fr/tt27.ard
+  - name: ard/gr/tt27.ard
+  - name: ard/it/tt27.ard
+  - name: ard/sp/tt27.ard
   method: binarc
   source:
   - name: evt
@@ -2343,6 +2739,10 @@ assets:
 - name: ard/tt28.ard #Tower: Wardrobe (GoA Warp)
   multi:
   - name: ard/us/tt28.ard
+  - name: ard/fr/tt28.ard
+  - name: ard/gr/tt28.ard
+  - name: ard/it/tt28.ard
+  - name: ard/sp/tt28.ard
   method: binarc
   source:
   - name: evt
@@ -2353,6 +2753,10 @@ assets:
 - name: ard/tt32.ard #Station of Serenity (GoA Warp)
   multi:
   - name: ard/us/tt32.ard
+  - name: ard/fr/tt32.ard
+  - name: ard/gr/tt32.ard
+  - name: ard/it/tt32.ard
+  - name: ard/sp/tt32.ard
   method: binarc
   source:
   - name: evt
@@ -2368,6 +2772,10 @@ assets:
 - name: ard/tt33.ard #Station of Calling (Data & Promise Charm Paths)
   multi:
   - name: ard/us/tt33.ard
+  - name: ard/fr/tt33.ard
+  - name: ard/gr/tt33.ard
+  - name: ard/it/tt33.ard
+  - name: ard/sp/tt33.ard
   method: binarc
   source:
   - name: map
@@ -2428,6 +2836,10 @@ assets:
 - name: ard/tt40.ard #Betwixt & Between (Data Warp)
   multi:
   - name: ard/us/tt40.ard
+  - name: ard/fr/tt40.ard
+  - name: ard/gr/tt40.ard
+  - name: ard/it/tt40.ard
+  - name: ard/sp/tt40.ard
   method: binarc
   source:
   - name: map
@@ -2443,6 +2855,10 @@ assets:
 - name: ard/tt41.ard #The Old Mansion (Nobodies) (BGM Change)
   multi:
   - name: ard/us/tt41.ard
+  - name: ard/fr/tt41.ard
+  - name: ard/gr/tt41.ard
+  - name: ard/it/tt41.ard
+  - name: ard/sp/tt41.ard
   method: binarc
   source:
   - name: evt
@@ -2453,6 +2869,10 @@ assets:
 - name: ard/wi00.ard #Cornerstone Hill (Reverse Warp)
   multi:
   - name: ard/us/wi00.ard
+  - name: ard/fr/wi00.ard
+  - name: ard/gr/wi00.ard
+  - name: ard/it/wi00.ard
+  - name: ard/sp/wi00.ard
   method: binarc
   source:
   - name: evt
@@ -2460,13 +2880,17 @@ assets:
     method: areadatascript
     source:
     - name: ard/wi00/evt.script
-- name: ard/wm00.ard #World Map (GoA Warp)
-  multi:
-  - name: ard/us/wm00.ard
-  method: binarc
-  source:
-  - name: evt
-    type: areadatascript
-    method: areadatascript
-    source:
-    - name: ard/wm00/evt.script
+#- name: ard/wm00.ard #World Map (GoA Warp)
+#  multi:
+#  - name: ard/us/wm00.ard
+#  - name: ard/fr/wm00.ard
+#  - name: ard/gr/wm00.ard
+#  - name: ard/it/wm00.ard
+#  - name: ard/sp/wm00.ard
+#  method: binarc
+#  source:
+#  - name: evt
+#    type: areadatascript
+#    method: areadatascript
+#    source:
+#    - name: ard/wm00/evt.script
