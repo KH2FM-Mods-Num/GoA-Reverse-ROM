@@ -1,18 +1,18 @@
 --ROM Version
---Last Update: Fix Post-Data Axel Computer Room & Basement Hall bug
+--Last Update: Code Optimization & Very-old Version Deprecation
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
 LUAGUI_AUTH = 'SonicShadowSilver2 (Ported by Num)'
 LUAGUI_DESC = 'A GoA build for use with the Randomizer. Requires ROM patching.'
 
 function _OnInit()
-local VersionNum = 'GoA Version 1.52.13'
+local VersionNum = 'GoA Version 1.52.14'
 if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" then --PCSX2
 	if ENGINE_VERSION < 3.0 then
 		print('LuaEngine is Outdated. Things might not work properly.')
 	end
 	print(VersionNum)
-	Platform = 0
+	OnPC = false
 	Now = 0x032BAE0 --Current Location
 	Sve = 0x1D5A970 --Saved Location
 	BGM = 0x0347D34 --Background Music
@@ -38,7 +38,8 @@ if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" 
 	BtlEnd = 0x1D490C0 --Something about end-of-battle camera
 	TxtBox = 0x1D48D54 --Last Displayed Textbox
 	DemCln = 0x1D48DEC --Demyx Clone Status
-	MSNLoad  = 0x04FA440
+	ARDLoad  = 0x034ECF4 --ARD Pointer Address
+	MSNLoad  = 0x04FA440 --Base MSN Address
 	Slot1    = 0x1C6C750 --Unit Slot 1
 	NextSlot = 0x268
 	Point1   = 0x1D48EFC
@@ -49,10 +50,10 @@ if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" 
 	NextMenu = 0x4
 elseif GAME_ID == 0x431219CC and ENGINE_TYPE == 'BACKEND' then --PC
 	if ENGINE_VERSION < 5.0 then
-		ConsolePrint('LuaFrontend is Outdated. Things might not work properly.',2)
+		ConsolePrint('LuaBackend is Outdated. Things might not work properly.',2)
 	end
 	ConsolePrint(VersionNum,0)
-	Platform = 1
+	OnPC = true
 	Now = 0x0714DB8 - 0x56454E
 	Sve = 0x2A09C00 - 0x56450E
 	BGM = 0x0AB8504 - 0x56450E
@@ -77,6 +78,7 @@ elseif GAME_ID == 0x431219CC and ENGINE_TYPE == 'BACKEND' then --PC
 	BtlEnd = 0x2A0D3A0 - 0x56450E
 	TxtBox = 0x074BC70 - 0x56454E
 	DemCln = 0x2A0CF74 - 0x56450E
+	ARDLoad  = 0x2A0CEE8 - 0x56450E
 	MSNLoad  = 0x0BF08C0 - 0x56450E
 	Slot1    = 0x2A20C58 - 0x56450E
 	NextSlot = 0x278
@@ -127,74 +129,40 @@ end
 function Spawn(Type,Subfile,Offset,Value)
 local Subpoint = ARD + 0x08 + 0x10*Subfile
 local Address
-if Platform == 0 and ReadInt(ARD) == 0x01524142 and Subfile <= ReadInt(ARD+4) then
-	--Exclusions on Crash Spots in PCSX2-EX
+--Detect errors
+if ReadInt(ARD,OnPC) ~= 0x01524142 then --Header mismatch
+	return
+elseif Subfile > ReadInt(ARD+4,OnPC) then --Subfile over count
+	return
+elseif Offset >= ReadInt(Subfile+4,OnPC) then --Offset exceed subfile length
+	return
+end
+--Get address
+if not OnPC then
 	Address = ReadInt(Subpoint) + Offset
-	if Type == 'Short' then
-		WriteShort(Address,Value)
-	elseif Type == 'Float' then
-		WriteFloat(Address,Value)
-	elseif Type == 'Int' then
-		WriteInt(Address,Value)
-	elseif Type == 'String' then
-		WriteString(Address,Value)
-	end
-elseif Platform == 1 then
-	local x = ARD&0xFFFFFF000000
-	if ENGINE_VERSION < 5.0 then --LuaBackend
-		if ReadIntA(ARD) == 0x01524142 and Subfile <= ReadIntA(ARD+4) then
-			local y = ReadIntA(Subpoint)&0xFFFFFF
-			Address = x + y + Offset
-			if Type == 'Short' then
-				WriteShortA(Address,Value)
-			elseif Type == 'Float' then
-				WriteFloatA(Address,Value)
-			elseif Type == 'Int' then
-				WriteIntA(Address,Value)
-			elseif Type == 'String' then
-				WriteStringA(Address,Value)
-			end
-		end
-	else --LuaFrontend
-		if ReadInt(ARD,true) == 0x01524142 and Subfile <= ReadInt(ARD+4,true) then
-			local y = ReadInt(Subpoint,true)&0xFFFFFF
-			Address = x + y + Offset
-			if Type == 'Short' then
-				WriteShort(Address,Value,true)
-			elseif Type == 'Float' then
-				WriteFloat(Address,Value,true)
-			elseif Type == 'Int' then
-				WriteInt(Address,Value,true)
-			elseif Type == 'String' then
-				WriteString(Address,Value,true)
-			end
-		end
-	end
+else
+	local x = ARD&0xFFFFFF000000 --Calculations are wrong if done in one step for some reason
+	local y = ReadInt(Subpoint,true)&0xFFFFFF
+	Address = x + y + Offset
+end
+--Change value
+if Type == 'Short' then
+	WriteShort(Address,Value,OnPC)
+elseif Type == 'Float' then
+	WriteFloat(Address,Value,OnPC)
+elseif Type == 'Int' then
+	WriteInt(Address,Value,OnPC)
+elseif Type == 'String' then
+	WriteString(Address,Value,OnPC)
 end
 end
 
 function BitOr(Address,Bit,Abs)
-if Abs and Platform == 1 then
-	if ENGINE_VERSION < 5.0 then
-		WriteByteA(Address,ReadByte(Address)|Bit)
-	else
-		WriteByte(Address,ReadByte(Address)|Bit,true)
-	end
-else
-	WriteByte(Address,ReadByte(Address)|Bit)
-end
+WriteByte(Address,ReadByte(Address)|Bit,Abs and OnPC)
 end
 
 function BitNot(Address,Bit,Abs)
-if Abs and Platform == 1 then
-	if ENGINE_VERSION < 5.0 then
-		WriteByteA(Address,ReadByte(Address)&~Bit)
-	else
-		WriteByte(Address,ReadByte(Address)&~Bit,true)
-	end
-else
-	WriteByte(Address,ReadByte(Address)&~Bit)
-end
+WriteByte(Address,ReadByte(Address)&~Bit,Abs and OnPC)
 end
 
 function Faster(Toggle)
@@ -234,13 +202,9 @@ if true then --Define current values for common addresses
 	PrevPlace = ReadShort(Now+0x30)
 	MSN    = MSNLoad + (ReadInt(MSNLoad+4)+1) * 0x10
 	if Platform == 0 then
-		ARD = ReadInt(0x034ECF4) --Base ARD Address
+		ARD = ReadInt(ARDLoad) --Base ARD Address
 	elseif Platform == 1 then
-		ARD = ReadLong(0x2A0CEE8 - 0x56450E) --Base ARD Address
-		if GetHertz() < 240 then
-			SetHertz(240)
-			ConsolePrint('Frequency set to 240Hz to accommodate GoA mod.\n',0)
-		end
+		ARD = ReadLong(ARDLoad) --Base ARD Address
 	end
 end
 NewGame()
@@ -487,17 +451,12 @@ end
 --Fix Genie Crash
 if true then --No Valor, Wisdom, Master, or Final
 	local CurSubmenu
-	if Platform == 0 then
+	if not OnPC then
 		CurSubmenu = ReadInt(Menu2)
-		CurSubmenu = ReadByte(CurSubmenu)
-	elseif Platform == 1 then
+	else
 		CurSubmenu = ReadLong(Menu2)
-		if ENGINE_VERSION < 5.0 then
-			CurSubmenu = ReadByteA(CurSubmenu)
-		else
-			CurSubmenu = ReadByte(CurSubmenu,true)
-		end
 	end
+	CurSubmenu = ReadByte(CurSubmenu,OnPC)
 	if CurSubmenu == 7 and ReadByte(Save+0x36C0)&0x56 == 0x00 then --In Summon menu without Forms
 		BitOr(Save+0x36C0,0x02) --Add Valor Form
 		BitOr(Save+0x06B2,0x01)
@@ -576,7 +535,7 @@ end
 --DUMMY 23 = Maximum HP Increased!
 if ReadByte(Save+0x3671) > 0 then
 	local Bonus
-	if ReadByte(Save+0x2498) < 0x03 then --Non-Critical
+	if ReadByte(Save+0x2498) < 3 then --Non-Critical
 		Bonus = 5
 	else --Critical
 		Bonus = 2
@@ -588,7 +547,7 @@ end
 --DUMMY 24 = Maximum MP Increased!
 if ReadByte(Save+0x3672) > 0 then
 	local Bonus
-	if ReadByte(Save+0x2498) < 0x03 then --Non-Critical
+	if ReadByte(Save+0x2498) < 3 then --Non-Critical
 		Bonus = 10
 	else --Critical
 		Bonus = 5
@@ -908,7 +867,7 @@ end
 if Place == 0x1A04 and ReadByte(Save+0x1D9E) > 0 then
 	if PrevPlace == 0x0008 then --Bamboo Grove
 		WriteByte(Save+0x1D9E,1)
-	elseif PrevPlace == 0x0C08 then --Village (Intact)
+	elseif PrevPlace == 0x0C08 then --Village (Destroyed)
 		WriteByte(Save+0x1D9E,2)
 	elseif PrevPlace == 0x0B08 then --Throne Room
 		WriteByte(Save+0x1D9E,3)
@@ -991,7 +950,7 @@ if ReadByte(Save+0x1D3F) > 7 then
 		Spawn('Short',0x05,0x024,0x0200)
 		if ReadShort(Save+0x07B8) ~= 0x0A then
 			Spawn('Short',0x03,0x024,0x0000)
-		else
+		else --Unblock before Xaldin
 			Spawn('Short',0x03,0x024,0x0006)
 		end
 	elseif Place == 0x0805 then --The West Hall -> Undercroft, Secret Passage
@@ -1010,25 +969,6 @@ if Place == 0x1A04 and ReadByte(Save+0x1D3E) > 0 then
 	elseif PrevPlace == 0x0305 then --Beast's Room
 		WriteByte(Save+0x1D3E,4)
 	end
-end
---Mrs. Potts Teleport in Lantern Minigame
-if Place == 0x0C05 and Events(Null,0x16,0x02) then
-	if Platform == 0 then --PC Address is Currently Unknown
-		local PottsLocAddress = 0x1ABB7D0
-		if ReadFloat(Gauge1) == 0 then --Cogsworth Out of Stamina
-			if not PottsCoordinate then
-				PottsCoordinate = ReadArray(PottsLocAddress,12)
-			end
-			WriteInt(PottsLocAddress+0,0xC5241753)
-			WriteInt(PottsLocAddress+4,0x00000000)
-			WriteInt(PottsLocAddress+8,0x44CF7FBE)
-		elseif ReadFloat(Gauge1) == 35 and PottsCoordinate then --Stamina Refilled
-			WriteArray(PottsLocAddress,PottsCoordinate)
-			PottsCoordinate = Null
-		end
-	end
-else --Exited Minigame
-	PottsCoordinate = Null
 end
 end
 
@@ -1145,7 +1085,6 @@ if Place == 0x1A04 then
 	if PostSave == 0 then
 		if Progress == 0 then --1st Visit
 			WarpRoom = 0x00
-			Spawn('Short',0x0A,0x0F6,0x00)
 		elseif Progress == 1 then --Before Meeting Jasmine & Aladdin
 			WarpRoom = 0x02
 		elseif Progress == 2 then --[Before Entering Cave of Wonders, Before Abu Escort]
@@ -2708,7 +2647,6 @@ end
 [Save+0x0664,Save+0x0669] Merlin's House Spawn IDs
 [Save+0x066A,Save+0x066F] Borough Spawn IDs
 Save+0x06B2 Genie Crash Fix
-[Save+0x07F0,Save+0x07FB] Mrs Potts' Minigame Location
 Save+0x1CF0 STT Computer Beam
 Save+0x1CF1 STT Dodge Roll, Trinity Limit, Twilight Thorn
 Save+0x1CF2 STT Fire
