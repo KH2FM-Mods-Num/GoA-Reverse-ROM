@@ -201,9 +201,9 @@ if true then --Define current values for common addresses
 	Evt    = ReadShort(Now+0x08)
 	PrevPlace = ReadShort(Now+0x30)
 	MSN    = MSNLoad + (ReadInt(MSNLoad+4)+1) * 0x10
-	if Platform == 0 then
+	if not OnPC then
 		ARD = ReadInt(ARDLoad) --Base ARD Address
-	elseif Platform == 1 then
+	else
 		ARD = ReadLong(ARDLoad) --Base ARD Address
 	end
 end
