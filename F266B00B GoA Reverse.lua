@@ -229,7 +229,7 @@ end
 
 function NewGame()
 --Before New Game
-if Platform == 1 and ReadByte(Sys3+0x116DB) == 0x19 then --Change Form's Icons in PC from Analog Stick
+if OnPC and ReadByte(Sys3+0x116DB) == 0x19 then --Change Form's Icons in PC from Analog Stick
 	WriteByte(Sys3+0x116DB,0xCE) --Valor
 	WriteByte(Sys3+0x116F3,0xCE) --Wisdom
 	WriteByte(Sys3+0x1170B,0xCE) --Limit
@@ -2016,15 +2016,15 @@ end
 --Marluxia HUD Pop-Up
 if Place == 0x2604 and ReadInt(CutNow) == 0x7A then
 	if Events(0x91,0x91,0x91) then --AS
-		if Platform == 0 and ReadShort(0x1C58FE0) ~= 0x923 then
+		if not OnPC and ReadShort(0x1C58FE0) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
-		elseif Platform == 1 and ReadShort(0x29ED460 - 0x56450E) ~= 0x923 then
+		elseif OnPC and ReadShort(0x29ED460 - 0x56450E) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		end
 	elseif Events(0x96,0x96,0x96) then --Data
-		if Platform == 0 and ReadShort(0x1C59114) ~= 0x923 then
+		if not OnPC and ReadShort(0x1C59114) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
-		elseif Platform == 1 and ReadShort(0x29ED594 - 0x56450E) ~= 0x923 then
+		elseif OnPC and ReadShort(0x29ED594 - 0x56450E) ~= 0x923 then
 			WriteByte(Cntrl,0x00)
 		end
 	end
