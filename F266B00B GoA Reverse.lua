@@ -177,7 +177,7 @@ function RemoveTTBlocks() --Remove All TT & STT Blocks
 WriteShort(Save+0x207C,0) --Sunset Station
 WriteShort(Save+0x2080,0) --Central Station
 WriteShort(Save+0x20E4,0) --Underground Concourse
-WriteShort(Save+0x20E8,0) --Woods
+WriteShort(Save+0x20E8,0) --The Woods
 WriteShort(Save+0x20EC,0) --Sandlot
 WriteShort(Save+0x20F0,0) --Tram Commons
 WriteShort(Save+0x20F4,0) --The Mysterious Tower
@@ -1798,7 +1798,6 @@ if ReadShort(Save+0x0650) == 0x0A then
 	WriteShort(Save+0x065C,0x16) --Heartless Manufactory EVT
 	WriteShort(Save+0x0662,0x10) --Merlin's House EVT
 	WriteShort(Save+0x0672,0x0B) --Ravine Trail BTL
-	WriteShort(Save+0x067C,0x0D) --Restoration Site (Destroyed) MAP (Data Door)
 	WriteShort(Save+0x067E,0x0B) --Restoration Site (Destroyed) BTL
 	WriteShort(Save+0x0684,0x0B) --Bailey (Destroyed) BTL
 	WriteShort(Save+0x20D4,0) --Heartless Manufactory Unblock
