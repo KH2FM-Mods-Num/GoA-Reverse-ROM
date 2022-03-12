@@ -322,36 +322,6 @@ if Place == 0x000F then
 		Warp(0x04,0x1A,WarpDoor,0x00,0x00,0x02)
 	end
 end
---[[World Map -> Garden of Assemblage v2 (unstable)
-if World == 0x12 then --The World that Never Was
-	WriteShort(Save+0x1694,0x01) --World Map EVT
-elseif World == 0x08 then --Land of Dragons
-	WriteShort(Save+0x1694,0x02)
-elseif World == 0x05 then --Beast's Castle
-	WriteShort(Save+0x1694,0x03)
-elseif World == 0x0E then --Halloween Town
-	WriteShort(Save+0x1694,0x04)
-elseif World == 0x07 then --Agrabah
-	WriteShort(Save+0x1694,0x05)
-elseif World == 0x06 then --Olympus Coliseum
-	WriteShort(Save+0x1694,0x06)
-elseif World == 0x0A then --Pride Lands
-	WriteShort(Save+0x1694,0x07)
-elseif World == 0x02 then
-	if ReadByte(Save+0x1CFF) == 8 then --Twilight Town
-		WriteShort(Save+0x1694,0x08)
-	elseif ReadByte(Save+0x1CFF) == 13 then --Simulated Twilight Town
-		WriteShort(Save+0x1694,0x0D)
-	end
-elseif World == 0x04 then --Hollow Bastion
-	WriteShort(Save+0x1694,0x09)
-elseif World == 0x10 then --Port Royal
-	WriteShort(Save+0x1694,0x0A)
-elseif World == 0x0C then --Disney Castle
-	WriteShort(Save+0x1694,0x0B)
-elseif World == 0x0B then --Atlantica
-	WriteShort(Save+0x1694,0x0C)
-end--]]
 --Battle Level
 if true then
 	local Bitmask, Visit = false
