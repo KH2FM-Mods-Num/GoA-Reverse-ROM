@@ -1,5 +1,7 @@
 --ROM Version
---Last Update: Code Optimization & Very-old Version Deprecation
+--Last Update: Visit-Locking, moved Goofy Dead to ROM, and added world progress for Reverse
+--Todo: Integrate ROM-based skips & item-based progression
+--Also Todo: TT reverse world progress (probably revert Mansion block too)
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
 LUAGUI_AUTH = 'SonicShadowSilver2 (Ported by Num)'
@@ -323,7 +325,7 @@ if Place == 0x000F then
 	end
 end
 --Visits Unlock
-if true then
+if false then
 	if ReadByte(Save+0x363F) > 0 then --Tournament Poster
 		BitOr(Save+0x1C92,0x08) --ZZ_TT_CHECK_1_GOA
 	end
@@ -360,6 +362,19 @@ if true then
 	if ReadByte(Save+0x35C2) > 0 then --Identity Disk
 		BitOr(Save+0x1C95,0x01) --ZZ_TR_CHECK_GOA
 	end
+else --Remove the item requirements
+	BitOr(Save+0x1C92,0x08) --ZZ_TT_CHECK_1_GOA
+	BitOr(Save+0x1C92,0x10) --ZZ_TT_CHECK_2_GOA
+	BitOr(Save+0x1C92,0x20) --ZZ_HB_CHECK_1_GOA
+	BitOr(Save+0x1C92,0x40) --ZZ_HB_CHECK_2_GOA
+	BitOr(Save+0x1C92,0x80) --ZZ_BB_CHECK_1_GOA
+	BitOr(Save+0x1C93,0x01) --ZZ_HE_CHECK_1_GOA
+	BitOr(Save+0x1C93,0x02) --ZZ_AL_CHECK_GOA
+	BitOr(Save+0x1C93,0x04) --ZZ_MU_CHECK_GOA
+	BitOr(Save+0x1C94,0x01) --ZZ_LK_CHECK_1_GOA
+	BitOr(Save+0x1C94,0x40) --ZZ_NM_CHECK_1_GOA
+	BitOr(Save+0x1C94,0x80) --ZZ_CA_CHECK_GOA
+	BitOr(Save+0x1C95,0x01) --ZZ_TR_CHECK_GOA
 end
 --Battle Level
 if true then
@@ -833,6 +848,8 @@ if Place == 0x1A04 then
 			WarpRoom = 0x0C
 		elseif Progress == 7 then --Before Storm Rider
 			WarpRoom = 0x0B
+		elseif Progress == 8 then --Post 2nd Visit
+			WarpRoom = 0x04
 		end
 	elseif PostSave == 1 then --Bamboo Grove
 		WarpRoom = 0x00
@@ -859,6 +876,8 @@ elseif Place == 0x0608 and Events(Null,Null,0x0C) then --The City is in Trouble!
 elseif Place == 0x0B08 and Events(Null,Null,0x0A) then --To the Emperor
 	WriteByte(Save+0x1D9F,7)
 elseif Place == 0x0B08 and Events(Null,Null,0x0B) then --The Ultimate Reward
+	WriteByte(Save+0x1D9F,8)
+elseif ReadByte(Save+0x1D9F) == 8 and ReadShort(Save+0x0C14) == 0x01 then --1st Visit
 	WriteByte(Save+0x1D9F,0)
 end
 --Block 1st Visit Areas
@@ -912,6 +931,8 @@ if Place == 0x1A04 then
 			WarpRoom = 0x03
 		elseif Progress == 11 then --[Before Entrance Hall Nobodies, Before Xaldin]
 			WarpRoom = 0x01
+		elseif Progress == 12 then --Post 2nd Visit
+			WarpRoom = 0x01
 		end
 	elseif ReadByte(Save+0x1D3E) == 1 then --Parlor
 		WarpRoom = 0x01
@@ -948,6 +969,8 @@ elseif Place == 0x0305 and Events(Null,Null,0x0A) then --The Missing Rose
 elseif Place == 0x0305 and Events(Null,Null,0x14) then --Don't Give Up
 	WriteByte(Save+0x1D3F,11)
 elseif Place == 0x0605 and Events(Null,Null,0x0B) then --Stay With Me
+	WriteByte(Save+0x1D3F,12)
+elseif ReadByte(Save+0x1D3F) == 12 and ReadShort(Save+0x0794) == 0x01 then --1st Visit
 	WriteByte(Save+0x1D3F,0)
 end
 --Block 1st Visit Areas
@@ -1011,6 +1034,8 @@ if Place == 0x1A04 then
 			WarpRoom = 0x08
 		elseif Progress == 12 then --Before Vexen
 			WarpRoom = 0x05
+		elseif Progress == 13 then --Post 2nd Visit
+			WarpRoom = 0x05
 		end
 	elseif PostSave == 1 then --Dr. Finklestein's Lab
 		WarpRoom = 0x01
@@ -1047,6 +1072,8 @@ elseif Place == 0x000E and Events(Null,Null,0x0A) then --Retrieving the Presents
 elseif Place == 0x000E and Events(Null,Null,0x0B) then --Merry Christmas!
 	WriteByte(Save+0x1E5F,12)
 elseif Place == 0x2004 and Events(0x79,0x79,0x79) then --Vexen Defeated
+	WriteByte(Save+0x1E5F,13)
+elseif ReadByte(Save+0x1E5F) == 13 and ReadShort(Save+0x152C) == 0x01 then --1st Visit
 	WriteByte(Save+0x1E5F,0)
 end
 --Block 1st Visit Areas
@@ -1102,7 +1129,7 @@ if Place == 0x1A04 then
 		elseif Progress == 5 then --Before Volcanic Lord & Blizzard Lord
 			WarpRoom = 0x02
 		elseif Progress == 6 then --Post 1st Visit
-			WarpRoom = 0x02
+			WarpRoom = 0x06
 		elseif Progress == 7 then --2nd Visit
 			WarpRoom = 0x04
 		elseif Progress == 8 then --Start of 2nd Visit
@@ -1111,8 +1138,10 @@ if Place == 0x1A04 then
 			WarpRoom = 0x06
 		elseif Progress == 10 then --Before Carpet Escape
 			WarpRoom = 0x0B
-		elseif Progress == 11 then --Before Genie Jafar
+		elseif Progress == 11 then --[Before Genie Jafar, Before Lexaeus]
 			WarpRoom = 0x0F
+		elseif Progress == 12 then --Post 2nd Visit
+			WarpRoom = 0x06
 		end
 	elseif PostSave == 1 then --The Peddler's Shop (Poor)
 		WarpRoom = 0x02
@@ -1152,6 +1181,8 @@ elseif Place == 0x0607 and Events(Null,Null,0x0B) then --A Successful Escape
 	WriteByte(Save+0x1D7F,11)
 elseif Place == 0x0007 and Events(Null,Null,0x0A) then --Cosmic Razzle-Dazzle
 elseif Place == 0x2104 and Events(0x7B,0x7B,0x7B) then --Lexaeus Defeated
+	WriteByte(Save+0x1D7F,12)
+elseif ReadByte(Save+0x1D7F) == 12 and ReadByte(Save+0x0A94) == 0x01 then --1st Visit
 	WriteByte(Save+0x1D7F,0)
 end
 --Block 1st Visit Areas
@@ -1210,6 +1241,8 @@ if Place == 0x1A04 then
 			WarpRoom = 0x03
 		elseif Progress == 12 then --Before Zexion
 			WarpRoom = 0x0A
+		elseif Progress == 13 then --Post 2nd Visit
+			WarpRoom = 0x03
 		end
 	elseif PostSave == 1 then --Underworld Entrance
 		WarpRoom = 0x03
@@ -1248,6 +1281,8 @@ elseif Place == 0x0606 and Events(Null,Null,0x0A) then --Voices from the Past
 elseif Place == 0x0E06 and Events(Null,Null,0x0A) then --The Constellation of Heroes
 	WriteByte(Save+0x1D6F,12)
 elseif Place == 0x2204 and Events(0x7D,0x7D,0x7D) then --Zexion Defeated
+	WriteByte(Save+0x1D6F,13)
+elseif ReadByte(Save+0x1D6F) == 13 and ReadShort(Save+0x0914) == 0x01 then --1st Visit
 	WriteByte(Save+0x1D6F,0)
 end
 --Block 1st Visit Areas
@@ -1349,6 +1384,8 @@ if Place == 0x1A04 then
 			WarpRoom = 0x04
 		elseif Progress == 9 then --[Before Meeting Up with Simba & Nala, Before Groundshaker]
 			WarpRoom = 0x01
+		elseif Progress == 10 then --Post 2nd Visit
+			WarpRoom = 0x01
 		end
 	elseif PostSave == 1 then --Gorge
 		WarpRoom = 0x06
@@ -1379,6 +1416,8 @@ elseif ReadByte(Save+0x1DDF) == 7 and ReadShort(Save+0x0F2C) == 0x0A then --2nd 
 elseif Place == 0x000A and Events(Null,Null,0x0A) then --Scar's Ghost
 	WriteByte(Save+0x1DDF,9)
 elseif Place == 0x000A and Events(Null,Null,0x0E) then --The Circle of Life
+	WriteByte(Save+0x1DDF,10)
+elseif ReadByte(Save+0x1DDF) == 10 and ReadShort(Save+0x0F74) == 0x01 then --1st Visit
 	WriteByte(Save+0x1DDF,0)
 end
 --Block 1st Visit Areas
@@ -1454,6 +1493,8 @@ if Place == 0x1A04 then
 			WarpRoom = 0x12
 		elseif Progress == 14 then --[After Entering the Computer Room, Before Betwixt and Between Nobodies]
 			WarpRoom = 0x15
+		elseif Progress == 15 then --Post 3rd Visit
+			WarpRoom = 0x02
 		end
 	elseif PostSave == 1 then --The Usual Spot
 		WarpRoom = 0x02
@@ -1465,7 +1506,6 @@ if Place == 0x1A04 then
 		WarpRoom = 0x12
 	elseif PostSave == 5 then --Mansion: Computer Room
 		WarpRoom = 0x15
-		Spawn('Short',0x0A,0x16E,0x3B)
 	elseif PostSave == 6 then --Tower: Entryway
 		WarpRoom = 0x1A
 	elseif PostSave == 7 then --Tower: Sorcerer's Loft
@@ -1544,9 +1584,6 @@ elseif ReadShort(TxtBox) == 0x768 and PrevPlace == 0x1A04 and ReadByte(Save+0x1C
 	WriteByte(Save+0x1CFF,8) --TT Flag
 	WriteArray(Save+0x0310,ReadArray(Save+0x01A0,144)) --Load Spawn ID
 	WriteArray(Save+0x03E8,ReadArray(Save+0x0310,6))   --The Empty Realm -> Tunnelway
-	WriteShort(Save+0x03E8,ReadShort(Save+0x0310)) --The Empty Realm -> Tunnelway
-	WriteShort(Save+0x03EA,ReadShort(Save+0x0312))
-	WriteShort(Save+0x03EC,ReadShort(Save+0x0314))
 	if Evt <= 50 then --Not a Special Event
 		WriteArray(Now+0x4,ReadArray(Save+0x310+Room*6,6)) --Load the Proper Spawn ID
 	end
@@ -1615,7 +1652,7 @@ elseif ReadByte(Save+0x1CFF) == 8 then --Save Events within TT
 end
 --Save Points <-> World Points
 if ReadByte(Save+0x1CFF) == 8 then
-	if ReadByte(Save+0x1D0D) > 10 then --3rd Visit
+	if ReadByte(Save+0x1D0D) > 10 and ReadByte(Save+0x1D0D) < 15 then --3rd Visit
 		if Place == 0x0902 then --Central Station
 			Spawn('Short',0x08,0x034,0x23A)
 		elseif Place == 0x0B02 then --Sunset Station
@@ -1697,14 +1734,17 @@ if Place == 0x1A04 then
 		elseif Progress == 9 then --Before 1000 Heartless
 			WarpRoom = 0x03
 			Visit = 4
-		elseif Progress == 10 then --Post 4th Visit (CoR)
+		elseif Progress == 10 then --Post 4th Visit
 			WarpRoom = 0x06
 			Visit = 4
-		elseif Progress == 11 then --5th Visit (Before Sephiroth)
-			WarpRoom = 0x03
+		elseif Progress == 11 then --5th Visit
+			WarpRoom = 0x0A
 			Visit = 5
 		elseif Progress == 12 then --After Borough Heartless III
 			WarpRoom = 0x06
+			Visit = 5
+		elseif Progress == 13 then --Post 5th Visit
+			WarpRoom = 0x03
 			Visit = 5
 		end
 	elseif PostSave == 1 then --Merlin's House
@@ -1749,6 +1789,7 @@ elseif ReadByte(Save+0x1D2F) == 10 and ReadShort(Save+0x0650) == 0x0A then --5th
 elseif Place == 0x0904 and Events(Null,Null,0x0B) then --The Rogue Security System
 	WriteByte(Save+0x1D2F,12)
 elseif Place == 0x0604 and Events(0x5E,0x5E,0x5E) then --Radiant Garden
+	WriteByte(Save+0x1D2F,13)
 elseif Place == 0x0104 and Events(Null,Null,0x13) then --The Battle
 	WriteByte(Save+0x1D2F,0)
 elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembrance Cleared
@@ -1782,12 +1823,6 @@ if ReadByte(Save+0x3643) > 0 then
 	elseif ReadShort(Save+0x062E) == 0x0F then
 		WriteShort(Save+0x20D4,0) --Heartless Manufactory Unblock
 		WriteShort(Save+0x062E,0x11)
-	end
-end
---After-Demyx Checkpoint (Dead Goofy)
-if ReadByte(Save+0x1D2F) == 8 and World == 0x04 then
-	if not(Place == 0x0404 or Place == 0x1A04 or Place == 0x2004 or Place == 0x2104 or Place == 0x2204 or Place == 0x2604) then --Not in HB Org Arenas or GoA
-		WriteInt(Save+0x3544,0x12120100) --Remove Goofy
 	end
 end
 --Skip Hollow Bastion 5th Visit
@@ -1877,7 +1912,7 @@ if Place == 0x1A04 then
 		elseif Progress == 4 then --Before Barbossa
 			WarpRoom = 0x08
 		elseif Progress == 5 then --Post 1st Visit
-			WarpRoom = 0x00
+			WarpRoom = 0x06
 		elseif Progress == 6 then --2nd Visit
 			WarpRoom = 0x0A
 		elseif Progress == 7 then --Before Harbor Pirates II
@@ -1887,6 +1922,8 @@ if Place == 0x1A04 then
 		elseif Progress == 9 then --After Grim Reaper I
 			WarpRoom = 0x0B
 		elseif Progress == 10 then --[Medallion Collection, Before Grim Reaper II]
+			WarpRoom = 0x06
+		elseif Progress == 11 then --Post 2nd Visit
 			WarpRoom = 0x06
 		end
 	elseif PostSave == 1 then --Rampart
@@ -1922,6 +1959,8 @@ elseif Place == 0x0B10 and Events(Null,Null,0x0A) then --The Ship Graveyard
 elseif Place == 0x0E10 and Events(Null,Null,0x0A) then --Retrieve the Medallion!
 	WriteByte(Save+0x1E9F,10)
 elseif Place == 0x0510 and Events(Null,Null,0x0E) then --Into the Ocean
+	WriteByte(Save+0x1E9F,11)
+elseif ReadByte(Save+0x1E9F) == 11 and ReadShort(Save+0x1814) == 0x01 then --1st Visit
 	WriteByte(Save+0x1E9F,0)
 end
 --Block 1st Visit Areas
@@ -2057,7 +2096,9 @@ if Place == 0x1A04 then
 			WarpRoom = 0x00
 		elseif Progress == 6 then --Before Solar Sailer Heartless
 			WarpRoom = 0x05
-		elseif Progress == 7 then --Before Sark & MCP
+		elseif Progress == 7 then --[Before Sark & MCP, Before Larxene]
+			WarpRoom = 0x08
+		elseif Progress == 8 then --Post 2nd Visit
 			WarpRoom = 0x08
 		end
 	elseif PostSave == 1 then --Pit Cell
@@ -2086,6 +2127,8 @@ elseif Place == 0x0811 and Events(Null,Null,0x0A) then --The System's Core
 	WriteByte(Save+0x1EBF,7)
 elseif Place == 0x0911 and Events(0x3B,0x3B,0x3B) then --Destroying the MCP
 elseif Place == 0x2104 and Events(0x81,0x81,0x81) then --Larxene Defeated
+	WriteByte(Save+0x1EBF,8)
+elseif ReadByte(Save+0x1EBF) == 8 and ReadShort(Save+0x199A) == 0x01 then --1st Visit
 	WriteByte(Save+0x1EBF,0)
 end
 --Space Paranoids Post-Story Save
@@ -2147,7 +2190,9 @@ if Place == 0x1A04 then
 			WarpRoom = 0x02
 		elseif Progress == 11 then --[Before Entering the Library, Before Entering Computer Room]
 			WarpRoom = 0x12
-		elseif Progress == 12 then --[Before Axel II, After Axel II]
+		elseif Progress == 12 then --Before Axel II
+			WarpRoom = 0x15
+		elseif Progress == 13 then --After Axel II
 			WarpRoom = 0x15
 		end
 	elseif PostSave == 1 then --The Usual Spot
@@ -2199,6 +2244,7 @@ elseif Place == 0x1202 and Events(Null,Null,0x01) then --Sketches
 elseif Place == 0x1502 and Events(Null,Null,0x01) then --The Computer System
 	WriteByte(Save+0x1D0E,12)
 elseif Place == 0x1302 and Events(0x88,0x88,0x88) then --In the Next Life
+	WriteByte(Save+0x1D0E,13)
 elseif Place == 0x1702 and Events(Null,Null,0x02) then --My Summer Vacation Is Over
 end
 --Block Mansion Post-Story
@@ -2288,6 +2334,7 @@ elseif ReadShort(TxtBox) == 0x76D and PrevPlace == 0x1A04 and ReadByte(Save+0x1C
 		elseif Progress == 13 then --After Axel II
 			Visit = 6
 			BGMSet = 2
+			WriteShort(Save+0x211C,0xC548) --The Old Mansion Block
 		end
 	else
 		Visit = 1
