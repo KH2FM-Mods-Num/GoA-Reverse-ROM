@@ -1,6 +1,6 @@
 --ROM Version
 --Last Update: Visit-Locking, moved Goofy Dead to ROM, and added world progress for Reverse, integrated ROM-based skips
---Todo: TT reverse world progress (probably revert Mansion block too), maybe item-based progression
+--Todo: HB reverse world progress, maybe item-based progression
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
 LUAGUI_AUTH = 'SonicShadowSilver2 (Ported by Num)'
@@ -1535,15 +1535,15 @@ elseif Place == 0x1B02 and Events(Null,Null,0x03) then --The Journey Begins
 	WriteByte(Save+0x1D0D,5)
 elseif Place == 0x1C02 and Events(0x97,0x97,0x97) then --The Evil Fairy's Revival
 	WriteByte(Save+0x1CFD,1) --Post-Story Save
-elseif ReadByte(Save+0x1D0D) == 6 and ReadShort(Save+0x032C) == 0x01 then --2nd Visit
+elseif ReadByte(Save+0x1D0D) == 15 and ReadShort(Save+0x032C) == 0x01 then --2nd Visit
 	WriteByte(Save+0x1D0D,7)
 elseif Place == 0x0702 and Events(0x6B,0x6B,0x6B) then --A Frantic Vivi
 	WriteByte(Save+0x1D0D,8)
 elseif Place == 0x0402 and Events(Null,Null,0x01) then --Leave It to Us!
 	WriteByte(Save+0x1D0D,9)
 elseif Place == 0x0012 and Events(0x75,0x75,0x75) then --Saix's Report
-	WriteByte(Save+0x1D0D,0)
-elseif ReadByte(Save+0x1D0D) == 10 and ReadShort(Save+0x0368) == 0x05 then --3rd Visit
+	WriteByte(Save+0x1D0D,10)
+elseif ReadByte(Save+0x1D0D) == 6 and ReadShort(Save+0x0368) == 0x05 then --3rd Visit
 	WriteByte(Save+0x1D0D,11)
 elseif Place == 0x0902 and Events(0x77,0x77,0x77) then --The Photograph
 	WriteByte(Save+0x1D0D,12)
@@ -1552,15 +1552,9 @@ elseif Place == 0x0E02 and Events(Null,Null,0x08) then --Reuniting with the King
 elseif Place == 0x1502 and Events(Null,Null,0x02) then --The Password Is...
 	WriteByte(Save+0x1D0D,14)
 elseif Place == 0x0012 and Events(0x77,0x77,0x77) then --Those Who Remain
-	WriteByte(Save+0x1D0D,6)
-end
---Block Mansion Post-Story
-if ReadByte(Save+0x1CFD) > 0 and ReadByte(Save+0x1CFF) == 8 then
-	if Place == 0x0E02 then --The Old Mansion -> Mansion: Foyer
-		Spawn('Short',0x04,0x024,0x0015)
-	elseif Place == 0x1502 then --Mansion: Computer Room -> Mansion: Library
-		Spawn('Short',0x03,0x024,0x010E)
-	end
+	WriteByte(Save+0x1D0D,15)
+elseif ReadByte(Save+0x1D0D) == 10 and ReadShort(Save+0x0368) == 0x12 then --1st Visit
+	WriteByte(Save+0x1D0D,0)
 end
 --Twilight Town Post-Story Save
 if Place == 0x1A04 and ReadByte(Save+0x1CFD) > 0 and Door == 0x1C then
@@ -1643,10 +1637,11 @@ elseif ReadShort(TxtBox) == 0x768 and PrevPlace == 0x1A04 and ReadByte(Save+0x1C
 		elseif Progress == 12 or Progress == 13 or Progress == 14 then --[Before The Old Mansion Nobodies, Before Betwixt and Between Nobodies]
 			Visit = 10
 			WriteShort(Save+0x20EC,0xCB76) --Sandlot Block
+		elseif Progress == 15 then --Post 3rd Visit
+			Visit = 10
 		end
 	else
 		Visit = 8
-		WriteShort(Save+0x20FC,0x9F50) --Basement Corridor Block
 	end
 	WriteByte(Save+0x3FF5,Visit)
 	WriteByte(Save+0x23EE,1) --TT Music: The Afternoon Streets & Working Together
@@ -2250,14 +2245,6 @@ elseif Place == 0x1502 and Events(Null,Null,0x01) then --The Computer System
 elseif Place == 0x1302 and Events(0x88,0x88,0x88) then --In the Next Life
 	WriteByte(Save+0x1D0E,13)
 elseif Place == 0x1702 and Events(Null,Null,0x02) then --My Summer Vacation Is Over
-end
---Block Mansion Post-Story
-if ReadByte(Save+0x1CFE) > 0 and ReadByte(Save+0x1CFF) == 13 then
-	if Place == 0x0E02 then --The Old Mansion -> Mansion: Foyer
-		Spawn('Short',0x04,0x024,0x0015)
-	elseif Place == 0x1502 then --Mansion: Computer Room -> Mansion: Library
-		Spawn('Short',0x03,0x024,0x010E)
-	end
 end
 --Simulated Twilight Town Post-Story Save
 if Place == 0x1A04 and ReadByte(Save+0x1CFE) > 0 and Door == 0x21 then
