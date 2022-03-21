@@ -1794,7 +1794,7 @@ elseif Place == 0x0104 and Events(Null,Null,0x13) then --The Battle
 elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembrance Cleared
 end
 --Block CoR Before 1K or Without Way to the Dawn
-if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or ReadByte(Save+0x35C1) == 0 then
+if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or (ReadByte(Save+0x35C1) == 0 and false) then
 	if Place == 0x0604 then --Postern -> Cavern of Remembrance: Depths
 		Spawn('Short',0x05,0x024,0x0306)
 	end
