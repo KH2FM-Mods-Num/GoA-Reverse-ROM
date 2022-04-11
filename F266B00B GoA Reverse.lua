@@ -1686,16 +1686,6 @@ end
 if Place == 0x0802 and Events(0x6C,0x6C,0x6C) and ReadInt(Point1) == 98 then --Hit Counter Almost Reached
 	WriteInt(CutLen,1) --End Trinity Limit Early
 end
---Beam -> Garden of Assemblage
-if ReadByte(Save+0x1CFF) == 8 then
-	if Place == 0x1502 then
-		Spawn('Short',0x10,0x55A,0x04) --Warp Pointer to Garden of Assemblage
-		Spawn('Short',0x10,0x55C,0x1A)
-		Spawn('Short',0x10,0x55E,0x1C)
-		Spawn('Short',0x10,0x552,0x8F3) --TT_TT21_FAKE (Decoy flag since it should already be raised)
-		--Same as BitOr(Save+0x1CEE,0x08). Also stops the game from editing the spawn IDs.
-	end
-end
 end
 
 function HB()
