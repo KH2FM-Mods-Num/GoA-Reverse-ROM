@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: Removed Post-TT3 Beam
+--Last Update: HB5 visit skip flag bugfix & removed post-TT3 beam
 --Todo: HB reverse world progress, maybe item-based progression
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
