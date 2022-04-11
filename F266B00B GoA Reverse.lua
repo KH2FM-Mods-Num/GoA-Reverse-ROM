@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: HB5 visit skip flag bugfix & removed post-TT3 beam
+--Last Update: HB5 visit skip flag bugfix & removed post-TT3 beam & 100AW/AT start-of-visit flag adjustment
 --Todo: HB reverse world progress, maybe item-based progression
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
@@ -1865,7 +1865,7 @@ if ReadShort(Save+0x0650) == 0x0A then
 	BitOr(Save+0x1D21,0x08) --HB_hb_event_507 (Hollow Bastion -> Radiant Garden)
 	BitOr(Save+0x1D24,0x02) --HB_ROXAS_KINOKO_ON
 end--]]
---Mushroom XIII Unlocked
+--Unlock Mushroom XIII
 if Place == 0x0204 and Events(Null,0x02,0x03) then
 	WriteShort(Save+0x3E94,3) --Mushroom I
 	WriteShort(Save+0x3E98,70)
@@ -2581,19 +2581,23 @@ if Place == 0x0009 then
 	end
 elseif ReadByte(Save+0x3598) > 0 and Place == 0x1A04 then
 	local CurMAP = ReadShort(Save+0x0D90)
-	if CurMAP == 0x11 then --Post 5th Visit
+	if CurMAP == 0x11 then --Unlock 4th Visit
 		WriteShort(Save+0x0D90,0x0C) --The Hundred Acre Wood MAP
 		WriteShort(Save+0x0D94,0x09) --The Hundred Acre Wood EVT
-	elseif CurMAP == 0x0E then --Post 4th Visit
+		BitOr(Save+0x1DB4,0x01) --PO_PAGE_4
+	elseif CurMAP == 0x0E then --Unlock 3rd Visit
 		WriteShort(Save+0x0D90,0x09) --The Hundred Acre Wood MAP
 		WriteShort(Save+0x0D94,0x07) --The Hundred Acre Wood EVT
-	elseif CurMAP == 0x0B then --Post 3rd Visit
+		BitOr(Save+0x1DB3,0x01) --PO_PAGE_3
+	elseif CurMAP == 0x0B then --Unlock 2nd Visit
 		WriteShort(Save+0x0D90,0x06) --The Hundred Acre Wood MAP
 		WriteShort(Save+0x0D94,0x05) --The Hundred Acre Wood EVT
-	elseif CurMAP == 0x08 then --Post 2nd Visit
+		BitOr(Save+0x1DB2,0x01) --PO_PAGE_2
+	elseif CurMAP == 0x08 then --Unlock 1st Visit
 		WriteShort(Save+0x0D90,0x03) --The Hundred Acre Wood MAP
 		WriteShort(Save+0x0D94,0x03) --The Hundred Acre Wood EVT
-	elseif CurMAP == 0x05 then --Post 1st Visit
+		BitOr(Save+0x1DB1,0x01) --PO_PAGE_1
+	elseif CurMAP == 0x05 then --Unlock 0th Visit
 		WriteShort(Save+0x0D90,0x00) --The Hundred Acre Wood MAP
 		WriteShort(Save+0x0D94,0x00) --The Hundred Acre Wood EVT
 	end
@@ -2620,16 +2624,19 @@ if Place == 0x020B and Events(Null,Null,0x02) then --1st Visit
 	Spawn('Short',0x04,0x034,0x23A)
 elseif Place == 0x1A04 then
 	local CurEVT = ReadShort(Save+0x10A0)
-	if CurEVT == 0x0D and ReadByte(Save+0x35CF) >= 1 then --Post 5th Visit
+	if CurEVT == 0x0D and ReadByte(Save+0x35CF) >= 1 then --Unlock 4th Visit
 		WriteShort(Save+0x1094,0x0F) --Triton's Throne EVT
 		WriteShort(Save+0x10A0,0x14) --Undersea Courtyard EVT
-	elseif CurEVT == 0x0C and ReadByte(Slot1+0x1B2) >= 5 then --Post 4th Visit
+		BitOr(Save+0x1DF5,0x01) --LM_GET_ITEM_4
+	elseif CurEVT == 0x0C and ReadByte(Slot1+0x1B2) >= 5 then --Unlock 3rd Visit
 		WriteShort(Save+0x1094,0x10) --Triton's Throne EVT
 		WriteShort(Save+0x10A0,0x15) --Undersea Courtyard EVT
-	elseif CurEVT == 0x07 and ReadByte(Save+0x35CF) >= 2 then --Post 3rd Visit
+		BitOr(Save+0x1DF4,0x80) --LM_GET_ITEM_3
+	elseif CurEVT == 0x07 and ReadByte(Save+0x35CF) >= 2 then --Unlock 2nd Visit
 		WriteShort(Save+0x1094,0x11) --Triton's Throne EVT
 		WriteShort(Save+0x10A0,0x16) --Undersea Courtyard EVT
-	elseif CurEVT == 0x06 and ReadByte(Save+0x3596) >= 3 then --Post 2nd Visit
+		BitOr(Save+0x1DF4,0x40) --LM_GET_ITEM_2
+	elseif CurEVT == 0x06 and ReadByte(Save+0x3596) >= 3 then --Unlock 1st Visit
 		WriteShort(Save+0x10A0,0x00) --Undersea Courtyard EVT
 		WriteShort(Save+0x10BE,0x01) --The Shore (Night) EVT
 		BitOr(Save+0x1DF0,0x01) --LM_START
