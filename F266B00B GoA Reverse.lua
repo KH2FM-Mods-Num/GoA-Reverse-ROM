@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: Visit-Locking, moved Goofy Dead to ROM, and added world progress for Reverse, integrated ROM-based skips
+--Last Update: Removed Post-TT3 Beam
 --Todo: HB reverse world progress, maybe item-based progression
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
