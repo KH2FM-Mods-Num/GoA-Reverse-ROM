@@ -1,6 +1,6 @@
 --ROM Version
 --Last Update: HB5 visit skip flag bugfix & removed post-TT3 beam & 100AW/AT start-of-visit flag adjustment
---Todo: HB reverse world progress, maybe item-based progression
+--Todo: Maybe item-based progress flags
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
 LUAGUI_AUTH = 'SonicShadowSilver2 (Ported by Num)'
