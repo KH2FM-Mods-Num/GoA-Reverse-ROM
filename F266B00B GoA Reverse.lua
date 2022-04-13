@@ -1563,6 +1563,15 @@ elseif Place == 0x0012 and Events(0x77,0x77,0x77) then --Those Who Remain
 elseif ReadByte(Save+0x1D0D) == 10 and ReadShort(Save+0x0368) == 0x12 then --1st Visit
 	WriteByte(Save+0x1D0D,0)
 end
+--Block 1st Visit Areas
+if ReadByte(Save+0x1D0D) == 15 then
+	if Place == 0x0E02 then --The Old Mansion -> Mansion: Foyer
+		Spawn('Short',0x04,0x024,0x010E)
+	elseif Place == 0x0902 then --Central Station -> The Tower
+		Spawn('Short',0x06,0x024,0x0309)
+		Spawn('Short',0x07,0x024,0x0409)
+	end
+end
 --Twilight Town Post-Story Save
 if Place == 0x1A04 and ReadByte(Save+0x1CFD) > 0 and Door == 0x1C then
 	if PrevPlace == 0x0202 then --The Usual Spot
@@ -1795,7 +1804,7 @@ elseif Place == 0x0104 and Events(Null,Null,0x13) then --The Battle
 elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembrance Cleared
 end
 --Block CoR Before 1K or Without Way to the Dawn
-if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or (ReadByte(Save+0x35C1) == 0 and false) then
+if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or (ReadByte(Save+0x3649) == 0 and false) then
 	if Place == 0x0604 then --Postern -> Cavern of Remembrance: Depths
 		Spawn('Short',0x05,0x024,0x0306)
 	end
