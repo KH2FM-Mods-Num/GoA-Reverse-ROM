@@ -768,7 +768,7 @@ elseif Place == 0x0001 and not Events(0x39,0x39,0x39) then --Post Xemnas II Cuts
 	WriteInt(Save+0x000C,0x321A04) --Post-Game Save at Garden of Assemblage
 end
 --The World that Never Was Post-Story Save
-if Place == 0x1A04 and ReadByte(Save+0x1EDE) > 0 then
+if ReadByte(Save+0x1EDE) > 0 then
 	if PrevPlace == 0x0112 and not Events(0x40,0x40,0x40) then --Alley to Between (except TT2)
 		WriteByte(Save+0x1EDE,1)
 	elseif PrevPlace == 0x0412 then --The Brink of Despair
@@ -1527,7 +1527,7 @@ elseif ReadByte(Save+0x1D0D) == 10 and ReadShort(Save+0x0368) == 0x12 then --1st
 	WriteByte(Save+0x1D0D,0)
 end
 --Block 1st Visit Areas
-if ReadByte(Save+0x1D0D) == 15 then
+if ReadByte(Save+0x1D0D) == 15 and ReadByte(Save+0x1CFF) == 8 then
 	if Place == 0x0E02 then --The Old Mansion -> Mansion: Foyer
 		Spawn('Short',0x04,0x024,0x010E)
 	elseif Place == 0x0902 then --Central Station -> The Tower
