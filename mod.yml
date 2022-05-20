@@ -1,6 +1,11 @@
 title: GoA Reverse ROM
 description: Do the visits in reverse.
 assets:
+#Lua Script
+- name: scripts/GoA Reverse.lua
+  method: copy
+  source:
+  - name: F266B00B GoA Reverse.lua
 #Various Stuff
 - name: 00battle.bin
   method: binarc
