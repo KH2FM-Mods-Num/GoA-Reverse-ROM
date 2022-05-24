@@ -182,6 +182,21 @@ Items:
   Picture: 19
   Icon1: 0
   Icon2: 26
+- Id: 462 #DUMMY 15 (Unknown Disk)
+  Type: Recipe
+  Flag0: 0
+  Flag1: 0
+  Rank: C
+  StatEntry: 0
+  Name: 0xBD1A
+  Description: 0xBD1B
+  ShopBuy: 0
+  ShopSell: 0
+  Command: 0
+  Slot: 223
+  Picture: 240
+  Icon1: 0
+  Icon2: 2
 - Id: 463 #DUMMY 16 (Item)
   Type: Recipe
   Flag0: 0
@@ -2899,9 +2914,9 @@ Stats:
   GeneralResistance: 100
   Unknown: 0
 - Id: 116 #FAKE Stats
-  Ability: 0x08A
-  Attack: 3
-  Magic: 1
+  Ability: 0x19E
+  Attack: 1
+  Magic: 3
   Defense: 0
   AbilityPoints: 0
   Unknown08: 100
