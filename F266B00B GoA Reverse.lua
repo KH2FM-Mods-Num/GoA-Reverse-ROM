@@ -320,14 +320,14 @@ if Place == 0x000F then
 	end
 end
 --Visits Unlock
-if false then
+if true then
 	if ReadByte(Save+0x3649) > 0 then --Ice Cream
 		BitOr(Save+0x1C92,0x08) --ZZ_TT_CHECK_1_GOA
 	end
 	if ReadByte(Save+0x364A) > 0 then --Picture
 		BitOr(Save+0x1C92,0x10) --ZZ_TT_CHECK_2_GOA
 	end
-	if ReadByte(Save+0x3643) > 0 then --Membership Card
+	if ReadByte(Save+0x3643) > 0 or true then --Membership Card (Unused since actual check is before CoR)
 		BitOr(Save+0x1C92,0x20) --ZZ_HB_CHECK_1_GOA
 	end
 	if ReadByte(Save+0x35C1) > 0 or true then --Way to the Dawn (Currently unused)
@@ -1762,7 +1762,7 @@ elseif Place == 0x0104 and Events(Null,Null,0x13) then --The Battle
 elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembrance Cleared
 end
 --Block CoR Before 1K or Without Way to the Dawn
-if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or (ReadByte(Save+0x3649) == 0 and false) then
+if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or ReadByte(Save+0x3643) == 0 then
 	if Place == 0x0604 then --Postern -> Cavern of Remembrance: Depths
 		Spawn('Short',0x05,0x024,0x0306)
 	end
