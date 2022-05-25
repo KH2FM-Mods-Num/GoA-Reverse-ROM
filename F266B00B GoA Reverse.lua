@@ -1625,7 +1625,7 @@ elseif ReadByte(Save+0x1CFF) == 8 then --Save Spawn ID within TT
 end
 --Save Points <-> World Points
 if ReadByte(Save+0x1CFF) == 8 then
-	if ReadByte(Save+0x1D0D) > 10 and ReadByte(Save+0x1D0D) < 15 then --3rd Visit
+	if ReadByte(Save+0x1D0D) > 10 and ReadByte(Save+0x1D0D) < 15 and ReadByte(Save+0x3640) == 0 then --3rd Visit (no Poster)
 		if Place == 0x0202 then --The Usual Spot
 			Spawn('Short',0x04,0x034,0x23A)
 		elseif Place == 0x0902 then --Central Station
