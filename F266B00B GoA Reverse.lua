@@ -2479,10 +2479,11 @@ if Place == 0x0D04 and Events(0x65,0x65,0x65) and PrevPlace == 0x0209 then --Los
 	WriteArray(Save+0x0646,ReadArray(Save+0x066A,6)) --Load Borough Spawn ID
 	WriteArray(Save+0x065E,ReadArray(Save+0x0664,6)) --Load Merlin's House Spawn ID
 end
---[[Skip 0th Visit
-if ReadShort(Save+0x0D90) == 0x00 then
+--Skip 0th Visit
+if ReadShort(Save+0x0D90) == 0x00 and ReadByte(Save+0x1DB6)&0x08 == 0x00 then
 	WriteShort(Save+0x0D90,0x02) --The Hundred Acre Wood MAP (Pooh's House Only)
 	WriteShort(Save+0x0DA0,0x16) --Pooh's House EVT
+	BitOr(Save+0x1DB6,0x08) --PO_SCENARIO_0_SKIP_GOA
 	BitOr(Save+0x1D16,0x02) --HB_START_pooh
 	BitOr(Save+0x1D16,0x04) --HB_901_END
 	BitOr(Save+0x1D16,0x08) --HB_902_END
