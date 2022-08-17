@@ -2479,11 +2479,10 @@ if Place == 0x0D04 and Events(0x65,0x65,0x65) and PrevPlace == 0x0209 then --Los
 	WriteArray(Save+0x0646,ReadArray(Save+0x066A,6)) --Load Borough Spawn ID
 	WriteArray(Save+0x065E,ReadArray(Save+0x0664,6)) --Load Merlin's House Spawn ID
 end
---Skip 0th Visit
-if ReadShort(Save+0x0D90) == 0x00 and ReadByte(Save+0x1DB6)&0x08 == 0x00 then
+--[[Skip 0th Visit
+if ReadShort(Save+0x0D90) == 0x00 then
 	WriteShort(Save+0x0D90,0x02) --The Hundred Acre Wood MAP (Pooh's House Only)
 	WriteShort(Save+0x0DA0,0x16) --Pooh's House EVT
-	BitOr(Save+0x1DB6,0x08) --PO_SCENARIO_0_SKIP_GOA
 	BitOr(Save+0x1D16,0x02) --HB_START_pooh
 	BitOr(Save+0x1D16,0x04) --HB_901_END
 	BitOr(Save+0x1D16,0x08) --HB_902_END
@@ -2547,8 +2546,31 @@ elseif ReadByte(Save+0x3598) > 0 and Place == 0x1A04 then
 		WriteShort(Save+0x0D94,0x03) --The Hundred Acre Wood EVT
 		BitOr(Save+0x1DB1,0x01) --PO_PAGE_1
 	elseif CurMAP == 0x05 then --Unlock 0th Visit
-		WriteShort(Save+0x0D90,0x00) --The Hundred Acre Wood MAP
-		WriteShort(Save+0x0D94,0x00) --The Hundred Acre Wood EVT
+		if ReadByte(Save+0x1DB6)&0x08 == 0x08 then --Skip 0th Visit
+			WriteShort(Save+0x0D90,0x02) --The Hundred Acre Wood MAP (Pooh's House Only)
+			WriteShort(Save+0x0DA0,0x16) --Pooh's House EVT
+			BitOr(Save+0x1DB6,0x08) --PO_SCENARIO_0_SKIP_GOA
+			BitOr(Save+0x1D16,0x02) --HB_START_pooh
+			BitOr(Save+0x1D16,0x04) --HB_901_END
+			BitOr(Save+0x1D16,0x08) --HB_902_END
+			BitOr(Save+0x1D16,0x20) --HB_903_END
+			BitOr(Save+0x1DB0,0x01) --PO_START
+			BitOr(Save+0x1DB0,0x02) --PO_001_END
+			BitOr(Save+0x1DB0,0x04) --PO_003_END
+			BitOr(Save+0x1DB0,0x08) --PO_004_END
+			BitOr(Save+0x1D16,0x10) --HB_po_004_END
+			BitOr(Save+0x1D16,0x40) --HB_904_END
+			BitOr(Save+0x1D17,0x08) --HB_905_END
+			BitOr(Save+0x1D18,0x08) --HB_hb09_ms901
+			BitOr(Save+0x1DB0,0x10) --PO_HB_BATTLE_END
+			BitOr(Save+0x1DB0,0x20) --PO_005_END
+			BitOr(Save+0x1DB0,0x40) --PO_007_END
+			BitOr(Save+0x1DB0,0x80) --PO_008_END
+			BitOr(Save+0x1D17,0x02) --HB_po_008_END
+			BitOr(Save+0x1D17,0x08) --HB_907_END
+		else
+			WriteShort(Save+0x0D90,0x00) --The Hundred Acre Wood MAP
+		end
 	end
 end
 --Faster Minigames
