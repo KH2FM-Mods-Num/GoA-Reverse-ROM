@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: Growth ability bugfix, TT2 & TT3 back to Photo & Ice Cream
+--Last Update: Unknown Disk removal prevention; show all items in shop & initially-equipped growh abilities compatibility; invincible initial dice, inaccessible data Axel, & a bunch of 100AW bugfixes
 --Todo: Maybe item-based progress flags
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
@@ -7,7 +7,7 @@ LUAGUI_AUTH = 'SonicShadowSilver2 (Ported by Num)'
 LUAGUI_DESC = 'A GoA build for use with the Randomizer. Requires ROM patching.'
 
 function _OnInit()
-local VersionNum = 'GoA Version 1.53.2'
+local VersionNum = 'GoA Version 1.53.3'
 if (GAME_ID == 0xF266B00B or GAME_ID == 0xFAF99301) and ENGINE_TYPE == "ENGINE" then --PCSX2
 	if ENGINE_VERSION < 3.0 then
 		print('LuaEngine is Outdated. Things might not work properly.')
@@ -2502,6 +2502,18 @@ if ReadShort(Save+0x0D90) == 0x00 then
 	BitOr(Save+0x1D17,0x02) --HB_po_008_END
 	BitOr(Save+0x1D17,0x08) --HB_907_END
 end--]]
+--Prevent Starting Torn Pages Removal (from Start of 5th Visit Cutscene)
+if Place == 0x2002 and Events(0x01,Null,0x01) then
+	StartingPages = ReadByte(Save+0x3598)
+	if StartingPages == 0 then
+		StartingPages = Null
+	end
+elseif Place == 0x1A04 and PrevPlace == 0x2002 and StartingPages then
+	if ReadByte(Save+0x3598) < StartingPages then
+		WriteByte(Save+0x3598,StartingPages)
+		StartingPages = Null
+	end
+end
 --Block Previous Visit Areas & Reverse Visit Order
 if Place == 0x0009 then
 	local CurMAP = ReadShort(Save+0x0D90)
