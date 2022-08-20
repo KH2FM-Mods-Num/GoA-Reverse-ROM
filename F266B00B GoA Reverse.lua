@@ -2506,12 +2506,12 @@ end--]]
 if Place == 0x2002 and Events(0x01,Null,0x01) then
 	StartingPages = ReadByte(Save+0x3598)
 	if StartingPages == 0 then
-		StartingPages = Null
+		StartingPages = nil
 	end
 elseif Place == 0x1A04 and PrevPlace == 0x2002 and StartingPages then
 	if ReadByte(Save+0x3598) < StartingPages then
 		WriteByte(Save+0x3598,StartingPages)
-		StartingPages = Null
+		StartingPages = nil
 	end
 end
 --Block Previous Visit Areas & Reverse Visit Order
