@@ -1270,12 +1270,7 @@ assets:
   - name: hb26_pcraw.map
 #GoA Picture in SP Terminal
 - name: file/jp/tr_tm.2ld
-  multi:
-  - name: file/us/tr_tm.2ld
-  - name: file/fr/tr_tm.2ld
-  - name: file/gr/tr_tm.2ld
-  - name: file/it/tr_tm.2ld
-  - name: file/sp/tr_tm.2ld
+  platform: ps2
   method: binarc
   source:
   - name: tr_t
@@ -1284,30 +1279,35 @@ assets:
     source:
     - name: tr_tm_2.png
       index: 2
-- name: remastered/file/us/tr_tm.2ld/US_tr_tm_2ld0.png #Include unchanged assets for fast-patch compatibility
+- name: remastered/file/us/tr_tm.2ld/US_tr_tm_2ld0.png
   multi:
   - name: remastered/file/fr/tr_tm.2ld/FR_tr_tm_2ld0.png
   - name: remastered/file/gr/tr_tm.2ld/GR_tr_tm_2ld0.png
   - name: remastered/file/it/tr_tm.2ld/IT_tr_tm_2ld0.png
   - name: remastered/file/sp/tr_tm.2ld/SP_tr_tm_2ld0.png
+  platform: pc
   method: copy
   source:
   - name: remastered/tr_tm.2ld/tr_tm_2ld0.png
+    type: internal
 - name: remastered/file/us/tr_tm.2ld/US_tr_tm_2ld1.png
   multi:
   - name: remastered/file/fr/tr_tm.2ld/FR_tr_tm_2ld1.png
   - name: remastered/file/gr/tr_tm.2ld/GR_tr_tm_2ld1.png
   - name: remastered/file/it/tr_tm.2ld/IT_tr_tm_2ld1.png
   - name: remastered/file/sp/tr_tm.2ld/SP_tr_tm_2ld1.png
+  platform: pc
   method: copy
   source:
   - name: remastered/tr_tm.2ld/tr_tm_2ld1.png
+    type: internal
 - name: remastered/file/us/tr_tm.2ld/US_tr_tm_2ld2.png
   multi:
   - name: remastered/file/fr/tr_tm.2ld/FR_tr_tm_2ld2.png
   - name: remastered/file/gr/tr_tm.2ld/GR_tr_tm_2ld2.png
   - name: remastered/file/it/tr_tm.2ld/IT_tr_tm_2ld2.png
   - name: remastered/file/sp/tr_tm.2ld/SP_tr_tm_2ld2.png
+  platform: pc
   method: copy
   source:
   - name: remastered/tr_tm.2ld/tr_tm_2ld2.png
@@ -1447,18 +1447,18 @@ assets:
   source:
   - name: remastered/fontimage_bar2.png
 #Add Missing PC BGM
-#- name: bgm/music130.win32.scd #Neverland Sky
-#  method: copy
-#  source:
-#  - name: bgm/Neverland Sky.scd
-#- name: bgm/music140.win32.scd #Under the Sea (KH I)
-#  method: copy
-#  source:
-#  - name: bgm/Under the Sea (KH I).scd
-#- name: bgm/music147.win32.scd #An Adventure in Atlantica
-#  method: copy
-#  source:
-#  - name: bgm/An Adventure in Atlantica.scd
+- name: bgm/music130.win32.scd #Neverland Sky
+  method: copy
+  source:
+  - name: bgm/Neverland Sky.scd
+- name: bgm/music140.win32.scd #Under the Sea (KH I)
+  method: copy
+  source:
+  - name: bgm/Under the Sea (KH I).scd
+- name: bgm/music147.win32.scd #An Adventure in Atlantica
+  method: copy
+  source:
+  - name: bgm/An Adventure in Atlantica.scd
 - name: bgm/music150.win32.scd #Squirming Evil
   method: copy
   source:
