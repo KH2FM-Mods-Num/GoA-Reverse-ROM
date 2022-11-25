@@ -822,10 +822,6 @@ end
 if Place == 0x1412 and ReadInt(Slot3) == 1 then
 	WriteInt(Slot3,0)
 end
---[[Skip Dragon Xemnas
-if Place == 0x1D12 then
-	Spawn('Short',0x03,0x038,0x5C)
-end--]]
 end
 
 function LoD()
