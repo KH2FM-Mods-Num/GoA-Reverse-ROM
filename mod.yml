@@ -1400,6 +1400,12 @@ assets:
     method: copy
     source:
     - name: obj/F_HB130.bin
+#Roxas-exclusive Skateboard MSET for Mail Delivery
+- name: obj/F_TT010_ROXAS.mset
+  method: copy
+  source:
+  - name: obj/F_TT010.mset
+    type: internal
 #Remove Bulky Vendors 2nd Visit Requirements (trap_progress_is_second -> trap_area_battle_set)
 - name: obj/F_AL050.mdlx
   method: binarc
@@ -4651,7 +4657,7 @@ assets:
     method: areadatascript
     source:
     - name: ard/tt02/evt.script
-- name: ard/tt06.ard #Market Street: Station Heights (No Jobs Post-TT1 & Short Day 2)
+- name: ard/tt06.ard #Market Street: Station Heights (No Jobs Post-TT1 & Short Day 2 & Revert on Mail Delivery)
   multi:
   - name: ard/jp/tt06.ard
   - name: ard/us/tt06.ard
@@ -4666,6 +4672,11 @@ assets:
     method: areadatascript
     source:
     - name: ard/tt06/map.script
+  - name: btl
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/tt06/btl.script
   - name: evt
     type: areadatascript
     method: areadatascript
