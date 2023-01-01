@@ -405,9 +405,9 @@ if true then
 		if Visit == 1 or Visit == 2 or Visit == 3 then
 			Bitmask = 0x00200
 		elseif Visit == 4 then
-			Bitmask = 0x00080
-		elseif Visit == 5 then
 			Bitmask = 0x00010
+		elseif Visit == 5 then
+			Bitmask = 0x00080
 		end
 		--0x00020 actual HB2 & HB3
 		--0x00040 HB4 pre-SP1
