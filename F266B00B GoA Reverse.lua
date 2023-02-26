@@ -769,6 +769,10 @@ else --Revert costume changes
 	WriteString(Obj0+0x40F0,'H_ZZ020\0')
 	WriteString(Obj0+0x4150,'H_ZZ030\0')
 end
+--Windows of Time Map 2 = Final Form
+if ReadByte(Save+0x36C2)&0x02 == 0x02 then
+	BitOr(Save+0x36C0,0x10)
+end
 --[[Enable Anti Form Forcing
 if ReadByte(Save+0x3524) == 6 then --In Anti Form
 	BitOr(Save+0x36C0,0x20) --Unlocks Anti Form
