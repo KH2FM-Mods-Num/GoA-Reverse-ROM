@@ -1674,10 +1674,6 @@ if ReadByte(Save+0x1CFF) == 8 then
 		end
 	end
 end
---Station Plaza Nobodies with Trinity Limit End Softlock Fix
-if Place == 0x0802 and Events(0x6C,0x6C,0x6C) and ReadInt(Point1) == 98 then --Hit Counter Almost Reached
-	WriteInt(CutLen,1) --End Trinity Limit Early
-end
 end
 
 function HB()
