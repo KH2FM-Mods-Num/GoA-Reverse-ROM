@@ -1,5 +1,5 @@
 --ROM Version
---Last Update: JP shop assembly code & battle level rework
+--Last Update: BAR() function implementation
 --Todo: Maybe item-based progress flags
 
 LUAGUI_NAME = 'GoA ROM Randomizer Build'
@@ -801,7 +801,7 @@ if Place == 0x1A04 then
 		WarpRoom = 0x12
 	end
 	WriteShort(BAR(ARD,0x0A,GoAOffset+0x010),WarpRoom)
-nd
+end
 --World Progress
 if Place == 0x0412 and Events(Null,Null,0x02) then --The Path to the Castle
 	WriteByte(Save+0x1EDF,1)
