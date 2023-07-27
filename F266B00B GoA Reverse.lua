@@ -100,9 +100,9 @@ Slot12 = Slot11 - NextSlot
 Point2 = Point1 + NxtPoint
 Point3 = Point2 + NxtPoint
 Gauge2 = Gauge1 + NxtGauge
-Gauge3 = Gauge2 + NxtGauge
+Gauge3 = Gauge2 + NxtGauge--]]
 Menu2  = Menu1 + NextMenu
-Menu3  = Menu2 + NextMenu--]]
+--Menu3  = Menu2 + NextMenu
 end
 
 function Warp(W,R,D,M,B,E) --Warp into the appropriate World, Room, Door, Map, Btl, Evt
@@ -137,13 +137,7 @@ elseif Offset >= ReadInt(Subpoint+4,OnPC) then --Offset exceed subfile length
 	return
 end
 --Get address
-if not OnPC then
-	Address = ReadInt(Subpoint) + Offset
-else
-	local x = File&0xFFFFFF000000 --Calculations are wrong if done in one step for some reason
-	local y = ReadInt(Subpoint,true)&0xFFFFFF
-	Address = x + y + Offset
-end
+Address = File + (ReadInt(Subpoint,OnPC) - ReadInt(File+8,OnPC)) + Offset
 return Address
 end
 
@@ -190,18 +184,23 @@ if true then --Define current values for common addresses
 	Btl    = ReadShort(Now+0x06)
 	Evt    = ReadShort(Now+0x08)
 	PrevPlace = ReadShort(Now+0x30)
+	if Place == 0xFFFF or not MSN then
+		if not OnPC then
+			Obj0 = ReadInt(Obj0Pointer)
+			Sys3 = ReadInt(Sys3Pointer)
+			Btl0 = ReadInt(Btl0Pointer)
+			MSN = 0x04FA440
+		else
+			Obj0 = ReadLong(Obj0Pointer)
+			Sys3 = ReadLong(Sys3Pointer)
+			Btl0 = ReadLong(Btl0Pointer)
+			MSN = 0x0BF08C0 - 0x56450E
+		end
+	end
 	if not OnPC then
-		Obj0 = ReadInt(Obj0Pointer)
-		Sys3 = ReadInt(Sys3Pointer)
-		Btl0 = ReadInt(Btl0Pointer)
 		ARD = ReadInt(ARDPointer)
-		MSN = 0x04FA440
 	else
-		Obj0 = ReadLong(Obj0Pointer)
-		Sys3 = ReadLong(Sys3Pointer)
-		Btl0 = ReadLong(Btl0Pointer)
 		ARD = ReadLong(ARDPointer)
-		MSN = 0x0BF08C0 - 0x56450E
 	end
 end
 NewGame()
@@ -491,7 +490,7 @@ if true then
 	WriteInt(Save+0x3724,Bitmask)
 end
 --Fix Genie Crash
-if true then --No Valor, Wisdom, Master, or Final
+if ReadByte(Save+0x36C4)&0x10 == 0x10 then --If Lamp Charm is obtained
 	local CurSubmenu
 	if not OnPC then
 		CurSubmenu = ReadInt(Menu2)
@@ -567,7 +566,7 @@ for Slot = 0,68 do
 	end
 end
 --Remove Growth Abilities
-if true then
+if ReadByte(BAR(Btl0,0x10,0x41),0,OnPC) ~= 0 then
 	for i = 0,34 do
 		WriteByte(BAR(Btl0,0x10,0x41+0x8*i),0,OnPC) --Remove Innate Growth Abilities
 	end
@@ -683,12 +682,12 @@ if true then
 		elseif Ability == 0x0A8 then --Donald Cure
 			WriteShort(Save+0x26F6,0x80A8)
 			WriteByte(BAR(Sys3,0x6,0x16D7),0,OnPC)
-		else
+		elseif ReadShort(Save+0x26F6) ~= 0 then
 			WriteShort(Save+0x26F6,0) --Remove Ability Slot 80
-			WriteByte(BAR(Sys3,0x6,0x168F),2) --Restore Original AP Costs
-			WriteByte(BAR(Sys3,0x6,0x16A7),2)
-			WriteByte(BAR(Sys3,0x6,0x16BF),2)
-			WriteByte(BAR(Sys3,0x6,0x16D7),3)
+			WriteByte(BAR(Sys3,0x6,0x168F),2,OnPC) --Restore Original AP Costs
+			WriteByte(BAR(Sys3,0x6,0x16A7),2,OnPC)
+			WriteByte(BAR(Sys3,0x6,0x16BF),2,OnPC)
+			WriteByte(BAR(Sys3,0x6,0x16D7),3,OnPC)
 		end
 	end
 end
@@ -729,7 +728,7 @@ if true then
 		elseif Ability == 0x1A9 then --Goofy Turbo
 			WriteShort(Save+0x280A,0x81A9)
 			WriteByte(BAR(Sys3,0x6,0x171F),0,OnPC)
-		else
+		elseif ReadShort(Save+0x280A) ~= 0 then
 			WriteShort(Save+0x280A,0) --Remove Ability Slot 80
 			WriteByte(BAR(Sys3,0x6,0x16EF),2,OnPC) --Restore Original AP Costs
 			WriteByte(BAR(Sys3,0x6,0x1707),2,OnPC)
@@ -747,20 +746,20 @@ elseif ReadLong(0x2F9142-0x56454E) == 0x43B70F0D74D68541 then --JP
 end
 --Alternate Party Models (adding new UCM using MEMT causes problems when shopping)
 if World == 0x0C and Place ~= 0x070C then --Mage & Knight (KH I)
-	WriteString(Obj0+0x16F0,'P_EX020_DC\0')
-	WriteString(Obj0+0x1750,'P_EX030_DC\0')
-	WriteString(Obj0+0x3250,'P_EX020_DC_ANGRY_NPC\0')
-	WriteString(Obj0+0x40F0,'H_ZZ020_DC\0')
-	WriteString(Obj0+0x4150,'H_ZZ030_DC\0')
+	WriteString(Obj0+0x16F0,'P_EX020_DC\0',OnPC)
+	WriteString(Obj0+0x1750,'P_EX030_DC\0',OnPC)
+	WriteString(Obj0+0x3250,'P_EX020_DC_ANGRY_NPC\0',OnPC)
+	WriteString(Obj0+0x40F0,'H_ZZ020_DC\0',OnPC)
+	WriteString(Obj0+0x4150,'H_ZZ030_DC\0',OnPC)
 elseif Place == 0x2004 or Place == 0x2104 or Place == 0x2204 or Place == 0x2604 then --Casual (CoM)
-	WriteString(Obj0+0x16F0,'P_EX020_CM\0')
-	WriteString(Obj0+0x1750,'P_EX030_CM\0')
-else --Revert costume changes
-	WriteString(Obj0+0x16F0,'P_EX020\0')
-	WriteString(Obj0+0x1750,'P_EX030\0')
-	WriteString(Obj0+0x3250,'P_EX020_ANGRY_NPC\0')
-	WriteString(Obj0+0x40F0,'H_ZZ020\0')
-	WriteString(Obj0+0x4150,'H_ZZ030\0')
+	WriteString(Obj0+0x16F0,'P_EX020_CM\0',OnPC)
+	WriteString(Obj0+0x1750,'P_EX030_CM\0',OnPC)
+elseif ReadString(Obj0+0x3250,13,OnPC) ~= 'P_EX020_ANGRY' then --Revert costume changes
+	WriteString(Obj0+0x16F0,'P_EX020\0',OnPC)
+	WriteString(Obj0+0x1750,'P_EX030\0',OnPC)
+	WriteString(Obj0+0x3250,'P_EX020_ANGRY_NPC\0',OnPC)
+	WriteString(Obj0+0x40F0,'H_ZZ020\0',OnPC)
+	WriteString(Obj0+0x4150,'H_ZZ030\0',OnPC)
 end
 --[[Enable Anti Form Forcing
 if ReadByte(Save+0x3524) == 6 then --In Anti Form
@@ -903,9 +902,9 @@ end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1D9F) > 4 then
 	if Place == 0x0108 then --Checkpoint -> Encampment
-		Spawn('Short',0x03,0x024,0x0001)
+		WriteShort(BAR(ARD,0x03,0x024),0x0001,OnPC)
 	elseif Place == 0x0C08 then --Village (Destroyed) -> Village Cave
-		Spawn('Short',0x04,0x024,0x010C)
+		WriteShort(BAR(ARD,0x04,0x024),0x010C,OnPC)
 	end
 end
 --The Land of Dragons Post-Story Save
@@ -996,15 +995,15 @@ end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1D3F) > 7 then
 	if Place == 0x0005 then --Entrance Hall -> The East Wing, Courtyard
-		Spawn('Short',0x05,0x024,0x0200)
+		WriteShort(BAR(ARD,0x05,0x024),0x0200,OnPC)
 		if ReadShort(Save+0x07B8) ~= 0x0A then
-			Spawn('Short',0x03,0x024,0x0000)
+			WriteShort(BAR(ARD,0x03,0x024),0x0000,OnPC)
 		else --Unblock before Xaldin
-			Spawn('Short',0x03,0x024,0x0006)
+			WriteShort(BAR(ARD,0x03,0x024),0x0006,OnPC)
 		end
 	elseif Place == 0x0805 then --The West Hall -> Undercroft, Secret Passage
-		Spawn('Short',0x04,0x024,0x0108)
-		Spawn('Short',0x06,0x024,0x0308)
+		WriteShort(BAR(ARD,0x04,0x024),0x0108,OnPC)
+		WriteShort(BAR(ARD,0x06,0x024),0x0308,OnPC)
 	end
 end
 --Beast's Castle Post-Story Save
@@ -1099,7 +1098,7 @@ end
 --Block 1st Visit Areas
 if ReadShort(Save+0x1E5F) > 7 then
 	if Place == 0x000E then --Halloween Town Square -> Dr. Finklestein's Lab
-		Spawn('Short',0x04,0x024,0x0100)
+		WriteShort(BAR(ARD,0x04,0x024),0x0100,OnPC)
 	end
 end
 --Halloween Town Post-Story Save
@@ -1193,7 +1192,7 @@ end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1D7F) > 6 then
 	if Place == 0x0607 then --Palace Walls -> The Cave of Wonders: Entrance
-		Spawn('Short',0x04,0x024,0x0106)
+		WriteShort(BAR(ARD,0x04,0x024),0x0106,OnPC)
 	end
 end
 --Agrabah Post-Story Save
@@ -1292,7 +1291,7 @@ end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1D6F) > 8 then
 	if Place == 0x0306 then --Underworld Entrance -> Underworld Caverns: Entrance
-		Spawn('Short',0x05,0x024,0x0203)
+		WriteShort(BAR(ARD,0x05,0x024),0x0203,OnPC)
 	end
 end
 --Olympus Coliseum Post-Story Save
@@ -1427,7 +1426,7 @@ end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1DDF) > 7 then
 	if Place == 0x050A then --Elephant Graveyard -> Gorge
-		Spawn('Short',0x03,0x024,0x0005)
+		WriteShort(BAR(ARD,0x03,0x024),0x0005,OnPC)
 	end
 end
 --Pride Lands Post-Story Save
@@ -1542,10 +1541,10 @@ end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1D0D) == 15 and ReadByte(Save+0x1CFF) == 8 then
 	if Place == 0x0E02 then --The Old Mansion -> Mansion: Foyer
-		Spawn('Short',0x04,0x024,0x010E)
+		WriteShort(BAR(ARD,0x04,0x024),0x010E,OnPC)
 	elseif Place == 0x0902 then --Central Station -> The Tower
-		Spawn('Short',0x06,0x024,0x0309)
-		Spawn('Short',0x07,0x024,0x0409)
+		WriteShort(BAR(ARD,0x06,0x024),0x0309,OnPC)
+		WriteShort(BAR(ARD,0x07,0x024),0x0409,OnPC)
 	end
 end
 --Twilight Town Post-Story Save
@@ -1778,7 +1777,7 @@ end
 --Block CoR Before 1K or Without Way to the Dawn
 if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or ReadByte(Save+0x3643) == 0 then
 	if Place == 0x0604 then --Postern -> Cavern of Remembrance: Depths
-		Spawn('Short',0x05,0x024,0x0306)
+		WriteShort(BAR(ARD,0x05,0x024),0x0306,OnPC)
 	end
 end
 --Hollow Bastion Post-Story Save
@@ -1954,11 +1953,11 @@ end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1E9F) > 5 then
 	if Place == 0x0010 then --Rampart -> Town
-		Spawn('Short',0x04,0x024,0x0100)
+		WriteShort(BAR(ARD,0x04,0x024),0x0100,OnPC)
 	elseif Place == 0x0110 then --Harbor -> Town
-		Spawn('Short',0x04,0x024,0x0101)
+		WriteShort(BAR(ARD,0x04,0x024),0x0101,OnPC)
 	elseif Place == 0x0910 then --Isla de Muerta: Cave Mouth -> Isla de Muerta: Powder Store
-		Spawn('Short',0x04,0x024,0x0109)
+		WriteShort(BAR(ARD,0x04,0x024),0x0109,OnPC)
 	end
 end
 --Port Royal Post-Story Save
@@ -2032,7 +2031,7 @@ end
 --Block 1st Visit Areas
 if ReadByte(Save+0x1E1F) > 2 then
 	if Place == 0x040C then --Hall of the Cornerstone (Dark) -> Audience Chamber
-		Spawn('Short',0x03,0x024,0x0004)
+		WriteShort(BAR(ARD,0x03,0x024),0x0004,OnPC)
 	end
 end
 --Disney Castle Post-Story Save
@@ -2331,7 +2330,7 @@ if ReadByte(Save+0x1CFF) == 13 then
 end
 --Simulated Twilight Town Adjustments
 if ReadByte(Save+0x1CFF) == 13 then --STT Removals
-	if ReadByte(BAR(Sys3,0x02,0x3345),OnPC) == 0xB7 then --Better STT disabled (value is 0x93 when enabled, address is Twilight Thorn RC flag)
+	if ReadByte(BAR(Sys3,0x2,0x3345),OnPC) == 0xB7 then --Better STT disabled (value is 0x93 when enabled, address is Twilight Thorn RC flag)
 		if ReadShort(Save+0x25D2)&0x8000 == 0x8000 then --Dodge Roll
 			BitNot(Save+0x25D3,0x80)
 			BitOr(Save+0x1CF1,0x01)
@@ -2357,9 +2356,9 @@ if ReadByte(Save+0x1CFF) == 13 then --STT Removals
 		WriteShort(BAR(Sys3,0x2,0x6DBA),0x00,OnPC) --Trinity (Solo)
 	else --Better STT enabled
 		if Events(0x5B,0x5B,0x5B) or Events(0xC0,0xC0,0xC0) then --Mail Delivery softlock fix
-			WriteString(Obj0+0x15030,'F_TT010_ROXAS.mset\0')
+			WriteString(Obj0+0x15030,'F_TT010_ROXAS.mset\0',OnPC)
 		else --Let Limit Form use skateboard
-			WriteString(Obj0+0x15030,'F_TT010.mset\0')
+			WriteString(Obj0+0x15030,'F_TT010.mset\0',OnPC)
 		end
 	end
 	local Equip = ReadShort(Save+0x24F0) --Currently equipped Keyblade
@@ -2405,7 +2404,7 @@ if ReadByte(Save+0x1CFF) == 13 then --STT Removals
 			WriteShort(Save+0x24F0,Store) --Change Equipped Keyblade
 		end
 	end
-else --Restore Outside STT
+elseif ReadShort(Save+0x1CF9) ~= 0 then --Restore Outside STT
 	if ReadByte(Save+0x1CF1)&0x01 == 0x01 then --Dodge Roll
 		BitOr(Save+0x25D3,0x80)
 		BitNot(Save+0x1CF1,0x01)
@@ -2492,25 +2491,25 @@ if Place == 0x0009 then
 	local CurMAP = ReadShort(Save+0x0D90)
 	if CurMAP == 0x12 then --0th Visit
 	elseif CurMAP > 0x0F then --5th Visit
-		Spawn('Short',0x07,0x024,0x0400) --The Spooky Cave
-		Spawn('Short',0x06,0x024,0x0300) --Kanga's House
-		Spawn('Short',0x04,0x024,0x0100) --Rabbit's House
-		Spawn('Short',0x05,0x024,0x0200) --Piglet's House
-		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+		WriteShort(BAR(ARD,0x07,0x024),0x0400,OnPC) --The Spooky Cave
+		WriteShort(BAR(ARD,0x06,0x024),0x0300,OnPC) --Kanga's House
+		WriteShort(BAR(ARD,0x04,0x024),0x0100,OnPC) --Rabbit's House
+		WriteShort(BAR(ARD,0x05,0x024),0x0200,OnPC) --Piglet's House
+		WriteShort(BAR(ARD,0x03,0x024),0x0000,OnPC) --Pooh's House
 	elseif CurMAP > 0x0C then --4th Visit
-		Spawn('Short',0x06,0x024,0x0300) --Kanga's House
-		Spawn('Short',0x04,0x024,0x0100) --Rabbit's House
-		Spawn('Short',0x05,0x024,0x0200) --Piglet's House
-		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+		WriteShort(BAR(ARD,0x06,0x024),0x0300,OnPC) --Kanga's House
+		WriteShort(BAR(ARD,0x04,0x024),0x0100,OnPC) --Rabbit's House
+		WriteShort(BAR(ARD,0x05,0x024),0x0200,OnPC) --Piglet's House
+		WriteShort(BAR(ARD,0x03,0x024),0x0000,OnPC) --Pooh's House
 	elseif CurMAP > 0x09 then --3rd Visit
-		Spawn('Short',0x04,0x024,0x0100) --Rabbit's House
-		Spawn('Short',0x05,0x024,0x0200) --Piglet's House
-		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+		WriteShort(BAR(ARD,0x04,0x024),0x0100,OnPC) --Rabbit's House
+		WriteShort(BAR(ARD,0x05,0x024),0x0200,OnPC) --Piglet's House
+		WriteShort(BAR(ARD,0x03,0x024),0x0000,OnPC) --Pooh's House
 	elseif CurMAP > 0x06 then --2nd Visit
-		Spawn('Short',0x05,0x024,0x0200) --Piglet's House
-		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+		WriteShort(BAR(ARD,0x05,0x024),0x0200,OnPC) --Piglet's House
+		WriteShort(BAR(ARD,0x03,0x024),0x0000,OnPC) --Pooh's House
 	elseif CurMAP > 0x03 then --1st Visit
-		Spawn('Short',0x03,0x024,0x0000) --Pooh's House
+		WriteShort(BAR(ARD,0x03,0x024),0x0000,OnPC) --Pooh's House
 	end
 elseif ReadByte(Save+0x3598) > 0 and Place == 0x1A04 then
 	local CurMAP = ReadShort(Save+0x0D90)
@@ -2577,7 +2576,7 @@ end
 function At()
 --Block Leaving Finny Fun & Reverse Visit Order
 if Place == 0x020B and Events(Null,Null,0x02) then --1st Visit
-	Spawn('Short',0x04,0x034,0x23A)
+	WriteShort(BAR(ARD,0x04,0x034),0x23A,OnPC)
 elseif Place == 0x1A04 then
 	local CurEVT = ReadShort(Save+0x10A0)
 	if CurEVT == 0x0D and ReadByte(Save+0x35CF) >= 1 then --Unlock 4th Visit
