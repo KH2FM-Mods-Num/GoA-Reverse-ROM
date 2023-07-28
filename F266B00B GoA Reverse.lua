@@ -820,7 +820,7 @@ elseif Place == 0x1012 and Events(Null,Null,0x05) then --Back to His Old Self
 	WriteByte(Save+0x1EDF,4)
 elseif Place == 0x0312 and Events(Null,Null,0x02) then --There was No One There
 	WriteByte(Save+0x1EDE,5) --Post-Story Save
-elseif Place == 0x0001 and not Events(0x39,0x39,0x39) then --Post Xemnas II Cutscenes (except STT6)
+elseif Place == 0x0001 and ReadInt(Save+0x000C) == 0x631212 then --END
 	WriteInt(Save+0x000C,0x321A04) --Post-Game Save at Garden of Assemblage
 end
 --The World that Never Was Post-Story Save
