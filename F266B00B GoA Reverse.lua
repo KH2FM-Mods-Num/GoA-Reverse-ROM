@@ -1890,6 +1890,22 @@ if Place == 0x0204 and Events(Null,0x02,0x03) then
 	WriteShort(Save+0x3EEC,3) --Mushroom XII
 	WriteShort(Save+0x3EF0,40)
 end
+--Cavern of Remembrance Battle Level (Boss/Enemy Rando)
+if Place == 0x1504 and ReadShort(BAR(ARD,0x0B,0x018),OnPC) == 35 then --Depths
+	WriteShort(BAR(ARD,0x0B,0x018),15,OnPC) --BTL 0x01
+elseif Place == 0x1704 and ReadShort(BAR(ARD,0x09,0x018),OnPC) == 55 then --Engine Chamber
+	WriteShort(BAR(ARD,0x09,0x018),28,OnPC) --BTL 0x01
+elseif Place == 0x1804 and ReadShort(BAR(ARD,0x0F,0x038),OnPC) == 35 then --Mineshaft
+	WriteShort(BAR(ARD,0x0F,0x038),15,OnPC) --BTL 0x01
+	WriteShort(BAR(ARD,0x0F,0x07C),28,OnPC) --BTL 0x02
+	WriteShort(BAR(ARD,0x0F,0x0B8),28,OnPC) --BTL 0x03
+elseif Place == 0x1904 and ReadShort(BAR(ARD,0x04,0x038),OnPC) == 75 then --Transport to Remembrance
+	WriteShort(BAR(ARD,0x04,0x038),30,OnPC) --BTL 0x01
+	WriteShort(BAR(ARD,0x04,0x07C),30,OnPC) --BTL 0x02
+	WriteShort(BAR(ARD,0x04,0x0C0),30,OnPC) --BTL 0x03
+	WriteShort(BAR(ARD,0x04,0x0E4),30,OnPC) --BTL 0x04
+	WriteShort(BAR(ARD,0x04,0x12C),30,OnPC) --BTL 0x05
+end
 end
 
 function PR()
