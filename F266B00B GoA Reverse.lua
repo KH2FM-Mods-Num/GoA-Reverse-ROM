@@ -370,6 +370,9 @@ if true then
 	--Identity Disk
 	VisitLock(Save+0x35C2, 1, Save+0x1EB5, 0x20) --TR_INIT
 	VisitLock(Save+0x35C2, 2, Save+0x1C95, 0x01) --ZZ_TR_CHECK_GOA
+	--Way to the Dawn
+	VisitLock(Save+0x3642, 1, Save+0x1C95, 0x02) --ZZ_EH_CHECK_1_GOA
+	VisitLock(Save+0x3642, 2, Save+0x1C95, 0x04) --ZZ_EH_CHECK_2_GOA
 else --Remove the item requirements
 	--Namine's Sketches
 	VisitLock(Save+0x3642, 0, Save+0x1CD0, 0x01) --TT_START_1
@@ -405,6 +408,9 @@ else --Remove the item requirements
 	--Identity Disk
 	VisitLock(Save+0x35C2, 0, Save+0x1EB5, 0x20) --TR_INIT
 	VisitLock(Save+0x35C2, 0, Save+0x1C95, 0x01) --ZZ_TR_CHECK_GOA
+	--Way to the Dawn
+	VisitLock(Save+0x3642, 0, Save+0x1C95, 0x02) --ZZ_EH_CHECK_1_GOA
+	VisitLock(Save+0x3642, 0, Save+0x1C95, 0x04) --ZZ_EH_CHECK_2_GOA
 
 	--Disable GoA Visit Skip
 	--BitOr(Save+0x1CED,0x01) --TT_MISTERY_SKIP_GOA

@@ -3747,6 +3747,26 @@ assets:
     method: areadatascript
     source:
     - name: ard/eh01/btl.script
+- name: ard/eh02.ard #Fragment Crossing (Visit Lock)
+  multi:
+  - name: ard/jp/eh02.ard
+  - name: ard/us/eh02.ard
+  - name: ard/fr/eh02.ard
+  - name: ard/gr/eh02.ard
+  - name: ard/it/eh02.ard
+  - name: ard/sp/eh02.ard
+  method: binarc
+  source:
+  - name: map
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh02/map.script
+  - name: m_12 #Loop to the other entrance
+    type: areadataspawn
+    method: spawnpoint
+    source:
+    - name: ard/eh02/m_12.yml
 - name: ard/eh03.ard #Memory's Skyscraper (Reverse Warp)
   multi:
   - name: ard/jp/eh03.ard
@@ -3782,6 +3802,21 @@ assets:
     method: areadatascript
     source:
     - name: ard/eh10/evt.script
+- name: ard/eh13.ard #Proof of Existence (Visit Lock)
+  multi:
+  - name: ard/jp/eh13.ard
+  - name: ard/us/eh13.ard
+  - name: ard/fr/eh13.ard
+  - name: ard/gr/eh13.ard
+  - name: ard/it/eh13.ard
+  - name: ard/sp/eh13.ard
+  method: binarc
+  source:
+  - name: map
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh13/map.script
 - name: ard/eh15.ard #Addled Impasse (Reverse Warp)
   multi:
   - name: ard/jp/eh15.ard
