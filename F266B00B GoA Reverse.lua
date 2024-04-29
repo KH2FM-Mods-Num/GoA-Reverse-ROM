@@ -232,6 +232,8 @@ if OnPC and ReadByte(BAR(Sys3,0x6,0x0E5F),OnPC) == 0x19 then --Change Form's Ico
 	WriteByte(BAR(Sys3,0x6,0x0EA7),0xCE,OnPC) --Master
 	WriteByte(BAR(Sys3,0x6,0x0EBF),0xCE,OnPC) --Final
 	WriteByte(BAR(Sys3,0x6,0x0ED7),0xCE,OnPC) --Anti
+	WriteByte(BAR(Sys3,0x6,0x253F),0xCE,OnPC) --Valor DUMMY (Navigational Map)
+	WriteByte(BAR(Sys3,0x6,0x265F),0xCE,OnPC) --Final DUMMY (Window of Time 2 Map)
 end
 --Start New Game
 if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
@@ -1899,12 +1901,12 @@ elseif Place == 0x1804 and ReadShort(BAR(ARD,0x0F,0x038),OnPC) == 35 then --Mine
 	WriteShort(BAR(ARD,0x0F,0x038),15,OnPC) --BTL 0x01
 	WriteShort(BAR(ARD,0x0F,0x07C),28,OnPC) --BTL 0x02
 	WriteShort(BAR(ARD,0x0F,0x0B8),28,OnPC) --BTL 0x03
-elseif Place == 0x1904 and ReadShort(BAR(ARD,0x04,0x038),OnPC) == 75 then --Transport to Remembrance
-	WriteShort(BAR(ARD,0x04,0x038),30,OnPC) --BTL 0x01
-	WriteShort(BAR(ARD,0x04,0x07C),30,OnPC) --BTL 0x02
-	WriteShort(BAR(ARD,0x04,0x0C0),30,OnPC) --BTL 0x03
-	WriteShort(BAR(ARD,0x04,0x0E4),30,OnPC) --BTL 0x04
-	WriteShort(BAR(ARD,0x04,0x12C),30,OnPC) --BTL 0x05
+elseif Place == 0x1904 and ReadShort(BAR(ARD,0x05,0x038),OnPC) == 75 then --Transport to Remembrance
+	WriteShort(BAR(ARD,0x05,0x038),30,OnPC) --BTL 0x01
+	WriteShort(BAR(ARD,0x05,0x07C),30,OnPC) --BTL 0x02
+	WriteShort(BAR(ARD,0x05,0x0C0),30,OnPC) --BTL 0x03
+	WriteShort(BAR(ARD,0x05,0x0E4),30,OnPC) --BTL 0x04
+	WriteShort(BAR(ARD,0x05,0x12C),30,OnPC) --BTL 0x05
 end
 end
 
