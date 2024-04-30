@@ -1833,8 +1833,8 @@ elseif Place == 0x0104 and Events(Null,Null,0x13) then --The Battle
 	WriteByte(Save+0x1D2F,0)
 elseif Place == 0x1904 and Events(Null,0x05,0x04) then --Transport to Remembrance Cleared
 end
---Block CoR Before 1K or Without Way to the Dawn
-if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or ReadByte(Save+0x3643) == 0 then
+--Block CoR Before 1K or Without ZZ_HB_CHECK_1_GOA
+if (ReadByte(Save+0x1D2F) > 2 and ReadByte(Save+0x1D2F) < 9) or ReadByte(Save+0x1C92)&0x20 == 0 then
 	if Place == 0x0604 then --Postern -> Cavern of Remembrance: Depths
 		WriteShort(BAR(ARD,0x05,0x024),0x0306,OnPC)
 	end
