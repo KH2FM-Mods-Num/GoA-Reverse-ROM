@@ -1,4 +1,4 @@
-title: GoA Reverse ROM v1.53.5
+title: GoA Reverse ROM v1.53.6
 description: Do the visits in reverse.
 assets:
 #Lua Script
@@ -1747,6 +1747,10 @@ assets:
   method: imd
   source:
   - name: itempic/DUMMY 16 Item.png
+- name: itempic/item-091.imd #DUMMY 13 (Royal Summons)
+  method: copy
+  source:
+  - name: itempic/Royal Summons.imd
 - name: itempic/item-092.imd #Scimitar
   method: copy
   source:
@@ -1945,6 +1949,11 @@ assets:
   method: copy
   source:
   - name: remastered/itempic/DUMMY 16 Item.dds
+- name: remastered/itempic/item-091.imd/-0.dds #DUMMY 13 (Royal Summons)
+  platform: pc
+  method: copy
+  source:
+  - name: remastered/itempic/Royal Summons.dds
 - name: remastered/itempic/item-092.imd/-0.dds #Scimitar
   platform: pc
   method: copy

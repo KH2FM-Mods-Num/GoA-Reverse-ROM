@@ -364,6 +364,9 @@ if true then
 	--Bone Fist
 	VisitLock(Save+0x35B4, 1, Save+0x1E56, 0x08) --NM_INIT
 	VisitLock(Save+0x35B4, 2, Save+0x1C94, 0x40) --ZZ_NM_CHECK_GOA
+	--Royal Summons (DUMMY 13)
+	VisitLock(Save+0x365D, 1, Save+0x1E12, 0x08) --DC_INIT
+	VisitLock(Save+0x365D, 2, Save+0x1C94, 0x40) --ZZ_DC_CHECK_GOA
 	--Skill and Crossbones
 	VisitLock(Save+0x35B6, 1, Save+0x1E99, 0x04) --CA_INIT
 	VisitLock(Save+0x35B6, 2, Save+0x1C94, 0x80) --ZZ_CA_CHECK_GOA
@@ -402,6 +405,9 @@ else --Remove the item requirements
 	--Bone Fist
 	VisitLock(Save+0x35B4, 0, Save+0x1E56, 0x08) --NM_INIT
 	VisitLock(Save+0x35B4, 0, Save+0x1C94, 0x40) --ZZ_NM_CHECK_GOA
+	--Royal Summons (DUMMY 13)
+	VisitLock(Save+0x365D, 0, Save+0x1E12, 0x08) --DC_INIT
+	VisitLock(Save+0x365D, 0, Save+0x1C94, 0x40) --ZZ_DC_CHECK_GOA
 	--Skill and Crossbones
 	VisitLock(Save+0x35B6, 0, Save+0x1E99, 0x04) --CA_INIT
 	VisitLock(Save+0x35B6, 0, Save+0x1C94, 0x80) --ZZ_CA_CHECK_GOA
