@@ -3681,6 +3681,11 @@ assets:
     method: areadatascript
     source:
     - name: ard/dc04/evt.script
+  - name: 0000
+    type: event
+    method: copy
+    source:
+    - name: ard/dc04/0000.bin
 - name: ard/dc05.ard #The Hall of the Cornerstone (Light) (GoA Warp & AS Warp)
   multi:
   - name: ard/jp/dc05.ard
