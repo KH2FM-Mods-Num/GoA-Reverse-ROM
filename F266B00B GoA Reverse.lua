@@ -334,6 +334,7 @@ if Place == 0x000F then
 		Warp(0x04,0x1A,WarpDoor)
 	end
 end
+--Visit Locks
 if true then
 	--Namine's Sketches
 	VisitLock(Save+0x3642, 1, Save+0x1CD0, 0x01) --TT_START_1
@@ -2100,7 +2101,6 @@ elseif Place == 0x000D and Events(Null,Null,0x07) then --Back to Their Own World
 elseif Place == 0x050C and Events(Null,Null,0x01) then --The Castle is Secure
 	WriteByte(Save+0x1E1E,3) --Post-Story Save
 elseif Place == 0x2604 and Events(0x7F,0x7F,0x7F) then --Marluxia Defeated
-	WriteByte(Save+0x1E1F,0)
 elseif ReadByte(Save+0x36B2) > 0 and ReadByte(Save+0x1E1E) > 0 and ReadShort(Save+0x1232) == 0x00 then --Proof of Connection, DC Cleared, Terra Locked
 	WriteShort(Save+0x121A,0x11) --Library EVT
 	WriteShort(Save+0x1232,0x02) --Hall of the Cornerstone (Light) EVT
@@ -2122,6 +2122,12 @@ if ReadByte(Save+0x1E1E) > 0 then
 		WriteByte(Save+0x1E1E,2)
 	elseif PrevPlace == 0x050C then --Hall of the Cornerstone (Light)
 		WriteByte(Save+0x1E1E,3)
+	end
+end
+--Unlock 1st Visit
+if ReadByte(Save+0x1E1F) == 3 and ReadByte(Save+0x1E1E) == 0 then
+	if ReadByte(Save+0x1E14)&0x01 == 0x01 and ReadByte(Save+0x1C94)&0x20 == 0x20 then --DC_FM_COM_OBJ_OFF_GOA, ZZ_DC_CHECK_GOA
+		WriteByte(Save+0x1E1F,0)
 	end
 end
 end
