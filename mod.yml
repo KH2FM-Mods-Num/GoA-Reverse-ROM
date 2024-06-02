@@ -1,4 +1,4 @@
-title: GoA Reverse ROM v1.53.5
+title: GoA ROM Reverse v1.53.6
 description: Do the visits in reverse.
 assets:
 #Lua Script
@@ -1747,6 +1747,10 @@ assets:
   method: imd
   source:
   - name: itempic/DUMMY 16 Item.png
+- name: itempic/item-091.imd #DUMMY 13 (Royal Summons)
+  method: copy
+  source:
+  - name: itempic/Royal Summons.imd
 - name: itempic/item-092.imd #Scimitar
   method: copy
   source:
@@ -1945,6 +1949,11 @@ assets:
   method: copy
   source:
   - name: remastered/itempic/DUMMY 16 Item.dds
+- name: remastered/itempic/item-091.imd/-0.dds #DUMMY 13 (Royal Summons)
+  platform: pc
+  method: copy
+  source:
+  - name: remastered/itempic/Royal Summons.dds
 - name: remastered/itempic/item-092.imd/-0.dds #Scimitar
   platform: pc
   method: copy
@@ -3672,6 +3681,11 @@ assets:
     method: areadatascript
     source:
     - name: ard/dc04/evt.script
+  - name: 0000
+    type: event
+    method: copy
+    source:
+    - name: ard/dc04/0000.bin
 - name: ard/dc05.ard #The Hall of the Cornerstone (Light) (GoA Warp & AS Warp)
   multi:
   - name: ard/jp/dc05.ard
@@ -3747,6 +3761,26 @@ assets:
     method: areadatascript
     source:
     - name: ard/eh01/btl.script
+- name: ard/eh02.ard #Fragment Crossing (Visit Lock)
+  multi:
+  - name: ard/jp/eh02.ard
+  - name: ard/us/eh02.ard
+  - name: ard/fr/eh02.ard
+  - name: ard/gr/eh02.ard
+  - name: ard/it/eh02.ard
+  - name: ard/sp/eh02.ard
+  method: binarc
+  source:
+  - name: map
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh02/map.script
+  - name: m_12 #Loop to the other entrance
+    type: areadataspawn
+    method: spawnpoint
+    source:
+    - name: ard/eh02/m_12.yml
 - name: ard/eh03.ard #Memory's Skyscraper (Reverse Warp)
   multi:
   - name: ard/jp/eh03.ard
@@ -3782,6 +3816,21 @@ assets:
     method: areadatascript
     source:
     - name: ard/eh10/evt.script
+- name: ard/eh13.ard #Proof of Existence (Visit Lock)
+  multi:
+  - name: ard/jp/eh13.ard
+  - name: ard/us/eh13.ard
+  - name: ard/fr/eh13.ard
+  - name: ard/gr/eh13.ard
+  - name: ard/it/eh13.ard
+  - name: ard/sp/eh13.ard
+  method: binarc
+  source:
+  - name: map
+    type: areadatascript
+    method: areadatascript
+    source:
+    - name: ard/eh13/map.script
 - name: ard/eh15.ard #Addled Impasse (Reverse Warp)
   multi:
   - name: ard/jp/eh15.ard
