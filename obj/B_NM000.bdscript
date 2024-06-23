@@ -969,7 +969,7 @@ L1701:
  pushFromFSp 0
  pushImm 24
  add 
- pushImm 1
+ pushImm 2
  memcpy 0
  pushImm 1
  gosub 4, L1520
