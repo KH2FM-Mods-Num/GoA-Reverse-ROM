@@ -7,7 +7,7 @@ LUAGUI_DESC = 'A GoA build for use with the Randomizer. Requires ROM patching.'
 
 function _OnInit()
 GameVersion = 0
-print('GoA v1.54.2')
+print('GoA v1.54.3')
 GoAOffset = 0x7C
 SeedCleared = false
 end
@@ -353,6 +353,15 @@ if Place == 0x2002 and Events(0x01,Null,0x01) then --Station of Serenity Weapons
 	WriteShort(Save+0x4270,0x1FF) --Pause Menu Tutorial Prompts Seen Flags
 	WriteShort(Save+0x4274,0x1FF) --Status Form & Summon Seen Flags
 	BitOr(Save+0x49F0,0x03) --Shop Tutorial Prompt Flags (1=Big Shops, 2=Small Shops)
+	--Fix for a softlock added on purpose for debugging purposes
+	--It'll warp you to Wedding Ship if Lua isn't running; this code will warp you properly to GoA)
+	if ReadShort(BAR(ARD,0x0A,0xD6),OnPC) == 0x0B and ReadShort(BAR(ARD,0x0A,0xD8),OnPC) == 0x0A then
+		WriteShort(BAR(ARD,0x0A,0xD6),0x04,OnPC)
+		WriteShort(BAR(ARD,0x0A,0xD8),0x1A,OnPC)
+	elseif ReadShort(BAR(ARD,0x0A,0xDE),OnPC) == 0x0B and ReadShort(BAR(ARD,0x0A,0xE0),OnPC) == 0x0A then
+		WriteShort(BAR(ARD,0x0A,0xDE),0x04,OnPC)
+		WriteShort(BAR(ARD,0x0A,0xE0),0x1A,OnPC)
+	end
 	--Start at 2nd Visits
 	WriteByte(Save+0x1D9F,5) --Land of Dragons
 	WriteByte(Save+0x1D3F,8) --Beast's Castle
