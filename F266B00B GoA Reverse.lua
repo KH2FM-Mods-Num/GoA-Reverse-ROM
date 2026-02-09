@@ -7,7 +7,7 @@ LUAGUI_DESC = 'A GoA build for use with the Randomizer. Requires ROM patching.'
 
 function _OnInit()
 GameVersion = 0
-print('GoA v1.54.3')
+print('GoA v1.55.0')
 GoAOffset = 0x7C
 SeedCleared = false
 end
@@ -393,8 +393,9 @@ if not SeedCleared then
 end
 --Garden of Assemblage Rearrangement
 if Place == 0x1A04 then
+	local CustomObjectiveCount = ReadByte(Save+0x06B3)
 	--Open Promise Charm Path
-	if SeedCleared and ReadByte(Save+0x3694) > 0 then --Seed Cleared & Promise Charm
+	if ((CustomObjectiveCount == 0 and SeedCleared) or (CustomObjectiveCount > 0 and ReadByte(Save+0x363D) >= CustomObjectiveCount)) and ReadByte(Save+0x3694) > 0 then --Seed Cleared & Promise Charm
 		WriteShort(BAR(ARD,0x06,0x05C),0x77A,OnPC) --Text
 	end
 	--Demyx's Portal Text
@@ -2836,6 +2837,7 @@ end
 [Save+0x0664,Save+0x0669] Merlin's House Spawn IDs
 [Save+0x066A,Save+0x066F] Borough Spawn IDs
 Save+0x06B2 Genie Crash Fix
+Save+0x06B3 Custom Objectives Needed
 Save+0x1CF1 STT Dodge Roll, Unknown Disk, Twilight Thorn
 Save+0x1CF7 Royal Summons
 Save+0x1CF8 STT Struggle Weapon
